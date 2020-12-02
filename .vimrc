@@ -6,6 +6,10 @@ set expandtab
 set ai
 set hlsearch
 set ruler
+set nobackup
+set noswapfile
+set noundofile
+set encoding=utf-8
 
 highlight Comment ctermfg=green
 highlight PreProc ctermfg=12
