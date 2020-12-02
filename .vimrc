@@ -8,4 +8,4 @@ set hlsearch
 set ruler
 
 highlight Comment ctermfg=green
-highlight PreProc ctermfg=darkred
+highlight PreProc ctermfg=12
