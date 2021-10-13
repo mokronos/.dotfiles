@@ -11,6 +11,7 @@ set nobackup
 set noswapfile
 set noundofile
 set encoding=utf-8
+set belloff=all
 
 highlight Comment ctermfg=green
 highlight PreProc ctermfg=12
