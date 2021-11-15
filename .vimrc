@@ -15,3 +15,4 @@ set belloff=all
 
 highlight Comment ctermfg=green
 highlight PreProc ctermfg=12
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
