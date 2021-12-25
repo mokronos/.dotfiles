@@ -23,14 +23,20 @@ set belloff=all
 
 set backspace=indent,eol,start
 
+set completeopt+=menuone
+set completeopt+=noselect
+set shortmess+=c 
+let g:mucomplete#enable_auto_at_startup = 1
 
 highlight Comment ctermfg=green
 highlight PreProc ctermfg=12
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
 call plug#begin('~/.vim/plugged')
-Plug 'preservim/nerdtree'
+"Plug 'scrooloose/syntastic'
 "Plug 'dense-analysis/ale'
+Plug 'preservim/nerdtree'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/syntastic'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'tpope/vim-commentary'
 call plug#end()
