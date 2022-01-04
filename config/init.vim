@@ -28,15 +28,20 @@ set shortmess+=c
 
 set signcolumn=yes
 set colorcolumn=80
-set nowrap
+set breakindent
+set linebreak
 
 set completeopt=menu,menuone,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 set updatetime=50
 
+"error no file name for buffer
+:setlocal buftype=nofile
+
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+au BufNewFile,BufFilePre,BufRead *.md setlocal colorcolumn=""
 
 set clipboard=unnamed
 
@@ -55,11 +60,15 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'tpope/vim-commentary'
 
+Plug 'tpope/vim-surround'
+
 Plug 'mbbill/undotree'
 
 Plug 'dense-analysis/ale'
 
 Plug 'neovim/nvim-lspconfig'
+
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 "*************************************************
@@ -80,9 +89,16 @@ let g:ale_lint_on_insert_leave=1
 nnoremap <leader>ps <cmd>Telescope find_files<cr>
 nnoremap <leader>t <cmd>NERDTreeToggle<cr>
 nnoremap <leader>u <cmd>UndotreeToggle<cr>
+nnoremap <leader>vt <cmd>Sex<cr>
 nnoremap <leader>d <cmd>lua vim.lsp.buf.definition()<cr>
 nmap <leader>c <Plug>Commentary
 nmap <leader>cc <Plug>CommentaryLine
+nnoremap <leader>oc :exe ':silent !start chrome %:p'<CR>
+
+" markdown
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_folding_disabled = 1
 
 lua <<EOF
 require'lspconfig'.pylsp.setup{}
