@@ -58,6 +58,8 @@ Plug 'preservim/nerdtree'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'vim-airline/vim-airline'
+
 Plug 'tpope/vim-commentary'
 
 Plug 'tpope/vim-surround'
@@ -94,6 +96,9 @@ nnoremap <leader>d <cmd>lua vim.lsp.buf.definition()<cr>
 nmap <leader>c <Plug>Commentary
 nmap <leader>cc <Plug>CommentaryLine
 nnoremap <leader>oc :exe ':silent !start chrome %:p'<CR>
+nmap <leader>gl :diffget //3<cr>
+nmap <leader>gh :diffget //3<cr>
+nmap <leader>gs :G<cr>
 
 " markdown
 let g:vim_markdown_math = 1
