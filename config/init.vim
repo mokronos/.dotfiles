@@ -107,4 +107,5 @@ let g:vim_markdown_folding_disabled = 1
 
 lua <<EOF
 require'lspconfig'.pylsp.setup{}
+require('telescope').setup{  defaults = { file_ignore_patterns = { "%.git", "%.pdf" }} }
 EOF
