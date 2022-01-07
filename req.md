@@ -4,6 +4,7 @@
 - Install neovim with choclatey
 - clone/update dotfiles
 - symlink neovim init.vim with dotfiles repo (could maybe be automated)
+- install vim-plug
 - install plugins
 - install lsp with pip:
     pip install python-lsp-server
