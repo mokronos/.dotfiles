@@ -1,5 +1,4 @@
 "Sets
-
 filetype plugin indent on
 
 set exrc
@@ -35,9 +34,6 @@ set completeopt=menu,menuone,noselect
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 set updatetime=50
-
-"error no file name for buffer
-:setlocal buftype=nofile
 
 autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
