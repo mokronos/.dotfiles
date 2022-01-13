@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+#
+# loop over folders to stow dotfiles
+DOTFILES=$HOME/.dotfiles
+STOW_FOLDERS="zsh,tmux,nvim"
+
+pushd $DOTFILES
+
+if [[ $1 == clean ]]
+then
+    for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+    do
+        echo "unlinking + removing $folder"
+        stow -D $folder
+    done
+else
+    for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+    do
+        echo "symlinking $folder"
+        stow -D $folder
+        stow $folder
+    done
+fi
+popd
