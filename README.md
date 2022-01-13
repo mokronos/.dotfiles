@@ -2,23 +2,37 @@
 ## Just use Linux
 Use WSL2 on Win10/11. I tried just Windows and just no.
 ## install some basic stuff
-**install zsh manually:**  
->sudo apt install zsh
+**install zsh manually:**
+```shell
+sudo apt install zsh
+```
 
-**install other stuff with script:**  
->chmod +x install
->./install
+**install other stuff with script:**
+```shell
+chmod +x install
+```
+```shell
+./install
+```
 
 ## clone dotfiles
->git clone https://github.com/Mokronos/.dotfiles.git
+```shell
+git clone https://github.com/Mokronos/.dotfiles.git
+```
 
 ## use stow to create symlinks for all the dotfiles
->chmod +x install_dot
+```shell
+chmod +x install_dot
+```
 
-**run to link:**  
->./install_dot
+**run to link:**
+```shell
+./install_dot
+```
 
-**run to clean/unlink:**  
->./install_dot clean
+**run to clean/unlink:**
+```shell
+./install_dot clean
+```
 
 ## probably good idea to restart terminal/wsl
