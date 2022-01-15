@@ -20,10 +20,11 @@ Plug 'tpope/vim-surround'
 
 Plug 'mbbill/undotree'
 
-Plug 'dense-analysis/ale'
+Plug 'plasticboy/vim-markdown'
+
+Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'neovim/nvim-lspconfig'
-
-Plug 'plasticboy/vim-markdown'
+Plug 'williamboman/nvim-lsp-installer'
 
 vim.call ('plug#end')

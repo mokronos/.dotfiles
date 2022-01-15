@@ -1,5 +1,5 @@
-vim.api.nvim_command('filetype plugin indent on')
-vim.api.nvim_command('set path+=**')
+vim.cmd[[filetype plugin indent on]]
+vim.cmd[[set path+=**]]
 local opt = vim.opt
 
 --opt.path = opt.path + **
@@ -22,14 +22,14 @@ opt.wildmode='longest,list,full'
 opt.guicursor='i:block'
 
 opt.swapfile = false
-opt.undodir='~/.nvim/undodir'
+opt.undodir= os.getenv("HOME") .. '/undo'
 opt.undofile = true
 
 opt.signcolumn = 'yes'
 opt.colorcolumn = '80' 
+vim.cmd[[highlight ColorColumn ctermbg=0 guibg=lightgrey]]
 opt.breakindent = true
 opt.linebreak = true
-
 
 opt.clipboard='unnamed'
 opt.completeopt='menu,menuone,noselect'
