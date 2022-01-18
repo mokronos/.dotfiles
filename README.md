@@ -36,3 +36,12 @@ chmod +x install_dot
 ```
 
 ## probably good idea to restart terminal/wsl
+
+## For matplotlib to display in wsl2 without ubuntu gui
+
+[install vcxsrv](https://stackoverflow.com/questions/43397162/show-matplotlib-plots-and-other-gui-in-ubuntu-wsl1-wsl2#:~:text=Ok%2C%20so%20I%20got%20it%20working%20as%20follows.%20I%20have%20Ubuntu%20on%20windows%2C%20with%20anaconda%20python%203.6%20installed.) and follow that thread
+
+**fix error with that:**
+```shell
+sudo apt install python3-gi-cairo
+```
