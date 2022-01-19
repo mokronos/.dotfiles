@@ -26,14 +26,12 @@ opt.undodir= os.getenv("HOME") .. '/undo'
 opt.undofile = true
 
 opt.signcolumn = 'yes'
-opt.colorcolumn = '80' 
+opt.colorcolumn = '80'
 vim.cmd[[highlight ColorColumn ctermbg=0 guibg=lightgrey]]
 opt.breakindent = true
 opt.linebreak = true
 
 opt.clipboard='unnamed'
-opt.completeopt='menu,menuone,noselect'
-vim.g.completion_matching_strategy_list = 'exact, substring, fuzzy'
 
 opt.updatetime=50
 
@@ -41,4 +39,3 @@ opt.formatoptions = opt.formatoptions
     - "c"
     - "r"
     - "o"
-
