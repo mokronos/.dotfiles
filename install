@@ -32,9 +32,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 #install nvm for node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
-#install node.js
-nvm install node
-
 #install stuff to install neovim
 sudo apt install clang-9 --install-suggests
 pip install cmake
