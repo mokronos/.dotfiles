@@ -41,6 +41,7 @@ pip install cmake
 sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
 
 #clone neovim repo and make
+cd
 git clone https://github.com/neovim/neovim
 cd neovim && make
 sudo make install
