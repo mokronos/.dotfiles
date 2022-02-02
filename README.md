@@ -7,17 +7,17 @@ Use WSL2 on Win10/11. I tried just Windows and just no.
 sudo apt install zsh
 ```
 
+## clone dotfiles
+```shell
+git clone https://github.com/Mokronos/.dotfiles.git
+```
+
 **install other stuff with script:**
 ```shell
 chmod +x install
 ```
 ```shell
 ./install
-```
-
-## clone dotfiles
-```shell
-git clone https://github.com/Mokronos/.dotfiles.git
 ```
 
 ## use stow to create symlinks for all the dotfiles
