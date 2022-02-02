@@ -35,6 +35,10 @@ chmod +x install_dot
 ./install_dot clean
 ```
 
+**install powerline fonts**
+https://slmeng.medium.com/how-to-install-powerline-fonts-in-windows-b2eedecace58
+
+
 ## probably good idea to restart terminal/wsl
 
 ## For matplotlib to display in wsl2 without ubuntu gui
