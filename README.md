@@ -35,8 +35,16 @@ chmod +x install_dot
 ./install_dot clean
 ```
 
+**make zsh default**
+```shell
+chsh -s $(which zsh)
+```
+
 **install powerline fonts**
 https://stackoverflow.com/questions/63148517/how-to-install-powerline-fonts-on-wsl
+
+**change dark blue color**
+https://superuser.com/questions/1365258/how-to-change-the-dark-blue-in-wsl-to-something-brighter
 
 ## probably good idea to restart terminal/wsl
 
