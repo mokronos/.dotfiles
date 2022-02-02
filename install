@@ -10,6 +10,11 @@ install () {
     sudo apt install -y $1
 }
 
+# update ubuntu first
+sudo apt-get update
+sudo apt-get upgrade
+
+# install some basic stuff
 install tmux
 install stow
 install neovim
