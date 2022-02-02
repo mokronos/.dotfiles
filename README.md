@@ -20,6 +20,11 @@ chmod +x install
 ./install
 ```
 
+**install some stuff after**
+```shell
+nvm install node
+```
+
 ## use stow to create symlinks for all the dotfiles
 ```shell
 chmod +x install_dot
