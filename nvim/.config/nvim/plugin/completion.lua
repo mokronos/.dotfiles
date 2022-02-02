@@ -11,9 +11,9 @@ vim.g.completion_matching_strategy_list = 'exact, substring, fuzzy'
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
         -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
     mapping = {
@@ -30,8 +30,8 @@ vim.g.completion_matching_strategy_list = 'exact, substring, fuzzy'
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       -- { name = 'vsnip' }, -- For vsnip users.
-      { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
@@ -53,3 +53,10 @@ vim.g.completion_matching_strategy_list = 'exact, substring, fuzzy'
       { name = 'cmdline' }
     })
   })
+
+-- Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+-- - https://github.com/Valloric/YouCompleteMe
+-- - https://github.com/nvim-lua/completion-nvim
+vim.g.UltiSnipsExpandTrigger="<tab>"
+vim.g.UltiSnipsJumpForwardTrigger="<c-b>"
+vim.g.UltiSnipsJumpBackwardTrigger="<c-z>"

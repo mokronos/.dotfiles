@@ -4,7 +4,7 @@ vim.call ('plug#begin', '~/.nvim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
 
---statusline
+-- statusline
 Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'nvim-lua/plenary.nvim'
@@ -25,21 +25,23 @@ Plug 'mbbill/undotree'
 
 Plug 'nvim-treesitter/nvim-treesitter'
 
---lsp
+-- lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 
---completion
+-- completion
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
---snippets(kinda required for nvim-cmp)
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
+-- snippetengine(kinda required for nvim-cmp)
+Plug 'SirVer/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+-- snipets
+Plug 'honza/vim-snippets'
 
---Plug 'ambv/black'
+-- Plug 'ambv/black'
 
 vim.call ('plug#end')
