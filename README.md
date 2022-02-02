@@ -36,8 +36,7 @@ chmod +x install_dot
 ```
 
 **install powerline fonts**
-https://slmeng.medium.com/how-to-install-powerline-fonts-in-windows-b2eedecace58
-
+https://stackoverflow.com/questions/63148517/how-to-install-powerline-fonts-on-wsl
 
 ## probably good idea to restart terminal/wsl
 
