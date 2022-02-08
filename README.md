@@ -61,3 +61,7 @@ https://superuser.com/questions/1365258/how-to-change-the-dark-blue-in-wsl-to-so
 ```shell
 sudo apt install python3-gi-cairo
 ```
+
+**TODO**
+
+there is still a lot of weird stuff happening every time i install on new setup which needs to be manually fixed/installed
