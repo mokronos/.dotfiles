@@ -53,6 +53,9 @@ set to deja vu sans mono
 **change dark blue color**
 https://superuser.com/questions/1365258/how-to-change-the-dark-blue-in-wsl-to-something-brighter
 
+## sharpkeys to swap capslock and esc
+https://github.com/randyrants/sharpkeys/releases
+
 ## probably good idea to restart terminal/wsl
 
 ## For matplotlib to display in wsl2 without ubuntu gui
