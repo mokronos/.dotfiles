@@ -23,6 +23,7 @@ Plug 'mbbill/undotree'
 
 -- Plug 'plasticboy/vim-markdown'
 
+-- produces weird error in python, where after a parenthesis, RETURN indents up to that perenthesis
 Plug 'nvim-treesitter/nvim-treesitter'
 
 -- lsp
