@@ -102,10 +102,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# make vcxsrv work with wsl2
-export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+# # make vcxsrv work with wsl2
+# export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
 
-# breaks pip
-pip () { 
-    export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring && command pip $@ && export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
-}
+# # breaks pip
+# pip () { 
+#     export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring && command pip $@ && export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+# }
