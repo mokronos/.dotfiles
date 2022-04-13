@@ -31,7 +31,7 @@ vim.cmd[[highlight ColorColumn ctermbg=0 guibg=lightgrey]]
 opt.breakindent = true
 opt.linebreak = true
 
-opt.clipboard='unnamed'
+opt.clipboard='unnamedplus'
 
 opt.updatetime=50
 

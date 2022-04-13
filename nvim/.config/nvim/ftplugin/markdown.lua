@@ -1,6 +1,7 @@
 -- make options local
 local opt = vim.opt_local
 opt.spell = true
+opt.spelllang = en_us,de_de
 
 
 local opts = {noremap=true, silent=true}

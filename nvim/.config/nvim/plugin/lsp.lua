@@ -9,6 +9,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_set_keymap('n', '<Leader>vs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
     vim.api.nvim_set_keymap('n', '<Leader>vi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
     vim.api.nvim_set_keymap('n', '<Leader>vc', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
+    vim.api.nvim_set_keymap('n', '<Leader>vr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
 end
 
 -- lsp

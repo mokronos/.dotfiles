@@ -104,3 +104,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # make vcxsrv work with wsl2
 export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+
+# breaks pip
+pip () { 
+    export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring && command pip $@ && export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
+}
