@@ -102,6 +102,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Ruby exports (fixes gem install for jekyll)
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+
 # # make vcxsrv work with wsl2
 # export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
 

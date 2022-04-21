@@ -1,4 +1,4 @@
-vim.cmd[[filetype plugin indent on]]
+-- vim.cmd[[filetype plugin indent on]]
 vim.cmd[[set path+=**]]
 local opt = vim.opt
 
@@ -32,6 +32,8 @@ opt.breakindent = true
 opt.linebreak = true
 
 opt.clipboard='unnamedplus'
+
+opt.pumheight=10
 
 opt.updatetime=50
 
