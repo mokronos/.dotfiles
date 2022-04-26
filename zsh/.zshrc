@@ -109,3 +109,7 @@ export NVM_DIR="$HOME/.nvm"
 # pip () { 
 #     export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring && command pip $@ && export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
 # }
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
