@@ -3,6 +3,7 @@
 #EVs
 BEVs/!
 BEVs
+<<<<<<< HEAD
 Preprocessing
 CS50
 make
@@ -23,3 +24,10 @@ Karpathy
 Roadmap
 preprocessed
 dataset
+=======
+Gitignore
+gitignore
+github
+dataset
+UI
+>>>>>>> abea802a7096396918c8e9cacf5cf80832101757
