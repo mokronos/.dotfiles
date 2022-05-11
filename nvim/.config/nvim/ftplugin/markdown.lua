@@ -4,7 +4,7 @@
 -- opt.spelllang = en_us,de_de
 
 -- convert to lua (above stuff is not working for some reason)
-vim.api.nvim_command('setlocal spell spelllang=en_us,de_de')
+vim.api.nvim_command('setlocal spell spelllang=en_us')
 
 
 local opts = {noremap=true, silent=true}
