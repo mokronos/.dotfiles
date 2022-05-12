@@ -60,18 +60,9 @@ https://github.com/randyrants/sharpkeys/releases
 
 ## For matplotlib to display in wsl2 without ubuntu gui
 
-[install vcxsrv](https://stackoverflow.com/questions/43397162/show-matplotlib-plots-and-other-gui-in-ubuntu-wsl1-wsl2#:~:text=Ok%2C%20so%20I%20got%20it%20working%20as%20follows.%20I%20have%20Ubuntu%20on%20windows%2C%20with%20anaconda%20python%203.6%20installed.) and follow that thread
+[install vcxsrv](https://gist.github.com/KulryCzech/6f11e145d59048637a9d419a66d55896) and follow that thread
 
-**install:**
-```shell
-sudo apt-get install python3-tk
-```
-and run XLaunch from start menu (and disable access control, everything else default)
-
-**fix error with that:**
-```shell
-sudo apt install python3-gi-cairo
-```
+and run XLaunch from start menu (and disable access control, disable clipboard, everything else default) and save config in autostart windows folder
 
 **TODO**
 
