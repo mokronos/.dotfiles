@@ -64,6 +64,11 @@ https://github.com/randyrants/sharpkeys/releases
 
 and run XLaunch from start menu (and disable access control, disable clipboard, everything else default) and save config in autostart windows folder
 
+## VPN and WSL2
+Internet doesn't work in WSL2 when connected to a VPN.  
+**Solution**:  
+Use Cisco Anyconnect from Windows Store (dont download online and install manually).
+
 **TODO**
 
 there is still a lot of weird stuff happening every time i install on new setup which needs to be manually fixed/installed
