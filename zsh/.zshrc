@@ -106,13 +106,9 @@ export NVM_DIR="$HOME/.nvm"
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
 
-# # make vcxsrv work with wsl2
-# export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
-
-# # breaks pip
-# pip () { 
-#     export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring && command pip $@ && export DISPLAY=`grep -oP "(?<=nameserver ).+" /etc/resolv.conf`:0.0
-# }
+# make vcxsrv work with wsl2
+LOCAL_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
+export DISPLAY=$LOCAL_IP:0
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
