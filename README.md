@@ -69,6 +69,9 @@ Internet doesn't work in WSL2 when connected to a VPN.
 **Solution**:  
 Use Cisco Anyconnect from Windows Store (dont download online and install manually).
 
+## Git config
+[follow](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-git)
+
 **TODO**
 
 there is still a lot of weird stuff happening every time i install on new setup which needs to be manually fixed/installed
