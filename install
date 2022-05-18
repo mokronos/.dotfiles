@@ -40,5 +40,7 @@ sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake c
 #clone neovim repo and make
 cd
 git clone https://github.com/neovim/neovim
-cd neovim && make
+cd neovim
+git checkout stable
+make CMAKE_BUILD_TYPE=Release
 sudo make install
