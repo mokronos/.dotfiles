@@ -44,3 +44,6 @@ cd neovim
 git checkout stable
 make CMAKE_BUILD_TYPE=Release
 sudo make install
+
+# make matplotlib work
+sudo apt-get install python3-tk
