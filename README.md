@@ -72,6 +72,13 @@ Use Cisco Anyconnect from Windows Store (dont download online and install manual
 ## Git config
 [follow](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-git)
 
+## Neovim Release Build
+go into neovim --> build directory
+change CMake txt file to Release
+go back to neovim directory
+```shell
+sudo make install
+```
 **TODO**
 
 there is still a lot of weird stuff happening every time i install on new setup which needs to be manually fixed/installed
