@@ -4,12 +4,12 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 -- set up keybinds, only use them on attach to server
 local opts = { noremap=true, silent=true}
 local on_attach = function(client, bufnr)
-    vim.api.nvim_set_keymap('n', '<Leader>K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<Leader>R', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<Leader>vs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<Leader>vi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<Leader>vc', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
-    vim.api.nvim_set_keymap('n', '<Leader>vr', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+    vim.keymap.set('n', '<Leader>K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<Leader>R', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<Leader>vs', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<Leader>vi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<Leader>vc', vim.diagnostic.open_float, opts)
+    vim.keymap.set('n', '<Leader>vr', vim.lsp.buf.rename, opts)
 end
 
 -- lsp
