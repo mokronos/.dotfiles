@@ -1,46 +1,63 @@
-local Plug = vim.fn['plug#']
+return require('packer').startup(function()
+    -- packer itself
+    use 'wbthomason/packer.nvim'
 
-vim.call ('plug#begin', '~/.nvim/plugged')
+    -- colorscheme
+    use 'gruvbox-community/gruvbox'
 
-Plug 'gruvbox-community/gruvbox'
+    -- statusline
+    use 'nvim-lualine/lualine.nvim'
 
--- statusline
-Plug 'nvim-lualine/lualine.nvim'
+    -- navigation
+    -- telescope, fuzzy finder
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {{'nvim-lua/plenary.nvim'}},
+    }
+    use 'nvim-telescope/telescope-fzy-native.nvim'
 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+    -- filetree
+    use 'preservim/nerdtree'
 
-Plug 'preservim/nerdtree'
+    -- undotree
+    use 'mbbill/undotree'
 
-Plug 'tpope/vim-fugitive'
+    -- git
+    use 'tpope/vim-fugitive'
 
-Plug 'tpope/vim-commentary'
+    -- comments
+    use 'tpope/vim-commentary'
 
-Plug 'tpope/vim-surround'
+    -- sourround stuff with stuff
+    use 'tpope/vim-surround'
 
-Plug 'mbbill/undotree'
+    -- better highlighting and language understanding
+    -- produces weird error in python, where after a parenthesis, RETURN indents up to that perenthesis
+    use 'nvim-treesitter/nvim-treesitter'
 
--- Plug 'plasticboy/vim-markdown'
+    -- lsp, language understanding, linting
+    use 'neovim/nvim-lspconfig'
+    use 'williamboman/nvim-lsp-installer'
 
--- produces weird error in python, where after a parenthesis, RETURN indents up to that perenthesis
-Plug 'nvim-treesitter/nvim-treesitter'
+    -- completion, uses lsp as source
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/nvim-cmp'
 
--- lsp
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
+    -- snippetengine(kinda required for nvim-cmp)
+    use 'L3MON4D3/LuaSnip'
+    use 'saadparwaiz1/cmp_luasnip'
 
--- completion
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
+    -- debugging
+    use 'mfussenegger/nvim-dap'
+    use 'mfussenegger/nvim-dap-python'
+    use 'rcarriga/nvim-dap-ui'
+    use 'theHamsta/nvim-dap-virtual-text'
+    use 'nvim-telescope/telescope-dap.nvim'
 
--- snippetengine(kinda required for nvim-cmp)
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
+    -- use 'ambv/black'
+    -- use 'plasticboy/vim-markdown'
 
--- Plug 'ambv/black'
-
-vim.call ('plug#end')
+end)
