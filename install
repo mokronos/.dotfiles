@@ -53,3 +53,6 @@ pip install debugpy
 
 # python testing
 pip install pytest
+
+# for telescope live_grep to work
+sudo apt-get install ripgrep
