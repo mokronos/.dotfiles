@@ -109,6 +109,11 @@ _G.packer_plugins = {
     path = "/home/mokronos/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["magma-nvim"] = {
+    loaded = true,
+    path = "/home/mokronos/.local/share/nvim/site/pack/packer/start/magma-nvim",
+    url = "https://github.com/dccsillag/magma-nvim"
+  },
   nerdtree = {
     loaded = true,
     path = "/home/mokronos/.local/share/nvim/site/pack/packer/start/nerdtree",
@@ -163,6 +168,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mokronos/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  sniprun = {
+    loaded = true,
+    path = "/home/mokronos/.local/share/nvim/site/pack/packer/start/sniprun",
+    url = "https://github.com/michaelb/sniprun"
   },
   ["telescope-dap.nvim"] = {
     loaded = true,
