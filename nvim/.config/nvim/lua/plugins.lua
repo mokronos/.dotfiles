@@ -61,6 +61,6 @@ return require('packer').startup(function()
     -- use 'plasticboy/vim-markdown'
 
     -- enable jupyter notebook like behaviour in nvim
-    use { 'michaelb/sniprun', run = 'bash ./install.sh'}
+    use 'jpalardy/vim-slime'
 
 end)
