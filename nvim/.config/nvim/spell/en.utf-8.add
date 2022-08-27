@@ -43,3 +43,5 @@ PyTorch
 Perceptron
 numpy
 backpropagation
+nospell
+reproducibility
