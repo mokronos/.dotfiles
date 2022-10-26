@@ -194,6 +194,11 @@ _G.packer_plugins = {
     path = "/home/mokronos/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
+  ["vim-slime"] = {
+    loaded = true,
+    path = "/home/mokronos/.local/share/nvim/site/pack/packer/start/vim-slime",
+    url = "https://github.com/jpalardy/vim-slime"
+  },
   ["vim-surround"] = {
     loaded = true,
     path = "/home/mokronos/.local/share/nvim/site/pack/packer/start/vim-surround",
