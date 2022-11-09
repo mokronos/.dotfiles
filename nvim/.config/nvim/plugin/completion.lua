@@ -8,6 +8,7 @@ vim.g.completion_matching_strategy_list = 'exact, substring, fuzzy'
 local cmp = require'cmp'
 
   cmp.setup({
+    enabled = true,
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
@@ -34,8 +35,8 @@ local cmp = require'cmp'
       { name = 'luasnip' }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
-    }, {
       { name = 'buffer' },
+      { name = 'copilot' },
     })
   })
 
@@ -65,3 +66,12 @@ local cmp = require'cmp'
       { name = 'cmdline' }
     })
   })
+
+-- for copilot compatability
+cmp.event:on("menu_opened", function()
+  vim.b.copilot_suggestion_hidden = true
+end)
+
+cmp.event:on("menu_closed", function()
+  vim.b.copilot_suggestion_hidden = false
+end)
