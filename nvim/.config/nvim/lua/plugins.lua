@@ -63,4 +63,13 @@ return require('packer').startup(function()
     -- enable jupyter notebook like behaviour in nvim
     use 'jpalardy/vim-slime'
 
+    use 'zbirenbaum/copilot.lua'
+    use {
+      "zbirenbaum/copilot-cmp",
+      after = { "copilot.lua" },
+      config = function ()
+        require("copilot_cmp").setup()
+      end
+    }
+
 end)
