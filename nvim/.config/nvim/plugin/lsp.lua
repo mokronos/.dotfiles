@@ -6,6 +6,8 @@ local opts = { noremap=true, silent=true}
 local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<Leader>K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', '<Leader>R', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<Leader>gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', '<Leader>gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', '<Leader>vs', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<Leader>vi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<Leader>vc', vim.diagnostic.open_float, opts)
