@@ -31,6 +31,9 @@ vim.cmd[[highlight ColorColumn ctermbg=0 guibg=lightgrey]]
 opt.breakindent = true
 opt.linebreak = true
 
+opt.ignorecase = true
+opt.smartcase = true
+
 opt.clipboard='unnamedplus'
 
 opt.pumheight=10

@@ -100,6 +100,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[yellow]%})"
 
 alias python="python3"
 alias explorer="explorer.exe ."
+alias actv="source .venv/bin/activate"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

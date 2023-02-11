@@ -22,7 +22,7 @@ local options = {
     },
   },
   filetypes = {
-    yaml = false,
+    yaml = true,
     markdown = true,
     help = false,
     gitcommit = false,
