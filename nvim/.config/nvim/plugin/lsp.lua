@@ -33,7 +33,15 @@ lsp_installer.on_server_ready(function(server)
             on_attach = on_attach,
         }
     end
-    if server.name == "pyright" then
+    if server.name == "pylsp" then
+        server_opts = {
+            settings = {
+            },
+            capabilities = capabilities,
+            on_attach = on_attach,
+        }
+    end
+    if server.name == "tsserver" then
         server_opts = {
             settings = {
             },
