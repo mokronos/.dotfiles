@@ -1,3 +1,8 @@
+local pac = require('packer')
+pac.init({
+    max_jobs = 5,
+})
+
 return require('packer').startup(function()
     -- packer itself
     use 'wbthomason/packer.nvim'
@@ -57,6 +62,8 @@ return require('packer').startup(function()
     use 'theHamsta/nvim-dap-virtual-text'
     use 'nvim-telescope/telescope-dap.nvim'
 
+    -- python code formatter
+    -- use 'averms/black-nvim'
     -- use 'ambv/black'
     -- use 'plasticboy/vim-markdown'
 
