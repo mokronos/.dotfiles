@@ -15,22 +15,24 @@ sudo apt-get update
 sudo apt-get upgrade
 
 # install some basic stuff
+install zsh
 install tmux
 install stow
 install tree
-#dependecy for pylsp
-install python3-venv
-install python3-pip
 
 #install oh-my-zsh https://ohmyz.sh/#install
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# symlink the folders
+chmod +x install_dot
+./install_dot
+
+# make zsh default shell
+chsh -s $(which zsh)
+
 #install packer https://github.com/wbthomason/packer.nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-#install nvm for node.js
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 #install stuff to install neovim
 sudo apt install clang-9 --install-suggests
@@ -44,6 +46,11 @@ cd neovim
 make CMAKE_BUILD_TYPE=Release
 git checkout stable
 sudo make install
+
+#install nvm for node.js
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+nvm install node
 
 # make matplotlib work
 sudo apt-get install python3-tk
