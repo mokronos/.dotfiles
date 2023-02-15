@@ -1,16 +1,12 @@
 # Dotfiles Setup
 ## Just use Linux
 Use WSL2 on Win10/11. I tried just Windows and just no.
-## install some basic stuff
-**install zsh manually:**
-```shell
-sudo apt install zsh
-```
 
 ## clone dotfiles
 ```shell
 git clone https://github.com/Mokronos/.dotfiles.git
 ```
+## install some basic stuff
 
 **install other stuff with script:**
 ```shell
@@ -18,31 +14,6 @@ chmod +x install
 ```
 ```shell
 ./install
-```
-
-**install some stuff after**
-```shell
-nvm install node
-```
-
-## use stow to create symlinks for all the dotfiles
-```shell
-chmod +x install_dot
-```
-
-**run to link:**
-```shell
-./install_dot
-```
-
-**run to clean/unlink:**
-```shell
-./install_dot clean
-```
-
-**make zsh default**
-```shell
-chsh -s $(which zsh)
 ```
 
 **install powerline fonts**

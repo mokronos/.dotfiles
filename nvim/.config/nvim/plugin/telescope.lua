@@ -5,7 +5,6 @@ require('telescope').setup{
         }
     }
 }
--- vim.keymap.set('n', '<Leader>ps', '<cmd>lua require("telescope.builtin").find_files()<cr>', { noremap = true, silent = true })
 
 local opts = { noremap=true, silent=true}
 
@@ -23,3 +22,6 @@ vim.keymap.set('n', '<Leader>fr', require("telescope.builtin").lsp_references, o
 vim.keymap.set('n', '<Leader>ft', require("telescope.builtin").treesitter, opts)
 -- extra
 -- vim.keymap.set('n', '<Leader>fp', require("telescope.builtin").planets, opts)
+
+
+
