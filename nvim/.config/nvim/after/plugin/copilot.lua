@@ -9,16 +9,22 @@ local options = {
       refresh = "gr",
       open = "<M-CR>"
     },
+    layout = {
+      position = "bottom", -- | top | left | right
+      ratio = 0.4
+    },
   },
   suggestion = {
     enabled = true,
     auto_trigger = true,
     debounce = 75,
     keymap = {
-     accept = "<S-Tab>",
-     next = "<M-]>",
-     prev = "<M-[>",
-     dismiss = "<C-]>",
+      accept = "<S-Tab>",
+      accept_word = false,
+      accept_line = false,
+      next = "<M-]>",
+      prev = "<M-[>",
+      dismiss = "<C-]>",
     },
   },
   filetypes = {
@@ -32,8 +38,7 @@ local options = {
     cvs = false,
     ["."] = false,
   },
-  copilot_node_command = 'node', -- Node version must be < 18
-  plugin_manager_path = vim.fn.stdpath("data") .. "/site/pack/packer",
+  copilot_node_command = 'node', -- Node.js version must be > 16.x
   server_opts_overrides = {},
 }
 
