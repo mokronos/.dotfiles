@@ -6,14 +6,11 @@
 -- convert to lua (above stuff is not working for some reason)
 vim.api.nvim_command('setlocal spell spelllang=en_us,de_de')
 
--- set keybinds
-local opts = {noremap=true, silent=true}
-
 -- quick fix last wrong word in insert mode
-vim.api.nvim_set_keymap('i', '<C-s>', '<C-g>u<Esc>[s1z=`]a<C-g>u', opts)
+vim.keymap.set('i', '<C-s>', '<C-g>u<Esc>[s1z=`]a<C-g>u', {desc = 'fix last spelling error'})
 
 -- open dictionary autocomplete
-vim.api.nvim_set_keymap('i', '<C-c>', '<C-x><C-k>', opts)
+vim.keymap.set('i', '<C-c>', '<C-x><C-k>', {desc = 'dictionary autocomplete'})
 
 -- spellfile probably should be cleaned at some point, but spellclean.vim is not in neovim. could do it myself (regex)
 

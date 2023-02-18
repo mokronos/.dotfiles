@@ -31,12 +31,32 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ["<C-Space>"] = cmp.mapping.complete(),
 })
 
+local cmp_sources = lsp.defaults.cmp_sources()
+
+table.insert(cmp_sources, {name = 'cmd-line'})
+
+cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = 'path' }
+      }, {
+        {
+          name = 'cmdline',
+          option = {
+            ignore_cmds = { 'Man', '!' }
+          }
+        }
+      })
+    })
+
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
+  mapping = cmp_mappings,
+  sources = cmp_sources
 })
+
 
 lsp.set_preferences({
     suggest_lsp_servers = false,

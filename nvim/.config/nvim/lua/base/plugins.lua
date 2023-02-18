@@ -44,6 +44,8 @@ return require('packer').startup(function(use)
             {'hrsh7th/cmp-path'},         -- Optional
             {'saadparwaiz1/cmp_luasnip'}, -- Optional
             {'hrsh7th/cmp-nvim-lua'},     -- Optional
+            {'hrsh7th/cmp-cmdline'},     -- Optional
+
 
             -- Snippets
             {'L3MON4D3/LuaSnip'},             -- Required
@@ -65,7 +67,10 @@ return require('packer').startup(function(use)
 
 
     -- statusline
-    -- use 'nvim-lualine/lualine.nvim'
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
 
 
 end)

@@ -8,14 +8,14 @@ require('telescope').setup{
 
 local builtin = require('telescope.builtin')
 -- files
-vim.keymap.set('n', '<Leader>ps', builtin.find_files)
-vim.keymap.set('n', '<Leader>fs', builtin.grep_string)
-vim.keymap.set('n', '<Leader>ff', builtin.live_grep)
+vim.keymap.set('n', '<Leader>ff', builtin.find_files, {desc = '[F]ind [F]ile'})
+vim.keymap.set('n', '<Leader>fs', builtin.live_grep, {desc = '[F]ind [S]tring'})
+vim.keymap.set('n', '<Leader>fw', builtin.grep_string, {desc = '[F]ind [W]ord'})
 -- vim
-vim.keymap.set('n', '<Leader>fc', builtin.commands)
-vim.keymap.set('n', '<Leader>fm', builtin.man_pages)
-vim.keymap.set('n', '<Leader>fk', builtin.keymaps)
+vim.keymap.set('n', '<Leader>fc', builtin.commands, {desc = '[F]ind [C]ommand'})
+vim.keymap.set('n', '<Leader>fh', builtin.man_pages, {desc = '[F]ind [H]elp'})
+vim.keymap.set('n', '<Leader>fk', builtin.keymaps, {desc = '[F]ind [K]eymap'})
 -- lsp
-vim.keymap.set('n', '<Leader>fr', builtin.lsp_references)
+vim.keymap.set('n', '<Leader>fr', builtin.lsp_references, {desc = '[F]ind [R]eference'})
 -- treesitter
-vim.keymap.set('n', '<Leader>ft', builtin.treesitter)
+vim.keymap.set('n', '<Leader>ft', builtin.treesitter, {desc = '[F]ind [T]reesitter'})
