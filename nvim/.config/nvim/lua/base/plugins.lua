@@ -52,19 +52,9 @@ return require('packer').startup(function(use)
             {'rafamadriz/friendly-snippets'}, -- Optional
         }
     }
+
     -- copilot
-    use {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup({})
-        end,
-    }
-
-    -- enable jupyter notebook like behaviour in nvim
-    -- use 'jpalardy/vim-slime'
-
+    use 'zbirenbaum/copilot.lua'
 
     -- statusline
     use {

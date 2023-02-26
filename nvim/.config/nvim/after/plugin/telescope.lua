@@ -13,7 +13,7 @@ vim.keymap.set('n', '<Leader>fs', builtin.live_grep, {desc = '[F]ind [S]tring'})
 vim.keymap.set('n', '<Leader>fw', builtin.grep_string, {desc = '[F]ind [W]ord'})
 -- vim
 vim.keymap.set('n', '<Leader>fc', builtin.commands, {desc = '[F]ind [C]ommand'})
-vim.keymap.set('n', '<Leader>fh', builtin.man_pages, {desc = '[F]ind [H]elp'})
+vim.keymap.set('n', '<Leader>fh', builtin.help_tags, {desc = '[F]ind [H]elp'})
 vim.keymap.set('n', '<Leader>fk', builtin.keymaps, {desc = '[F]ind [K]eymap'})
 -- lsp
 vim.keymap.set('n', '<Leader>fr', builtin.lsp_references, {desc = '[F]ind [R]eference'})
