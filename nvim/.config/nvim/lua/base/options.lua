@@ -1,5 +1,5 @@
+-- might want to transfer to nvim_set_option
 local opt = vim.opt
-
 
 opt.guicursor=''
 
