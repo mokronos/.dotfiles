@@ -1,5 +1,4 @@
-#!/usr/bin/env zsh
-#
+#!/usr/bin/env bash
 # installs all important programs
 #
 # checks if package is installed
@@ -12,32 +11,36 @@ install () {
 
 # update ubuntu first
 sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get -y upgrade
+
+# install stow to create symlinks for config files
+# before installing zsh to not have conflicts
+install stow
+# symlink the folders
+chmod +x install_dot
+./install_dot
 
 # install some basic stuff
 install zsh
 install tmux
-install stow
 install tree
 
 #install oh-my-zsh https://ohmyz.sh/#install
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# symlink the folders
-chmod +x install_dot
-./install_dot
-
 # make zsh default shell
-chsh -s $(which zsh)
+chsh -s -y $(which zsh)
+
+# new run required
 
 #install packer https://github.com/wbthomason/packer.nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 #install stuff to install neovim
-sudo apt install clang-9 --install-suggests
-pip install cmake
-sudo apt-get install ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+sudo apt install -y clang-9 --install-suggests
+pip install -y cmake
+sudo apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
 
 #clone neovim repo and make
 cd
@@ -45,21 +48,22 @@ git clone https://github.com/neovim/neovim
 cd neovim
 make CMAKE_BUILD_TYPE=Release
 git checkout stable
-sudo make install
+sudo make install -y
 
 #install nvm for node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
-nvm install node
+# not installing, need to do manually after
+nvm install -y node
 
 # make matplotlib work
-sudo apt-get install python3-tk
+sudo apt-get install -y python3-tk
 
 # python debugging
-pip install debugpy
+pip install -y debugpy
 
 # python testing
-pip install pytest
+pip install -y pytest
 
 # for telescope live_grep to work
-sudo apt-get install ripgrep
+sudo apt-get install -y ripgrep
