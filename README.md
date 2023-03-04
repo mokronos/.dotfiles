@@ -41,7 +41,7 @@ Internet doesn't work in WSL2 when connected to a VPN.
 Use Cisco Anyconnect from Windows Store (dont download online and install manually).
 
 ## Git config
-[follow](https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-git)
+[follow](https://github.com/GitCredentialManager/git-credential-manager/blob/main/docs/wsl.md#:~:text=git%20config%20%2D%2Dglobal%20credential.helper%20%22/mnt/c/Program%5C%20Files/Git/mingw64/bin/git%2Dcredential%2Dmanager.exe%22)
 
 ## Neovim Release Build
 clone nvim git [repo](https://github.com/neovim/neovim) (or specific version) [follow](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source).
