@@ -1,7 +1,7 @@
 -- might want to transfer to nvim_set_option
 local opt = vim.opt
 
-opt.guicursor=''
+opt.guicursor='n-c-v:block-nCursor'
 
 opt.relativenumber = true
 opt.number = true
@@ -37,3 +37,7 @@ opt.clipboard='unnamedplus'
 
 opt.updatetime=50
 
+opt.keywordprg=':help'
+
+-- debugging
+-- opt.verbose=0
