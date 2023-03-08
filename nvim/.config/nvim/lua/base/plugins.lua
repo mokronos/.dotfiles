@@ -28,10 +28,16 @@ return require('packer').startup(function(use)
     -- comments
     use 'tpope/vim-commentary'
 
+    -- server manger
+    use 'williamboman/mason.nvim'
+
     -- LSP
     use 'neovim/nvim-lspconfig'
-    use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
+
+    -- linter
+    use 'jose-elias-alvarez/null-ls.nvim'
+    use 'jay-babu/mason-null-ls.nvim'
 
     -- Autocompletion
     use 'hrsh7th/nvim-cmp'
