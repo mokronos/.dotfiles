@@ -1,7 +1,4 @@
--- make options local
--- local opt = vim.opt_local
--- opt.spell = true
--- opt.spelllang = en_us
+local opt = vim.opt_local
 
 -- convert to lua (above stuff is not working for some reason)
 vim.api.nvim_command('setlocal spell spelllang=en_us,de_de')
@@ -14,3 +11,5 @@ vim.keymap.set('i', '<C-c>', '<C-x><C-k>', {desc = 'dictionary autocomplete'})
 
 -- spellfile probably should be cleaned at some point, but spellclean.vim is not in neovim. could do it myself (regex)
 
+opt.wrap = true
+opt.linebreak = true
