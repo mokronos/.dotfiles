@@ -2,7 +2,8 @@ require('telescope').setup{
     defaults = {
         file_ignore_patterns = {
             "%.git", "%.pdf", "%.png", "results/", "data/", "models/", "spell/", "%.db", "%.pth", "__init__.py", "__pycache__/", "_site/"
-        }
+        },
+        layout_strategy = "vertical",
     }
 }
 
