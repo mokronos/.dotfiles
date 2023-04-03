@@ -51,3 +51,15 @@ Check [this](https://github.com/neovim/neovim/wiki/Building-Neovim#building) for
 ## TODO
 
 there is still a lot of weird stuff happening every time i install on new setup which needs to be manually fixed/installed
+
+# Python scripts
+## install python scripts
+Just makes the scripts executable, path is hardcoded in zshrc.
+```shell
+for f in *(.); chmod +x $f; done
+```
+Need to have zsh with extended globbing enabled.
+## Info
+These are just some random python scripts I made.
+This setup makes them nicely organized and they can be used from anywhere like cli programs.
+Just need to be careful with names.

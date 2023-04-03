@@ -58,6 +58,9 @@ plugins=(git tmux)
 # autostart tmux
 ZSH_TMUX_AUTOSTART=true
 
+# extended pattern matching
+setopt extendedglob
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -100,7 +103,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[yellow]%})"
 
 # change python version as needed
 # easier than fiddeling with default system version and breaking stuff
-alias python="python3.11"
+alias python="python3"
 alias pip="python -m pip"
 
 # shortcuts
@@ -125,4 +128,7 @@ export PATH="$HOME/gems/bin:$PATH"
 
 # add stuff to path
 export PATH="$HOME/.local/bin:$PATH"
+
+# add dotfile scripts to path
+export PATH="$HOME/.dotfiles/scripts:$PATH"
 
