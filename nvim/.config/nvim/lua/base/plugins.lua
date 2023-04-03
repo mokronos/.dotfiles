@@ -18,6 +18,7 @@ return require('packer').startup(function(use)
 
     -- better highlighting and language understanding
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use 'nvim-treesitter/nvim-treesitter-context'
 
     -- undotree
     use 'mbbill/undotree'
@@ -62,6 +63,9 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
+
+    -- debugging
+    use 'mfussenegger/nvim-dap'
 
 
 end)
