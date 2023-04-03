@@ -5,3 +5,5 @@ github-copilot/
 package-lock.json
 package.json
 packer_compiled.lua
+__pycache__/
+api_key.json
