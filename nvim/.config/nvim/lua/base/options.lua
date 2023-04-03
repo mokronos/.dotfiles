@@ -33,7 +33,7 @@ opt.smartcase = true
 
 opt.hlsearch = false
 
-opt.clipboard='unnamedplus'
+-- opt.clipboard='unnamedplus'
 
 opt.updatetime=50
 
