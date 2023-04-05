@@ -16,6 +16,12 @@ return require('packer').startup(function(use)
         requires = { {'nvim-lua/plenary.nvim'} }
     }
 
+    -- swapping files
+    use {
+        'ThePrimeagen/harpoon',
+        requires = { {'nvim-lua/plenary.nvim'} }
+    }
+
     -- better highlighting and language understanding
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'nvim-treesitter/nvim-treesitter-context'
