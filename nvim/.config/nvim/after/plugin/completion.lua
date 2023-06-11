@@ -17,10 +17,10 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = false}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
-        { name = 'nvim_lsp'},
+        { name = 'nvim_lsp', max_item_count = 10},
         { name = 'nvim_lua'},
-        { name = 'path'},
-        { name = 'buffer', keyword_length = 4 },
+        { name = 'path', max_item_count = 5},
+        { name = 'buffer', keyword_length = 4, max_item_count = 5},
     }),
     formatting = {
         format = lspkind.cmp_format({

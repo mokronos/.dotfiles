@@ -79,5 +79,9 @@ return require('packer').startup(function(use)
     setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
     ft = { "markdown" }, })
 
+    -- latex
+    -- not working, seems like a python issue
+    use({ "xuhdev/vim-latex-live-preview",
+    ft = { "tex", "latex" }, })
 
 end)
