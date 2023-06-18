@@ -41,3 +41,7 @@ opt.keywordprg=':help'
 
 -- debugging
 -- opt.verbose=0
+
+-- make latex be the default filetype for .tex files
+-- so that ftplugin/tex.lua is loaded
+vim.g.tex_flavor='latex'
