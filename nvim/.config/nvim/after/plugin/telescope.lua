@@ -1,13 +1,14 @@
 require('telescope').setup{
     defaults = {
         file_ignore_patterns = {
-            "%.git", "%.pdf", "%.png"
+            "%.pdf", "%.png"
         },
         layout_strategy = "vertical",
-    }
+    },
 }
 
 local builtin = require('telescope.builtin')
+
 -- files
 vim.keymap.set('n', '<Leader>ff', builtin.find_files, {desc = '[F]ind [F]ile'})
 vim.keymap.set('n', '<Leader>fs', builtin.live_grep, {desc = '[F]ind [S]tring'})
@@ -20,3 +21,8 @@ vim.keymap.set('n', '<Leader>fk', builtin.keymaps, {desc = '[F]ind [K]eymap'})
 vim.keymap.set('n', '<Leader>fr', builtin.lsp_references, {desc = '[F]ind [R]eference'})
 -- treesitter
 vim.keymap.set('n', '<Leader>ft', builtin.treesitter, {desc = '[F]ind [T]reesitter'})
+
+-- not working for some reason
+-- remap <C-h> to select vertical
+-- local actions = require('telescope.actions')
+-- vim.keymap.set('n', '<C-h>', actions.select_horizontal, {desc = 'Select vertical'})
