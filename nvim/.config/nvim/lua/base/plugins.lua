@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
     -- comments
     use 'tpope/vim-commentary'
 
-    -- server manger
+    -- LSP server manager
     use 'williamboman/mason.nvim'
 
     -- LSP
