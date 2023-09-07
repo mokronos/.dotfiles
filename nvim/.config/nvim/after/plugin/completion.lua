@@ -47,7 +47,8 @@ cmp.setup.filetype('gitcommit', {
 cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = 'buffer' }
+        { name = 'buffer' },
+        { name = 'path' }
     }
 })
 
@@ -55,7 +56,16 @@ cmp.setup.cmdline({ '/', '?' }, {
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = 'cmdline' },
         { name = 'path' },
-    })
+        { name = 'cmdline' },
+    }),
+    formatting = {
+        format = lspkind.cmp_format({
+            mode = 'text',
+            menu = ({
+                path = '[Path]',
+                cmdline = '[Cmd]',
+            }),
+        })
+    }
 })
