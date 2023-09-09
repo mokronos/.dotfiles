@@ -48,6 +48,10 @@ clone nvim git [repo](https://github.com/neovim/neovim) (or specific version) [f
 
 Check [this](https://github.com/neovim/neovim/wiki/Building-Neovim#building) for making sure we are using the RELEASE version of neovim.
 
+## Copilot not working because of WSL2 internet
+
+[This](https://stackoverflow.com/questions/62314789/no-internet-connection-on-wsl-ubuntu-windows-subsystem-for-linux) fixed it.
+
 ## TODO
 
 there is still a lot of weird stuff happening every time i install on new setup which needs to be manually fixed/installed
