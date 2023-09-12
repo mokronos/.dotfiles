@@ -134,3 +134,15 @@ export PATH="$HOME/.dotfiles/scripts:$PATH"
  
 # copilot aliases
 eval "$(github-copilot-cli alias -- "$0")"
+
+# modular (mojo)
+export MODULAR_HOME="/home/mokronos/.modular"
+export PATH="/home/mokronos/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
+
+# make ctrl-p act like up arrow (take typed text into account)
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^P" up-line-or-beginning-search # Up
+bindkey "^N" down-line-or-beginning-search # Down
