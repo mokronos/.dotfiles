@@ -53,7 +53,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux)
+plugins=(git tmux zsh-autosuggestions)
 
 # autostart tmux
 ZSH_TMUX_AUTOSTART=true
@@ -117,10 +117,6 @@ export NVM_DIR="$HOME/.nvm"
 # Ruby exports (fixes gem install for jekyll)
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
-
-# make vcxsrv work with wsl2
-LOCAL_IP=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
-export DISPLAY=$LOCAL_IP:0
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
