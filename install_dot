@@ -18,7 +18,8 @@ else
     do
         echo "symlinking $folder"
         stow -D $folder
-        stow $folder
+        stow $folder --adopt
     done
+    git reset --hard
 fi
 popd
