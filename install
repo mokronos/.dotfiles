@@ -1,69 +1,25 @@
 #!/usr/bin/env bash
-# installs all important programs
 #
-# checks if package is installed
-#if (dpkg-query -W -f='${Status}' tmux 2>/dev/null | grep -c "ok installed") == 0
+# loop over folders to stow dotfiles
+DOTFILES=$HOME/.dotfiles
+STOW_FOLDERS="zsh,tmux,nvim"
 
+pushd $DOTFILES
 
-install () {
-    sudo apt install -y $1
-}
-
-# update ubuntu first
-sudo apt-get update
-sudo apt-get -y upgrade
-
-# install stow to create symlinks for config files
-# before installing zsh to not have conflicts
-install stow
-# symlink the folders
-chmod +x install_dot
-./install_dot
-
-# install some basic stuff
-install zsh
-install tmux
-install tree
-
-#install oh-my-zsh https://ohmyz.sh/#install
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# make zsh default shell
-chsh -s -y $(which zsh)
-
-# new run required
-
-#install packer https://github.com/wbthomason/packer.nvim
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-#install stuff to install neovim
-sudo apt install -y clang-9 --install-suggests
-pip install -y cmake
-sudo apt-get install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
-
-#clone neovim repo and make
-cd
-git clone https://github.com/neovim/neovim
-cd neovim
-make CMAKE_BUILD_TYPE=Release
-git checkout stable
-sudo make install -y
-
-#install nvm for node.js
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-
-# not installing, need to do manually after
-nvm install -y node
-
-# make matplotlib work
-sudo apt-get install -y python3-tk
-
-# python debugging
-pip install -y debugpy
-
-# python testing
-pip install -y pytest
-
-# for telescope live_grep to work
-sudo apt-get install -y ripgrep
+if [[ $1 == clean ]]
+then
+    for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+    do
+        echo "unlinking + removing $folder"
+        stow -D $folder
+    done
+else
+    for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+    do
+        echo "symlinking $folder"
+        stow -D $folder
+        stow $folder --adopt
+    done
+    git reset --hard
+fi
+popd
