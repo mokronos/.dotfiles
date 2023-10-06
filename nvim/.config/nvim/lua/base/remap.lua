@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
 -- open file manager
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, {desc = '[P]roject [V]iew'})
+vim.keymap.set('n', '<leader>pv', vim.cmd.Lex, {desc = '[P]roject [V]iew'})
 
 -- source current file
 vim.keymap.set("n", "<leader><leader>", function()
