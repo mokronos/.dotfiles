@@ -14,9 +14,11 @@ null_ls.setup({
 
         -- might be good to only have diagnostics on save to improve
         -- performance for pyright, but this is not working:
-        -- null_ls.builtins.diagnostics.pyright.with({
-        --     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-        -- }),
+        null_ls.builtins.diagnostics.flake8.with({
+            diagnostic_config  = { underline = false },
+            method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+            extra_args = { "--ignore=" },
+        }),
     }
 })
 
