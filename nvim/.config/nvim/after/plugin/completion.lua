@@ -20,7 +20,7 @@ cmp.setup({
         { name = 'nvim_lsp', max_item_count = 10},
         { name = 'nvim_lua'},
         { name = 'path', max_item_count = 5},
-        { name = 'buffer', keyword_length = 4, max_item_count = 5},
+        { name = 'buffer', keyword_length = 1, max_item_count = 5},
     }),
     formatting = {
         format = lspkind.cmp_format({
