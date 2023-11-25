@@ -21,6 +21,7 @@ vim.keymap.set('n', '<Leader>fk', builtin.keymaps, {desc = '[F]ind [K]eymap'})
 vim.keymap.set('n', '<Leader>fr', builtin.lsp_references, {desc = '[F]ind [R]eference'})
 -- treesitter
 vim.keymap.set('n', '<Leader>ft', builtin.treesitter, {desc = '[F]ind [T]reesitter'})
+vim.keymap.set('n', '<Leader>fq', builtin.quickfix, {desc = '[F]ind [Q]uickfix'})
 
 -- not working for some reason
 -- remap <C-h> to select vertical
