@@ -1,5 +1,3 @@
-zmodload zsh/zprof
-
 # only check zcompdump once a day to improve startup time
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
@@ -23,19 +21,6 @@ setopt extendedglob
 
 source $ZSH/oh-my-zsh.sh
 
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# colorscheme custom adjustments
-# https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/robbyrussell.zsh-theme
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 PROMPT+=' %{$fg[green]%}%c%{$reset_color%} $(git_prompt_info)'
 
@@ -57,14 +42,13 @@ alias newpy='proj=$(find ~/ -maxdepth 3 -type d | fzf) &&
     tmux send-keys -t $(basename $proj):shell "actv" Enter &&
     tmux switch-client -t $(basename $proj):nvim'
 
-
 # only needed on windows with wsl
 alias explorer="explorer.exe ."
 
 # nvm install
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
@@ -92,4 +76,3 @@ bindkey "^P" up-line-or-beginning-search # Up
 bindkey "^N" down-line-or-beginning-search # Down
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-zprof
