@@ -35,6 +35,7 @@ alias pip="python -m pip"
 
 # shortcuts 
 alias actv="source .venv/bin/activate"
+# TODO: make this into script bin/.local/bin (fzf works with tmux now)
 alias newpy='proj=$(find ~/ -maxdepth 3 -type d | fzf) &&
     tmux new-session -s $(basename $proj) -c $proj -d -n "nvim" &&
     tmux send-keys -t $(basename $proj):nvim "actv; nvim" Enter &&
@@ -75,4 +76,3 @@ zle -N down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search # Up
 bindkey "^N" down-line-or-beginning-search # Down
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
