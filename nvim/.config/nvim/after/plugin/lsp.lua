@@ -8,6 +8,7 @@ mason.setup({
     -- Replace these with whatever servers you want to install
     'pyright',
     'lua_ls',
+    'rust_analyzer',
   }
 })
 
