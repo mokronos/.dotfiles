@@ -1,6 +1,11 @@
-vim.g.mapleader = " "
+-- makes sure that space is fully reserved for leader key
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
--- open file manager
+-- move up and down into wrapped lines
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- open file manager (not really needed)
 vim.keymap.set('n', '<leader>pv', vim.cmd.Lex, {desc = '[P]roject [V]iew'})
 
 -- source current file
@@ -22,9 +27,3 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = 'Move selected lines up'})
 
 vim.keymap.set("n", "<C-j>", "<C-^>", {desc = 'Jump to alternate file'})
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {desc = 'Jump to normal mode from terminal'})
-
--- no clue why this doesn't work
--- vim.keymap.set("n", "<leader>;", function()
---     vim.cmd("messages")
--- end, {desc = 'Show messages'})
-
