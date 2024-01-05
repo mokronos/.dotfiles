@@ -1,97 +1,164 @@
--- Only required if you have packer configured as `opt`
-vim.cmd.packadd('packer.nvim')
+-- Plugin Manager Bootstrap
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
 
-return require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
 
-    -- colorscheme
-    use { "ellisonleao/gruvbox.nvim" }
 
-    -- navigation
-    -- telescope, fuzzy finder
-    use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        -- or                            , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim'} }
-    }
-
-    -- swapping files
-    use {
-        'ThePrimeagen/harpoon',
-        requires = { {'nvim-lua/plenary.nvim'} }
-    }
-
-    -- better highlighting and language understanding
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use 'nvim-treesitter/nvim-treesitter-context'
-
-    -- undotree
-    use 'mbbill/undotree'
+-- Plugins
+require('lazy').setup({
 
     -- git
-    use 'tpope/vim-fugitive'
+    'tpope/vim-fugitive',
+    'tpope/vim-rhubarb',
+    'lewis6991/gitsigns.nvim',
 
     -- comments
-    use 'tpope/vim-commentary'
+    'tpope/vim-commentary',
 
-    -- LSP server manager
-    use 'williamboman/mason.nvim'
+    -- colorscheme
+    {
+        'ellisonleao/gruvbox.nvim',
+        priority = 1000,
+        config = function()
+            vim.o.background = 'dark'
+            vim.cmd.colorscheme 'gruvbox'
+        end
+    },
 
-    -- LSP
-    use 'neovim/nvim-lspconfig'
-    use 'williamboman/mason-lspconfig.nvim'
+    -- LSP Configuration
+    {
+        'neovim/nvim-lspconfig',
+        dependencies = {
+            -- Automatically install LSPs to stdpath for neovim
+            { 'williamboman/mason.nvim', config = true },
+            'williamboman/mason-lspconfig.nvim',
 
-    -- linter
-    use 'jose-elias-alvarez/null-ls.nvim'
-    use 'jay-babu/mason-null-ls.nvim'
+            -- Useful status updates for LSP
+            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+            { 'j-hui/fidget.nvim', opts = {} },
+
+            -- Additional lua configuration, makes nvim stuff amazing!
+            'folke/neodev.nvim',
+        },
+    },
+
+    -- Diagnostics
+    {
+        'folke/trouble.nvim',
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+        },
+    },
 
     -- Autocompletion
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-nvim-lua'
+    {
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+            -- Snippet Engine & its associated nvim-cmp source
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
 
-    -- better description for completion
-    use 'onsails/lspkind-nvim'
+            -- Adds LSP completion capabilities
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            -- 'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-nvim-lua',
 
-    -- -- Snippets
-    use 'L3MON4D3/LuaSnip'
-    use 'rafamadriz/friendly-snippets'
+            -- Adds a number of user-friendly snippets
+            'rafamadriz/friendly-snippets',
+        },
+    },
 
-    -- copilot
-    use 'zbirenbaum/copilot.lua'
-
-    -- statusline
-    use {
+    -- Statusline
+    {
+        -- Set lualine as statusline
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
+        -- See `:help lualine.txt`
+        opts = {
+            options = {
+                icons_enabled = false,
+                theme = 'gruvbox',
+                component_separators = '|',
+                section_separators = '',
+            },
+        },
+    },
 
-    -- debugging
-    use 'mfussenegger/nvim-dap'
+    -- Navigation
+    {
+        'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+            -- Only load if `make` is available. Make sure you have the system
+            -- requirements installed.
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                -- NOTE: If you are having trouble with this installation,
+                --       refer to the README for telescope-fzf-native for more instructions.
+                build = 'make',
+                cond = function()
+                    return vim.fn.executable 'make' == 1
+                end,
+            },
+        },
+    },
+    {
+        'ThePrimeagen/harpoon',
+        branch = 'harpoon2',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+    },
+
+    -- Highlighting
+    {
+        -- Highlight, edit, and navigate code
+        'nvim-treesitter/nvim-treesitter',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter-textobjects',
+            'nvim-treesitter/nvim-treesitter-context',
+        },
+        build = ':TSUpdate',
+    },
+
+    -- Better undo
+    'mbbill/undotree',
+
+    -- Copilot
+    'zbirenbaum/copilot.lua',
 
     -- markdown
-    use({ "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-    ft = { "markdown" }, })
-
-    -- latex
-    -- not working, seems like a python issue
-    use({ "xuhdev/vim-latex-live-preview",
-    ft = { "tex", "latex" }, })
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
+    },
 
     -- tailwind sorter
     -- need to figure out prettier, and linters in general
     -- this should be their job
-    use {
+    {
         'laytan/tailwind-sorter.nvim',
-        requires = {'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim'},
-        config = function() require('tailwind-sorter').setup() end,
-        run = 'cd formatter && npm i && npm run build',
-    }
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-lua/plenary.nvim'
+        },
+        build = 'cd formatter && npm i && npm run build',
+        config = true,
+    },
 
-end)
+}, {})

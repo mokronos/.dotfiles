@@ -1,5 +1,5 @@
 local cmp = require('cmp')
-local lspkind = require('lspkind')
+-- local lspkind = require('lspkind')
 
 cmp.setup({
     snippet = {
@@ -22,17 +22,17 @@ cmp.setup({
         { name = 'path', max_item_count = 5},
         { name = 'buffer', keyword_length = 1, max_item_count = 5},
     }),
-    formatting = {
-        format = lspkind.cmp_format({
-            mode = 'text',
-            menu = ({
-                nvim_lsp = '[LSP]',
-                nvim_lua = '[Lua]',
-                path = '[Path]',
-                buffer = '[Buf]',
-            }),
-        })
-    }
+    -- formatting = {
+    --     format = lspkind.cmp_format({
+    --         mode = 'text',
+    --         menu = ({
+    --             nvim_lsp = '[LSP]',
+    --             nvim_lua = '[Lua]',
+    --             path = '[Path]',
+    --             buffer = '[Buf]',
+    --         }),
+    --     })
+    -- }
 })
 
 -- Set configuration for specific filetype.
@@ -59,13 +59,13 @@ cmp.setup.cmdline(':', {
         { name = 'path' },
         { name = 'cmdline' },
     }),
-    formatting = {
-        format = lspkind.cmp_format({
-            mode = 'text',
-            menu = ({
-                path = '[Path]',
-                cmdline = '[Cmd]',
-            }),
-        })
-    }
+    -- formatting = {
+    --     format = lspkind.cmp_format({
+    --         mode = 'text',
+    --         menu = ({
+    --             path = '[Path]',
+    --             cmdline = '[Cmd]',
+    --         }),
+    --     })
+    -- }
 })

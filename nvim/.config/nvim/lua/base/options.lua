@@ -1,46 +1,50 @@
--- might want to transfer to nvim_set_option
-local opt = vim.opt
+vim.o.guicursor='n-c-v:block-nCursor'
 
-opt.guicursor='n-c-v:block-nCursor'
+vim.o.relativenumber = true
+vim.o.number = true
 
-opt.relativenumber = true
-opt.number = true
+vim.o.completeopt='menuone,noselect'
 
-opt.tabstop=4
-opt.softtabstop=4
-opt.shiftwidth=4
-opt.expandtab = true
+vim.o.tabstop=4
+vim.o.softtabstop=4
+vim.o.shiftwidth=4
+vim.o.expandtab = true
 
-opt.smartindent = true
+vim.o.smartindent = true
 
-opt.swapfile = false
-opt.backup = false
-opt.undodir= os.getenv("HOME") .. '/.vim/undodir'
-opt.undofile = true
+vim.o.swapfile = false
+vim.o.backup = false
+vim.o.undodir= os.getenv("HOME") .. '/.vim/undodir'
+vim.o.undofile = true
 
-opt.wrap = false
+vim.o.wrap = true
+vim.o.breakindent = true
 
-opt.signcolumn = 'yes'
-opt.colorcolumn = '80'
-vim.cmd[[highlight ColorColumn ctermbg=0 guibg=lightgrey]]
+-- add line at x chars to enforce line length
+vim.o.signcolumn = 'yes'
+vim.o.colorcolumn = '80'
+-- vim.cmd[[highlight ColorColumn ctermbg=0 guibg=darkgrey]]
 
-opt.scrolloff=8
+vim.o.scrolloff=8
 
-opt.termguicolors = true
+vim.o.termguicolors = true
 
-opt.ignorecase = true
-opt.smartcase = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
-opt.hlsearch = false
+vim.o.hlsearch = false
 
--- opt.clipboard='unnamedplus'
+-- make all clipboards the same
+-- vim.o.clipboard='unnamedplus'
 
-opt.updatetime=50
+vim.o.updatetime=250
+-- vim.o.timeoutlen=500
 
-opt.keywordprg=':help'
+-- makes K open the help page for the word under the cursor
+vim.o.keywordprg=':help'
 
 -- debugging
--- opt.verbose=0
+-- vim.o.verbose=0
 
 -- make latex be the default filetype for .tex files
 -- so that ftplugin/tex.lua is loaded
