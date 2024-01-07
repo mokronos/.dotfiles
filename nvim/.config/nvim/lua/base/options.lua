@@ -1,7 +1,7 @@
 vim.o.guicursor='n-c-v:block-nCursor'
 
-vim.o.relativenumber = true
-vim.o.number = true
+vim.wo.number = true
+vim.wo.relativenumber = true
 
 vim.o.tabstop=4
 vim.o.softtabstop=4
