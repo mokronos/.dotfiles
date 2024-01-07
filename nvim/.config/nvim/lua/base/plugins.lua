@@ -13,7 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
-
 -- Plugins
 require('lazy').setup({
 
@@ -167,6 +166,17 @@ require('lazy').setup({
         },
         build = 'cd formatter && npm i && npm run build',
         config = true,
+    },
+
+    -- jupyter
+    {
+        'luk400/vim-jukit',
+        -- need to run these before the plugin loads, would rather have them in
+        -- the seperate config file, like just require the file here
+        -- but doesnt work bc of pathing somehow
+        init = function()
+            vim.g.jukit_mappings = 0
+        end,
     },
 
 }, {})
