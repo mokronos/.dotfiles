@@ -33,20 +33,20 @@ cmp.setup({
 
     sources = cmp.config.sources({
         -- { name = 'copilot', max_item_count = 3},
-        { name = 'nvim_lsp', max_item_count = 10 },
-        { name = 'path',     max_item_count = 5 },
-        { name = 'luasnip',  max_item_count = 5 },
-        { name = 'buffer',   keyword_length = 1, max_item_count = 5 },
+        { name = 'nvim_lsp',   max_item_count = 10 },
+        { name = 'async_path', max_item_count = 5 },
+        { name = 'luasnip',    max_item_count = 5 },
+        { name = 'buffer',     keyword_length = 1, max_item_count = 5 },
     }),
     formatting = {
         format = lspkind.cmp_format({
             mode = "text",
             menu = ({
-                buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
+                async_path = "[Path]",
                 luasnip = "[Snippet]",
-                path = "[Path]",
                 copilot = "[Copilot]",
+                buffer = "[Buffer]",
             }),
         }),
     },
@@ -73,7 +73,7 @@ cmp.setup.cmdline({ '/', '?' }, {
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = 'path' },
+        { name = 'async_path' },
     }, {
         { name = 'cmdline' },
     }),
@@ -81,7 +81,7 @@ cmp.setup.cmdline(':', {
         format = lspkind.cmp_format({
             mode = "text",
             menu = ({
-                path = "[Path]",
+                async_path = "[Path]",
                 cmdline = "[Cmd]",
             }),
         }),
