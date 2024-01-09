@@ -69,7 +69,7 @@ require('lazy').setup({
 
             -- Adds LSP completion capabilities
             'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-path',
+            'FelipeLema/cmp-async-path',
             'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-buffer',
             -- {
@@ -166,6 +166,7 @@ require('lazy').setup({
         },
         build = 'cd formatter && npm i && npm run build',
         config = true,
+        ft = { "html", "js*", "css" }
     },
 
     -- jupyter
@@ -177,6 +178,7 @@ require('lazy').setup({
         init = function()
             vim.g.jukit_mappings = 0
         end,
+        ft = { "python", "ipynb" },
     },
 
 }, {})
