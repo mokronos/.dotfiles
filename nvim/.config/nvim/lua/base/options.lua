@@ -47,3 +47,6 @@ vim.o.keywordprg=':help'
 -- make latex be the default filetype for .tex files
 -- so that ftplugin/tex.lua is loaded
 vim.g.tex_flavor='latex'
+
+-- make system python the default, otherwise it uses the one from the venv
+vim.g.python3_host_prog = '/usr/bin/python3'
