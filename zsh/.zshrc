@@ -65,8 +65,8 @@ export PATH="$HOME/.dotfiles/scripts:$PATH"
 eval "$(github-copilot-cli alias -- "$0")"
 
 # modular (mojo)
-export MODULAR_HOME="/home/mokronos/.modular"
-export PATH="/home/mokronos/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
+export MODULAR_HOME="$HOME/mokronos/.modular"
+export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 # make ctrl-p act like up arrow (take typed text into account)
 autoload -U up-line-or-beginning-search
