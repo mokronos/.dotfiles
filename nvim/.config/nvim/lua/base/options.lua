@@ -8,7 +8,7 @@ vim.o.softtabstop=4
 vim.o.shiftwidth=4
 vim.o.expandtab = true
 
-vim.o.smartindent = true
+-- vim.o.smartindent = true
 
 vim.o.swapfile = false
 vim.o.backup = false
@@ -49,4 +49,4 @@ vim.o.keywordprg=':help'
 vim.g.tex_flavor='latex'
 
 -- make system python the default, otherwise it uses the one from the venv
-vim.g.python3_host_prog = '/usr/bin/python3'
+-- vim.g.python3_host_prog='/usr/bin/python3'

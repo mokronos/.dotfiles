@@ -27,3 +27,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = 'Move selected lines up'})
 
 vim.keymap.set("n", "<C-j>", "<C-^>", {desc = 'Jump to alternate file'})
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {desc = 'Jump to normal mode from terminal'})
+
+-- make 2 spaces into 4 spaces
+vim.api.nvim_create_user_command('Retab',
+    'set ts=2 sts=2 noet | retab! | set ts=4 sts=4 et | retab',
+    {}
+)

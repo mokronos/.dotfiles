@@ -67,3 +67,11 @@ Need to have zsh with extended globbing enabled.
 These are just some random python scripts I made.
 This setup makes them nicely organized and they can be used from anywhere like cli programs.
 Just need to be careful with names.
+
+## weird stuff
+
+### explorer.exe doesn't open or markdown viewer can't access chrome (over cmd.exe) from wsl
+
+Go to /etc/ and check where the paths are set (search for "games", its in the path) and add :$PATH to the end.
+It somehow sets the path there and overwrites the path set by windows when initializing wsl.
+Or at least some hidden path, because i cant identify any changes to the path afterwards, like there is no /mnt/c/windows/system32 (where all the windows executables are).
