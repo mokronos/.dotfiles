@@ -2,6 +2,8 @@ vim.keymap.set('n', '<Leader>ji', function() vim.fn['jukit#splits#output']() end
 vim.keymap.set('n', '<Leader>jl', function() vim.fn['jukit#send#line']() end, {desc = '[J]upyter Run [L]ine'})
 vim.keymap.set('v', '<Leader>jl', [[:<C-U>call jukit#send#selection()<CR>]], {desc = '[J]upyter Run Selection'})
 vim.keymap.set('n', '<Leader>jb', function() vim.fn['jukit#send#section'](0) end, {desc = '[J]upyter [B]lock'})
+vim.keymap.set('n', '<Leader>jj', function() vim.fn['jukit#send#until_current_section']() end, {desc = '[J]upyter Run up until curret cell'})
+vim.keymap.set('n', '<Leader>ja', function() vim.fn['jukit#send#all']() end, {desc = '[J]upyter Run all cells'})
 vim.keymap.set('n', '<Leader>jo', function() vim.fn['jukit#cells#create_below'](0) end, {desc = '[J]upyter [O]pen Code cell below'})
 vim.keymap.set('n', '<Leader>jO', function() vim.fn['jukit#cells#create_above'](0) end, {desc = '[J]upyter [O]pen Code cell above'})
 vim.keymap.set('n', '<Leader>jt', function() vim.fn['jukit#cells#create_below'](1) end, {desc = '[J]upyter Open [T]ext cell below'})
