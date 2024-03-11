@@ -30,6 +30,6 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {desc = 'Jump to normal mode from te
 
 -- make 2 spaces into 4 spaces
 vim.api.nvim_create_user_command('Retab',
-    'set ts=2 sts=2 noet | retab! | set ts=4 sts=4 et | retab',
+    'set ts=2 sts=2 noet | retab! | set ts=4 sts=4 et | retab | normal! gg=G',
     {}
 )
