@@ -2,7 +2,7 @@
 #
 # loop over folders to stow dotfiles
 DOTFILES=$HOME/.dotfiles
-STOW_FOLDERS="zsh,tmux,nvim"
+STOW_FOLDERS="zsh,tmux,nvim,bin"
 
 pushd $DOTFILES
 
