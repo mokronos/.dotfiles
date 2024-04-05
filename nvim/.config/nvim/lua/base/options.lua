@@ -48,5 +48,8 @@ vim.o.keywordprg=':help'
 -- so that ftplugin/tex.lua is loaded
 vim.g.tex_flavor='latex'
 
+-- don't add comment to line when using o on a commented line
+vim.opt.formatoptions:remove 'o'
+
 -- make system python the default, otherwise it uses the one from the venv
 -- vim.g.python3_host_prog='/usr/bin/python3'
