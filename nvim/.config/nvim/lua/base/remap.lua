@@ -33,3 +33,13 @@ vim.api.nvim_create_user_command('Retab',
     'set ts=2 sts=2 noet | retab! | set ts=4 sts=4 et | retab | normal! gg=G',
     {}
 )
+
+vim.api.nvim_create_user_command('Tab2',
+    'set ts=2 sts=2 sw=2 et',
+    {}
+)
+
+vim.api.nvim_create_user_command('Tab4',
+    'set ts=4 sts=4 sw=4 et',
+    {}
+)

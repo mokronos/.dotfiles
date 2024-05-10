@@ -28,6 +28,8 @@ ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[yellow]%}git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}) %{$fg[yellow]%}✗"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[yellow]%})"
 
+export GIT_PAGER=
+
 # change python version as needed
 # easier than fiddeling with default system version and breaking stuff
 alias python="python3"
