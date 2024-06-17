@@ -178,10 +178,12 @@ require('lazy').setup({
         init = function()
             vim.g.jukit_mappings = 0
         end,
-        -- ft = { "python", "ipynb" },
+        ft = { "python", "ipynb" },
     },
 
-    -- autodetect tabwidth
-    -- 'tpope/vim-sleuth',
-
+    {
+        'nosduco/remote-sshfs.nvim',
+        dependencies = { "nvim-telescope/telescope.nvim" },
+        opts = {},
+    }
 }, {})
