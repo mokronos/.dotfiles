@@ -76,3 +76,8 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search # Up
 bindkey "^N" down-line-or-beginning-search # Down
+
+# cuda paths
+export PATH="/usr/local/cuda-12.4/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH"
+export PATH="/usr/lib/wsl/lib/:$PATH"
