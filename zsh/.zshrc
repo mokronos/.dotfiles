@@ -41,7 +41,7 @@ alias ls="ls -A --color=auto"
 alias actv="source .venv/bin/activate"
 
 # only needed on windows with wsl
-alias explorer="explorer.exe ."
+alias explorer="/mnt/c/Windows/explorer.exe ."
 
 alias o="cd /mnt/c/vault"
 
