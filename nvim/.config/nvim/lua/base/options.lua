@@ -30,7 +30,8 @@ vim.o.termguicolors = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
-vim.o.hlsearch = false
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
 
 -- make all clipboards the same
 -- vim.o.clipboard='unnamedplus'
