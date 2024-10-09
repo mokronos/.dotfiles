@@ -53,4 +53,4 @@ vim.g.tex_flavor='latex'
 vim.opt.formatoptions:remove 'o'
 
 -- make system python the default, otherwise it uses the one from the venv
--- vim.g.python3_host_prog='/usr/bin/python3'
+vim.g.python3_host_prog='/usr/bin/python3'
