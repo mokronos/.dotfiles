@@ -144,8 +144,13 @@ require('lazy').setup({
     -- Better undo
     'mbbill/undotree',
 
-    -- Copilot
-    'zbirenbaum/copilot.lua',
+    -- LLM completion
+    {'zbirenbaum/copilot.lua', enabled = false},
+    { "supermaven-inc/supermaven-nvim", enabled = false },
+    {
+        "Exafunction/codeium.vim",
+        event = 'BufEnter'
+    },
 
     -- markdown
     {
@@ -192,6 +197,7 @@ require('lazy').setup({
         "yetone/avante.nvim",
         event = "VeryLazy",
         lazy = false,
+        enabled = false,
         version = false, -- set this if you want to always pull the latest change
         opts = {
             provider = "copilot",
