@@ -92,7 +92,7 @@ export COLCON_EXTENSION_BLOCKLIST=colcon_core.event_handler.desktop_notification
 export PATH="/usr/lib/wsl/lib:/mnt/c/Program Files/WindowsApps/CanonicalGroupLimited.Ubuntu_2204.3.49.0_x64__79rhkp1fndgsc:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Users/Sebastian Hirt/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Sebastian Hirt/AppData/Local/Programs/Microsoft VS Code/bin:$PATH"
 
 # cuda fix
-export CUDA_HOME=/usr/local/cuda
+export CUDA_HOME=/usr/local/cuda-12.4
 export PATH=${CUDA_HOME}/bin:${PATH}
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:$LD_LIBRARY_PATH
 
