@@ -30,7 +30,8 @@ vim.o.termguicolors = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
-vim.o.hlsearch = false
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
 
 -- make all clipboards the same
 -- vim.o.clipboard='unnamedplus'
@@ -52,4 +53,4 @@ vim.g.tex_flavor='latex'
 vim.opt.formatoptions:remove 'o'
 
 -- make system python the default, otherwise it uses the one from the venv
--- vim.g.python3_host_prog='/usr/bin/python3'
+vim.g.python3_host_prog='/usr/bin/python3'
