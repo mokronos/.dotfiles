@@ -1,3 +1,6 @@
+-- Clear highlights on search when pressing <Esc> in normal mode
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- makes sure that space is fully reserved for leader key
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
@@ -27,6 +30,11 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = 'Move selected lines up'})
 
 vim.keymap.set("n", "<C-j>", "<C-^>", {desc = 'Jump to alternate file'})
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {desc = 'Jump to normal mode from terminal'})
+
+-- navigate quickfix list
+vim.keymap.set("n", "<leader>qn", ":cnext<CR>", {desc = 'Go to [N]ext quickfix item'})
+vim.keymap.set("n", "<leader>qp", ":cprev<CR>", {desc = 'Go to [P]revious quickfix item'})
+vim.keymap.set("n", "<leader>qo", ":copen<CR>", {desc = '[O]pen quickfix list'})
 
 -- make 2 spaces into 4 spaces
 vim.api.nvim_create_user_command('Retab',

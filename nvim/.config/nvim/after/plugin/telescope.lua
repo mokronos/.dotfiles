@@ -4,6 +4,14 @@ require('telescope').setup{
             "%.pdf", "%.png"
         },
         layout_strategy = "vertical",
+        mappings = {
+            n = {
+            ["<C-q>"] = require('telescope.actions').send_to_qflist,
+            },
+            i = {
+            ["<C-q>"] = require('telescope.actions').send_to_qflist,
+            },
+        },
     },
 }
 
