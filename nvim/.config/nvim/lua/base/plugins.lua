@@ -44,7 +44,7 @@ require('lazy').setup({
 
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim', opts = {} },
+            { 'j-hui/fidget.nvim',       opts = {} },
 
             -- Additional lua configuration, makes nvim stuff amazing!
             'folke/neodev.nvim',
@@ -130,6 +130,16 @@ require('lazy').setup({
         },
     },
 
+    {
+      'stevearc/oil.nvim',
+      ---@module 'oil'
+      ---@type oil.SetupOpts
+      opts = {},
+      -- Optional dependencies
+      dependencies = { { "echasnovski/mini.icons", opts = {} } },
+      -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+    },
+
     -- Highlighting
     {
         -- Highlight, edit, and navigate code
@@ -145,7 +155,7 @@ require('lazy').setup({
     'mbbill/undotree',
 
     -- LLM completion
-    {'zbirenbaum/copilot.lua', enabled = false},
+    { 'zbirenbaum/copilot.lua',         enabled = false },
     { "supermaven-inc/supermaven-nvim", enabled = false },
     {
         "Exafunction/codeium.vim",
@@ -187,9 +197,14 @@ require('lazy').setup({
     },
 
     {
-        'nosduco/remote-sshfs.nvim',
-        dependencies = { "nvim-telescope/telescope.nvim" },
-        opts = {},
+        "amitds1997/remote-nvim.nvim",
+        version = "*",                  -- Pin to GitHub releases
+        dependencies = {
+            "nvim-lua/plenary.nvim",    -- For standard functions
+            "MunifTanjim/nui.nvim",     -- To build the plugin UI
+            "nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+        },
+        config = true,
     },
 
     -- ai, getting tiktoken_core error, not sure if it doens't work because of that
@@ -212,7 +227,7 @@ require('lazy').setup({
             "MunifTanjim/nui.nvim",
             --- The below dependencies are optional,
             "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-            "zbirenbaum/copilot.lua", -- for providers='copilot'
+            "zbirenbaum/copilot.lua",      -- for providers='copilot'
             {
                 -- support for image pasting
                 "HakonHarnes/img-clip.nvim",
