@@ -16,6 +16,16 @@ chmod +x install
 ./install
 ```
 
+# install neovim
+
+Either from source or just (swap version):
+
+```bash
+wget https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-linux-x86_64.appimage && chmod u+x nvim-linux-x86_64.appimage && sudo rm /usr/local/bin/nvim && sudo mv nvim-linux-x86_64.appimage /usr/local/bin/nvim
+```
+
+# other stuff
+
 **install powerline fonts**
 https://stackoverflow.com/questions/63148517/how-to-install-powerline-fonts-on-wsl
 
