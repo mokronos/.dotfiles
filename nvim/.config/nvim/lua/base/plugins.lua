@@ -106,6 +106,7 @@ require('lazy').setup({
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
+        commit = "2eca9ba22002184ac05eddbe47a7fe2d5a384dfc",
         dependencies = {
             'nvim-lua/plenary.nvim',
             -- Fuzzy Finder Algorithm which requires local dependencies to be built.
