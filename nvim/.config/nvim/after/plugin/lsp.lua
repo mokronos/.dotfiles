@@ -20,6 +20,20 @@ nmap('<Leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, '[W]orkspace [L]ist folders')
 
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Comprehensively reformat Python with Ruff",
+    pattern = "python",
+    callback = function()
+        vim.keymap.set('n', '<Leader>F', function()
+            vim.lsp.buf.code_action {
+                context = { only = { 'source.fixAll' }, diagnostics = {} },
+                apply = true,
+            }
+            vim.lsp.buf.format { async = true }
+        end, { desc = '[F]ormat (Python with Ruff)' })
+    end
+})
+
 nmap('<Leader>vd', builtin.lsp_definitions, '[V]iew [D]efinition')
 nmap('<Leader>vr', builtin.lsp_references, '[V]iew [R]eferences')
 nmap('<Leader>vi', builtin.lsp_implementations, '[V]iew [I]mplementations')
