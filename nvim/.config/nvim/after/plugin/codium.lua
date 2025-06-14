@@ -41,7 +41,7 @@
 --     }
 -- })
 
-vim.g.codeium_disable_bindings = 1
-vim.keymap.set('i', '<C-K>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-vim.keymap.set('i', '<S-Tab>', function() return vim.fn['codeium#AcceptNextLine']() end, { expr = true, silent = true })
-vim.g.codeium_idle_delay = 75
+-- vim.g.codeium_disable_bindings = 1
+-- vim.keymap.set('i', '<C-K>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+-- vim.keymap.set('i', '<S-Tab>', function() return vim.fn['codeium#AcceptNextLine']() end, { expr = true, silent = true })
+-- vim.g.codeium_idle_delay = 75
