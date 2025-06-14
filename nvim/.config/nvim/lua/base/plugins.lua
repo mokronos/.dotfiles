@@ -152,11 +152,11 @@ require('lazy').setup({
 
     -- LLM completion
     { 'zbirenbaum/copilot.lua',         enabled = false },
-    { "supermaven-inc/supermaven-nvim", enabled = false },
-    {
-        "Exafunction/codeium.vim",
-        event = 'BufEnter'
-    },
+    { "supermaven-inc/supermaven-nvim", enabled = true },
+    -- {
+    --     "Exafunction/codeium.vim",
+    --     event = 'BufEnter'
+    -- },
 
     -- markdown
     {
