@@ -4,7 +4,7 @@ require("supermaven-nvim").setup({
     clear_suggestion = "<C-]>",
     accept_word = "<S-Tab>",
   },
-  ignore_filetypes = { cpp = true }, -- or { "cpp", }
+  ignore_filetypes = { cpp = false }, -- or { "cpp", }
   color = {
     -- suggestion_color = "#ffffff",
     suggestion_color = "#8a8a8a",
