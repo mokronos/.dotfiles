@@ -62,6 +62,20 @@ Check [this](https://github.com/neovim/neovim/wiki/Building-Neovim#building) for
 
 [This](https://stackoverflow.com/questions/62314789/no-internet-connection-on-wsl-ubuntu-windows-subsystem-for-linux) fixed it.
 
+## Cursor settings
+
+Im just symlinking the cursor settings (keybindings.json and settings.json) from wsl to windows.
+Powershell (with admin rights):
+
+```shell
+$wslUser = "mokronos"
+$distro = "ubuntu-22.04"
+$dot = "\\wsl$\$distro\home\$wslUser\.dotfiles\cursor"
+
+New-Item -ItemType SymbolicLink -Path "$env:APPDATA\Cursor\User\settings.json" -Target "$dot\settings.json"
+New-Item -ItemType SymbolicLink -Path "$env:APPDATA\Cursor\User\keybindings.json" -Target "$dot\keybindings.json"
+```
+
 ## TODO
 
 there is still a lot of weird stuff happening every time i install on new setup which needs to be manually fixed/installed
