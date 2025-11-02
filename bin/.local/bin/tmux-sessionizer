@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/projects -mindepth 1 -maxdepth 2 -type d -exec test -d "{}/.git" \; -print | fzf)
+    selected=$(find ~/projects -mindepth 1 -maxdepth 2 -type d -exec test -d "{}/.git" \; -print | $HOME/.fzf/bin/fzf)
 fi
 
 if [[ -z $selected ]]; then

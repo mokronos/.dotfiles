@@ -81,3 +81,20 @@ bindkey "^N" down-line-or-beginning-search # Down
 export PATH="/usr/local/cuda-12.4/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH"
 export PATH="/usr/lib/wsl/lib/:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/mokronos/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" eval export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
+export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
+export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
+fpath[1,0]="/home/linuxbrew/.linuxbrew/share/zsh/site-functions";
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
+[ -z "${MANPATH-}" ] || export MANPATH=":${MANPATH#:}";
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
