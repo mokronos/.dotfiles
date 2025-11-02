@@ -1,0 +1,12 @@
+{
+    "security.allowedUNCHosts": [
+        "wsl$",
+        "wsl.localhost"
+    ],
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "vscode-neovim.useWSL": true,
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.linux": "~/.config/nvim/lua/base/init.lua"
+}
