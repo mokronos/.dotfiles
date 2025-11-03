@@ -3,6 +3,17 @@ require('telescope').setup{
         file_ignore_patterns = {
             "%.pdf", "%.png"
         },
+        pickers = {
+            find_files = {
+                hidden = true,
+            },
+            live_grep = {
+                hidden = true,
+            },
+            grep_string = {
+                hidden = true,
+            },
+        },
         layout_strategy = "vertical",
         mappings = {
             n = {
