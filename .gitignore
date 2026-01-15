@@ -8,3 +8,5 @@ packer_compiled.lua
 __pycache__/
 api_key.json
 opencode/.config/opencode/node_modules/
+bin/.local/bin/
+nvim/.config/
