@@ -45,6 +45,9 @@ alias explorer="/mnt/c/Windows/explorer.exe ."
 
 alias o="cd /mnt/c/vault"
 
+# kill recently suspended process
+alias k="kill -9 %+"
+
 # nvm install
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -78,7 +81,7 @@ bindkey "^P" up-line-or-beginning-search # Up
 bindkey "^N" down-line-or-beginning-search # Down
 
 # ros shell startup script
-source /opt/ros/humble/setup.zsh
+# source /opt/ros/humble/setup.zsh
 
 # colcon autocomplete
 source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh
@@ -99,12 +102,23 @@ export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:$LD_LIBRARY_PATH
 # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# bun completions
-[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+# go
+export PATH=$PATH:/usr/local/go/bin
+
+# pnpm
+export PNPM_HOME="/home/snhirt/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-. "~/.deno/env"
+
+# bun completions
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+
 # opencode
 export PATH=~/.opencode/bin:$PATH
