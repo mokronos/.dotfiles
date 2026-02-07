@@ -108,3 +108,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 . "/home/mokronos/.deno/env"
 # opencode
 export PATH=/home/mokronos/.opencode/bin:$PATH
+export PATH="$PATH:/home/mokronos/google-home-cli"
