@@ -5,6 +5,9 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 compinit -C
 
+# Initialize colors for prompt
+autoload -U colors && colors
+
 # Path to your oh-my-zsh installation.
 DISABLE_MAGIC_FUNCTIONS=true
 export ZSH=$HOME/.oh-my-zsh
