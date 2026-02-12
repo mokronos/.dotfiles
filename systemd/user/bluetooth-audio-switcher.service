@@ -1,0 +1,13 @@
+[Unit]
+Description=Bluetooth Audio Auto-Switcher
+After=pipewire.service wireplumber.service bluetooth.service
+Wants=pipewire.service wireplumber.service bluetooth.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/bluetooth-audio-switcher
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
