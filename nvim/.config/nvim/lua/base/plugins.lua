@@ -166,20 +166,6 @@ require('lazy').setup({
         build = function() vim.fn["mkdp#util#install"]() end,
     },
 
-    -- tailwind sorter
-    -- need to figure out prettier, and linters in general
-    -- this should be their job
-    {
-        'laytan/tailwind-sorter.nvim',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-            'nvim-lua/plenary.nvim'
-        },
-        build = 'cd formatter && npm i && npm run build',
-        config = true,
-        ft = { "html", "js*", "css" }
-    },
-
     -- jupyter
     {
         'luk400/vim-jukit',
