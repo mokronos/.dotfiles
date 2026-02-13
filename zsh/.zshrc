@@ -43,8 +43,6 @@ alias ls="ls -A --color=auto"
 # shortcuts 
 alias actv="source .venv/bin/activate"
 
-# only needed on windows with wsl
-alias explorer="/mnt/c/Windows/explorer.exe ."
 
 alias o="cd /mnt/c/vault"
 
@@ -92,13 +90,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" eval export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
-export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
-export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
-fpath[1,0]="/home/linuxbrew/.linuxbrew/share/zsh/site-functions";
-export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
-[ -z "${MANPATH-}" ] || export MANPATH=":${MANPATH#:}";
-export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -108,7 +99,7 @@ export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-. "/home/mokronos/.deno/env"
+
 # opencode
 export PATH=/home/mokronos/.opencode/bin:$PATH
 export PATH="$PATH:/home/mokronos/google-home-cli"
