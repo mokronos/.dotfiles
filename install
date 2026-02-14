@@ -2,7 +2,7 @@
 #
 # loop over folders to stow dotfiles
 DOTFILES=$HOME/.dotfiles
-STOW_FOLDERS="bin,btop,cursor,fastfetch,ghostty,hypr,nvim,opencode,scripts,systemd,tmux,walker,waybar,zsh"
+STOW_FOLDERS="bin,btop,cursor,fastfetch,ghostty,home,hypr,nvim,opencode,scripts,systemd,tmux,walker,waybar,zsh"
 
 pushd $DOTFILES
 
