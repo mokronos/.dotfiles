@@ -11,9 +11,11 @@ STOW_FOLDERS=(
   ghostty
   home
   hypr
+  lazygit
   nvim
   opencode
   scripts
+  starship
   systemd
   tmux
   walker
@@ -80,6 +82,25 @@ apply_all() {
   fi
 }
 
+preflight_conflicts() {
+  local folder
+  local has_conflicts="false"
+
+  for folder in "${STOW_FOLDERS[@]}"; do
+    if ! stow -n --restow "$folder" >/dev/null 2>&1; then
+      has_conflicts="true"
+      echo "conflict detected for $folder"
+      stow -nv --restow "$folder" || true
+    fi
+  done
+
+  if [[ "$has_conflicts" == "true" ]]; then
+    echo "resolve conflicts, then rerun ./install" >&2
+    echo "tip: one-time import for existing files: ./install adopt <folder>" >&2
+    exit 1
+  fi
+}
+
 adopt_folder() {
   local folder="$1"
 
@@ -101,6 +122,7 @@ pushd "$DOTFILES" >/dev/null
 
 case "$MODE" in
   install)
+    preflight_conflicts
     apply_all false
     ;;
   dry-run)
