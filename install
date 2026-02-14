@@ -2,7 +2,7 @@
 #
 # loop over folders to stow dotfiles
 DOTFILES=$HOME/.dotfiles
-STOW_FOLDERS="bin,zsh,tmux,nvim,opencode,systemd"
+STOW_FOLDERS="bin,btop,cursor,fastfetch,ghostty,hypr,nvim,opencode,scripts,systemd,tmux,walker,waybar,zsh"
 
 pushd $DOTFILES
 
@@ -20,6 +20,5 @@ else
         stow -D $folder
         stow $folder --adopt
     done
-    git reset --hard
 fi
 popd
