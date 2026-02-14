@@ -1,24 +1,131 @@
 #!/usr/bin/env bash
-#
-# loop over folders to stow dotfiles
-DOTFILES=$HOME/.dotfiles
-STOW_FOLDERS="bin,btop,cursor,fastfetch,ghostty,home,hypr,nvim,opencode,scripts,systemd,tmux,walker,waybar,zsh"
 
-pushd $DOTFILES
+set -euo pipefail
 
-if [[ $1 == clean ]]
-then
-    for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
-    do
-        echo "unlinking + removing $folder"
-        stow -D $folder
-    done
-else
-    for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
-    do
-        echo "symlinking $folder"
-        stow -D $folder
-        stow $folder --adopt
-    done
+DOTFILES="${HOME}/.dotfiles"
+STOW_FOLDERS=(
+  bin
+  btop
+  cursor
+  fastfetch
+  ghostty
+  home
+  hypr
+  nvim
+  opencode
+  scripts
+  systemd
+  tmux
+  walker
+  waybar
+  zsh
+)
+
+CRITICAL_FOLDERS=(hypr waybar walker)
+MODE="${1:-install}"
+
+is_critical_folder() {
+  local target="$1"
+  local folder
+  for folder in "${CRITICAL_FOLDERS[@]}"; do
+    if [[ "$folder" == "$target" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+run_stow() {
+  local folder="$1"
+  local dry_run="${2:-false}"
+
+  if [[ ! -d "$folder" ]]; then
+    echo "error: stow folder not found: $folder" >&2
+    exit 1
+  fi
+
+  if [[ "$dry_run" == "true" ]]; then
+    stow -nv --restow "$folder"
+  else
+    stow --restow "$folder"
+  fi
+}
+
+apply_all() {
+  local dry_run="${1:-false}"
+  local folder
+
+  for folder in "${STOW_FOLDERS[@]}"; do
+    if ! is_critical_folder "$folder"; then
+      echo "restowing $folder"
+      run_stow "$folder" "$dry_run"
+    fi
+  done
+
+  for folder in "${CRITICAL_FOLDERS[@]}"; do
+    echo "restowing $folder"
+    run_stow "$folder" "$dry_run"
+  done
+
+  if [[ "$dry_run" != "true" ]]; then
+    if command -v hyprctl >/dev/null 2>&1; then
+      hyprctl reload || true
+    fi
+    if command -v omarchy-restart-waybar >/dev/null 2>&1; then
+      omarchy-restart-waybar || true
+    fi
+    if command -v omarchy-restart-walker >/dev/null 2>&1; then
+      omarchy-restart-walker || true
+    fi
+  fi
+}
+
+adopt_folder() {
+  local folder="$1"
+
+  if [[ ! -d "$folder" ]]; then
+    echo "error: stow folder not found: $folder" >&2
+    exit 1
+  fi
+
+  echo "adopting $folder (one-time import mode)"
+  stow --adopt "$folder"
+}
+
+if ! command -v stow >/dev/null 2>&1; then
+  echo "error: stow is not installed" >&2
+  exit 1
 fi
-popd
+
+pushd "$DOTFILES" >/dev/null
+
+case "$MODE" in
+  install)
+    apply_all false
+    ;;
+  dry-run)
+    apply_all true
+    ;;
+  clean)
+    for folder in "${STOW_FOLDERS[@]}"; do
+      echo "unlinking $folder"
+      stow -D "$folder"
+    done
+    ;;
+  adopt)
+    if [[ $# -lt 2 ]]; then
+      echo "usage: ./install adopt <folder> [folder ...]" >&2
+      exit 1
+    fi
+    shift
+    for folder in "$@"; do
+      adopt_folder "$folder"
+    done
+    ;;
+  *)
+    echo "usage: ./install [install|dry-run|clean|adopt <folder> ...]" >&2
+    exit 1
+    ;;
+esac
+
+popd >/dev/null
