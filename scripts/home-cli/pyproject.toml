@@ -1,0 +1,21 @@
+[project]
+name = "home-cli"
+version = "0.1.0"
+description = "Simple room lights CLI"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "google-assistant-grpc==0.3.0",
+  "google-auth>=2.37.0,<3.0.0",
+  "google-auth-oauthlib>=1.2.1,<2.0.0",
+  "grpcio>=1.62.0,<2.0.0",
+  "protobuf==3.20.3",
+  "typer>=0.12.0,<1.0.0",
+]
+
+[project.scripts]
+home = "home_cli.main:main"
+
+[build-system]
+requires = ["hatchling>=1.24.0"]
+build-backend = "hatchling.build"
