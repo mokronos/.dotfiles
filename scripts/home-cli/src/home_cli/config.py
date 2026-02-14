@@ -7,6 +7,9 @@ from pathlib import Path
 
 CONFIG_DIR = Path.home() / ".config" / "home-cli"
 CONFIG_PATH = CONFIG_DIR / "config.json"
+DEFAULT_QUERY_ALLON = "turn on dining room and couch lights"
+DEFAULT_QUERY_ALLOFF = "turn off all lights"
+LEGACY_QUERY_ALLON = "turn on all lights"
 
 
 @dataclass
@@ -18,8 +21,8 @@ class Config:
     assistant_device_model_id: str = ""
     assistant_device_id: str = ""
     assistant_language: str = "en-US"
-    query_allon: str = "turn on all lights"
-    query_alloff: str = "turn off all lights"
+    query_allon: str = DEFAULT_QUERY_ALLON
+    query_alloff: str = DEFAULT_QUERY_ALLOFF
     base_url: str = ""
     token: str = ""
     entity_ids: list[str] | None = None
@@ -34,6 +37,10 @@ def load_config() -> Config:
     if not isinstance(entity_ids, list):
         entity_ids = None
 
+    query_allon = str(data.get("query_allon", DEFAULT_QUERY_ALLON))
+    if query_allon.strip().lower() == LEGACY_QUERY_ALLON:
+        query_allon = DEFAULT_QUERY_ALLON
+
     return Config(
         backend=str(data.get("backend", "assistant")),
         assistant_client_secret_file=str(data.get("assistant_client_secret_file", "")),
@@ -47,8 +54,8 @@ def load_config() -> Config:
         assistant_device_model_id=str(data.get("assistant_device_model_id", "")),
         assistant_device_id=str(data.get("assistant_device_id", "")),
         assistant_language=str(data.get("assistant_language", "en-US")),
-        query_allon=str(data.get("query_allon", "turn on all lights")),
-        query_alloff=str(data.get("query_alloff", "turn off all lights")),
+        query_allon=query_allon,
+        query_alloff=str(data.get("query_alloff", DEFAULT_QUERY_ALLOFF)),
         base_url=str(data.get("base_url", "")),
         token=str(data.get("token", "")),
         entity_ids=entity_ids,

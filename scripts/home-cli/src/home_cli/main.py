@@ -10,6 +10,7 @@ from home_cli.backends.assistant import ensure_device_registration
 from home_cli.backends.assistant import load_credentials
 from home_cli.backends.assistant import run_oauth_flow
 from home_cli.backends.assistant import save_credentials
+from home_cli.config import DEFAULT_QUERY_ALLOFF, DEFAULT_QUERY_ALLON
 from home_cli.config import Config, load_config, save_config
 
 app = typer.Typer(add_completion=False, no_args_is_help=True)
@@ -39,8 +40,9 @@ def _assistant_client(config: Config) -> AssistantClient:
 def _run_query(text_query: str) -> None:
     config = load_config()
     client = _assistant_client(config)
+    typer.echo(f"Sent query: {text_query}")
     response = client.query(text_query)
-    typer.echo(response)
+    typer.echo(f"Assistant: {response}")
 
 
 @app.command()
@@ -57,10 +59,12 @@ def auth(
     ),
     language: str = typer.Option("en-US", help="Assistant language code."),
     query_allon: str = typer.Option(
-        "turn on all lights", help="Text query used by `home allon`."
+        DEFAULT_QUERY_ALLON,
+        help="Text query used by `home allon`.",
     ),
     query_alloff: str = typer.Option(
-        "turn off all lights", help="Text query used by `home alloff`."
+        DEFAULT_QUERY_ALLOFF,
+        help="Text query used by `home alloff`.",
     ),
 ) -> None:
     client_secret_file = client_secret_file.expanduser()
