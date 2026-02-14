@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+"""
+Bluetooth Audio Auto-Switcher
+Monitors bluetooth device connections and automatically switches audio output.
+When bluetooth connects -> switch to bluetooth
+When bluetooth disconnects -> switch back to previous device
+"""
+
+import dbus
+import dbus.mainloop.glib
+from gi.repository import GLib
+import subprocess
+import json
+import os
+
+# File to store the previous audio device
+STATE_FILE = os.path.expanduser("~/.config/bluetooth-audio-switcher.state")
+
+def get_current_default_sink():
+    """Get the current default audio sink"""
+    try:
+        result = subprocess.run(['pactl', 'info'], capture_output=True, text=True)
+        for line in result.stdout.split('\n'):
+            if 'Default Sink:' in line:
+                return line.split(':', 1)[1].strip()
+    except Exception as e:
+        print(f"Error getting default sink: {e}")
+    return None
+
+def set_default_sink(sink_name):
+    """Set the default audio sink"""
+    try:
+        subprocess.run(['pactl', 'set-default-sink', sink_name], check=True)
+        print(f"Switched to: {sink_name}")
+        return True
+    except subprocess.CalledProcessError as e:
+        print(f"Error setting default sink: {e}")
+        return False
+
+def get_bluetooth_sink(device_address):
+    """Get the sink name for a bluetooth device"""
+    try:
+        result = subprocess.run(['pactl', 'list', 'sinks'], capture_output=True, text=True)
+        lines = result.stdout.split('\n')
+        current_sink = None
+        
+        for i, line in enumerate(lines):
+            if 'Name:' in line:
+                current_sink = line.split(':', 1)[1].strip()
+            if device_address.replace(':', '_') in line and current_sink:
+                return current_sink
+    except Exception as e:
+        print(f"Error getting bluetooth sink: {e}")
+    return None
+
+def show_notification(message, icon="audio-speakers-symbolic"):
+    """Show a notification using swayosd-client"""
+    try:
+        # Get focused monitor
+        result = subprocess.run(
+            ['hyprctl', 'monitors', '-j'],
+            capture_output=True, text=True
+        )
+        monitors = json.loads(result.stdout)
+        focused_monitor = None
+        for monitor in monitors:
+            if monitor.get('focused'):
+                focused_monitor = monitor['name']
+                break
+        
+        if focused_monitor:
+            subprocess.Popen([
+                'swayosd-client',
+                '--monitor', focused_monitor,
+                '--custom-message', message,
+                '--custom-icon', icon
+            ], stderr=subprocess.DEVNULL)
+    except Exception as e:
+        print(f"Could not show notification: {e}")
+
+def save_state(sink_name):
+    """Save the current sink to state file"""
+    try:
+        os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
+        with open(STATE_FILE, 'w') as f:
+            f.write(sink_name)
+    except Exception as e:
+        print(f"Error saving state: {e}")
+
+def load_state():
+    """Load the previous sink from state file"""
+    try:
+        if os.path.exists(STATE_FILE):
+            with open(STATE_FILE, 'r') as f:
+                return f.read().strip()
+    except Exception as e:
+        print(f"Error loading state: {e}")
+    return None
+
+def on_device_connected(device_path, device_props):
+    """Handle bluetooth device connection"""
+    try:
+        address = device_props.get('Address', '')
+        name = device_props.get('Name', 'Unknown')
+        
+        print(f"Bluetooth device connected: {name} ({address})")
+        
+        # Save current sink before switching
+        current_sink = get_current_default_sink()
+        if current_sink and 'bluez' not in current_sink:
+            save_state(current_sink)
+            print(f"Saved previous sink: {current_sink}")
+        
+        # Wait a moment for the audio sink to be created
+        GLib.timeout_add(2000, lambda: switch_to_bluetooth(address, name))
+        
+    except Exception as e:
+        print(f"Error handling device connection: {e}")
+
+def switch_to_bluetooth(address, name):
+    """Switch audio to bluetooth device"""
+    sink = get_bluetooth_sink(address)
+    if sink:
+        if set_default_sink(sink):
+            show_notification(f"Audio: {name}", "audio-headset-bluetooth-symbolic")
+    else:
+        print(f"Could not find sink for device {address}, retrying...")
+        # Retry after a short delay
+        GLib.timeout_add(1000, lambda: switch_to_bluetooth(address, name))
+        return False  # Don't repeat this timeout
+    return False  # Don't repeat this timeout
+
+def on_device_disconnected(device_path, device_props):
+    """Handle bluetooth device disconnection"""
+    try:
+        address = device_props.get('Address', '')
+        name = device_props.get('Name', 'Unknown')
+        
+        print(f"Bluetooth device disconnected: {name} ({address})")
+        
+        # Switch back to previous device
+        previous_sink = load_state()
+        if previous_sink:
+            if set_default_sink(previous_sink):
+                show_notification("Audio: Switched to previous device", "audio-speakers-symbolic")
+        else:
+            # Fallback to built-in audio
+            set_default_sink('alsa_output.pci-0000_00_1b.0.analog-stereo')
+            
+    except Exception as e:
+        print(f"Error handling device disconnection: {e}")
+
+def on_interfaces_added(path, interfaces):
+    """Handle DBus interfaces added signal"""
+    if 'org.bluez.Device1' in interfaces:
+        props = interfaces['org.bluez.Device1']
+        connected = props.get('Connected', False)
+        if connected:
+            on_device_connected(path, props)
+
+def on_interfaces_removed(path, interfaces):
+    """Handle DBus interfaces removed signal"""
+    if 'org.bluez.Device1' in interfaces:
+        # Device disconnected
+        pass
+
+def on_properties_changed(interface, changed, invalidated, path):
+    """Handle DBus properties changed signal"""
+    if interface == 'org.bluez.Device1':
+        if 'Connected' in changed:
+            bus = dbus.SystemBus()
+            try:
+                device = bus.get_object('org.bluez', path)
+                props_iface = dbus.Interface(device, 'org.freedesktop.DBus.Properties')
+                all_props = props_iface.GetAll('org.bluez.Device1')
+                
+                # Convert dbus types to python types
+                props = {}
+                for key, value in all_props.items():
+                    if isinstance(value, dbus.String):
+                        props[key] = str(value)
+                    elif isinstance(value, dbus.Boolean):
+                        props[key] = bool(value)
+                    else:
+                        props[key] = value
+                
+                if changed['Connected']:
+                    on_device_connected(path, props)
+                else:
+                    on_device_disconnected(path, props)
+            except Exception as e:
+                print(f"Error getting device properties: {e}")
+
+def main():
+    """Main function"""
+    print("Bluetooth Audio Auto-Switcher started")
+    print(f"State file: {STATE_FILE}")
+    
+    # Setup dbus main loop
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+    
+    # Connect to system bus
+    bus = dbus.SystemBus()
+    
+    # Add signal receivers
+    bus.add_signal_receiver(
+        on_interfaces_added,
+        dbus_interface='org.freedesktop.DBus.ObjectManager',
+        signal_name='InterfacesAdded'
+    )
+    
+    bus.add_signal_receiver(
+        on_interfaces_removed,
+        dbus_interface='org.freedesktop.DBus.ObjectManager',
+        signal_name='InterfacesRemoved'
+    )
+    
+    bus.add_signal_receiver(
+        on_properties_changed,
+        dbus_interface='org.freedesktop.DBus.Properties',
+        signal_name='PropertiesChanged',
+        path_keyword='path'
+    )
+    
+    # Check for already connected bluetooth devices
+    try:
+        manager = bus.get_object('org.bluez', '/')
+        iface = dbus.Interface(manager, 'org.freedesktop.DBus.ObjectManager')
+        objects = iface.GetManagedObjects()
+        
+        for path, interfaces in objects.items():
+            if 'org.bluez.Device1' in interfaces:
+                props = interfaces['org.bluez.Device1']
+                if props.get('Connected', False):
+                    print(f"Found already connected device: {props.get('Name', 'Unknown')}")
+                    on_device_connected(path, {
+                        'Address': str(props.get('Address', '')),
+                        'Name': str(props.get('Name', 'Unknown'))
+                    })
+    except Exception as e:
+        print(f"Error checking existing connections: {e}")
+    
+    # Run main loop
+    loop = GLib.MainLoop()
+    print("Monitoring for bluetooth connections...")
+    loop.run()
+
+if __name__ == '__main__':
+    main()
