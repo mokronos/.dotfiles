@@ -142,6 +142,12 @@ require('lazy').setup({
         'nvim-treesitter/nvim-treesitter',
         lazy = false,
         build = ':TSUpdate',
+        config = function()
+            local ts_runtime = vim.fn.stdpath('data') .. '/lazy/nvim-treesitter/runtime'
+            if vim.uv.fs_stat(ts_runtime) then
+                vim.opt.rtp:prepend(ts_runtime)
+            end
+        end,
     },
 
     -- Better undo

@@ -57,6 +57,7 @@ export PATH="$HOME/gems/bin:$PATH"
 
 # add stuff to path
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # add dotfile scripts to path
 export PATH="$HOME/.dotfiles/scripts:$PATH"
