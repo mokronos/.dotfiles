@@ -36,6 +36,12 @@ vim.keymap.set("n", "<leader>qn", ":cnext<CR>", {desc = 'Go to [N]ext quickfix i
 vim.keymap.set("n", "<leader>qp", ":cprev<CR>", {desc = 'Go to [P]revious quickfix item'})
 vim.keymap.set("n", "<leader>qo", ":copen<CR>", {desc = '[O]pen quickfix list'})
 
+-- diffview
+vim.keymap.set("n", "<leader>gg", "<cmd>DiffviewOpen<CR>", { desc = '[G]it diffview open' })
+vim.keymap.set("n", "<leader>gq", "<cmd>DiffviewClose<CR>", { desc = '[G]it diffview close' })
+vim.keymap.set("n", "<leader>gf", "<cmd>DiffviewFileHistory %<CR>", { desc = '[G]it [F]ile history' })
+vim.keymap.set("n", "<leader>gF", "<cmd>DiffviewFileHistory<CR>", { desc = '[G]it repo history' })
+
 -- make 2 spaces into 4 spaces
 vim.api.nvim_create_user_command('Retab',
     'set ts=2 sts=2 noet | retab! | set ts=4 sts=4 et | retab | normal! gg=G',
