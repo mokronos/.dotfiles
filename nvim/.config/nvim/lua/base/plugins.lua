@@ -20,6 +20,7 @@ require('lazy').setup({
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
     'lewis6991/gitsigns.nvim',
+    { 'sindrets/diffview.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
 
     -- comments
     'tpope/vim-commentary',
