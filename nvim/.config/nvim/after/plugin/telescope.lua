@@ -4,6 +4,7 @@ require('telescope').setup {
             "%.pdf", "%.png", ".git"
         },
         layout_strategy = "vertical",
+        previewer = false,
         mappings = {
             n = {
                 ["<C-q>"] = require('telescope.actions').send_to_qflist,
