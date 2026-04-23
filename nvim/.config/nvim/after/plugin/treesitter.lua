@@ -1,16 +1,14 @@
+local languages = { "vimdoc", "python", "c", "lua", "rust" }
+
 vim.defer_fn(function()
-    require'nvim-treesitter.configs'.setup {
-      -- A list of parser names, or "all"
-      ensure_installed = { "vimdoc", "python", "c", "lua", "rust" },
-
-      -- Install parsers synchronously (only applied to `ensure_installed`)
-      sync_install = false,
-
-      -- Automatically install missing parsers when entering buffer
-      -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-      auto_install = true,
-
-      highlight = { enable = true },
-      indent = { enable = true },
-    }
+    require('nvim-treesitter').install(languages)
 end, 0)
+
+vim.api.nvim_create_autocmd('FileType', {
+    callback = function(args)
+        local ok = pcall(vim.treesitter.start, args.buf)
+        if ok then
+            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+    end,
+})

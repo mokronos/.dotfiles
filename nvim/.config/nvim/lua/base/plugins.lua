@@ -141,9 +141,13 @@ require('lazy').setup({
         -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-textobjects',
+            {
+                'nvim-treesitter/nvim-treesitter-textobjects',
+                branch = 'main',
+            },
             'nvim-treesitter/nvim-treesitter-context',
         },
+        branch = "main",
         build = ':TSUpdate',
     },
 

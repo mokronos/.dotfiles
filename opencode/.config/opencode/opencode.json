@@ -3,10 +3,31 @@
         "*": "allow"
     },
     "$schema": "https://opencode.ai/config.json",
+    "lsp": false,
     "mcp": {
         "context7": {
             "type": "remote",
-            "url": "https://mcp.context7.com/mcp",
+            "url": "https://mcp.context7.com/mcp"
         },
-    },
+        "excalidraw": {
+            "type": "local",
+            "command": [
+                "docker",
+                "run",
+                "-i",
+                "--rm",
+                "-e",
+                "EXPRESS_SERVER_URL=http://host.docker.internal:3000",
+                "-e",
+                "ENABLE_CANVAS_SYNC=true",
+                "ghcr.io/yctimlin/mcp_excalidraw:latest"
+            ],
+            "enabled": false
+        },
+        "executor": {
+            "type": "remote",
+            "url": "http://localhost:4788/mcp",
+            "enabled": false
+        }
+    }
 }
