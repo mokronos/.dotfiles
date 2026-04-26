@@ -104,3 +104,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # opencode
 export PATH=/home/mokronos/.opencode/bin:$PATH
 export PATH="$PATH:/home/mokronos/google-home-cli"
+
+# Disable Bun AI agent rule file generation
+export BUN_AGENT_RULE_DISABLED=1
+export CLAUDE_CODE_AGENT_RULE_DISABLED=1
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
