@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Google Chrome
+Exec=/usr/bin/google-chrome-stable %U
+Type=Application
+Icon=google-chrome
+Categories=Network;WebBrowser;
+MimeType=x-scheme-handler/mailto;x-scheme-handler/unknown;x-scheme-handler/about;x-scheme-handler/https;x-scheme-handler/http;text/html;
