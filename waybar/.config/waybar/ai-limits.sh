@@ -1,18 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-codex_json="$(timeout 55 codexbar usage --provider codex --format json --no-color 2>/dev/null || printf '[]')"
-claude_json="$(timeout 55 codexbar usage --provider claude --format json --no-color 2>/dev/null || printf '[]')"
+cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-ai-limits"
+mkdir -p "$cache_dir"
 
-if ! jq -e . >/dev/null 2>&1 <<<"$codex_json"; then
-  codex_json='[]'
-fi
+provider_json() {
+  local provider="$1"
+  local cache_file="$cache_dir/$provider.json"
+  local payload
 
-if ! jq -e . >/dev/null 2>&1 <<<"$claude_json"; then
-  claude_json='[]'
-fi
+  if payload="$(timeout 45 codexbar usage --provider "$provider" --format json --no-color 2>/dev/null)" && jq -e . >/dev/null 2>&1 <<<"$payload"; then
+    jq -c . <<<"$payload" | tee "$cache_file"
+  elif [[ -r $cache_file ]]; then
+    jq -c . "$cache_file"
+  else
+    printf '[]'
+  fi
+}
 
-jq -n --argjson codex "$codex_json" --argjson claude "$claude_json" '
+codex_json="$(provider_json codex)"
+claude_json="$(provider_json claude)"
+
+jq -cn --argjson codex "$codex_json" --argjson claude "$claude_json" '
   def first_item: if type == "array" then (.[0] // {}) else (. // {}) end;
   def pct($usage; $window):
     ($usage[$window].usedPercent // null) as $value
@@ -30,7 +39,7 @@ jq -n --argjson codex "$codex_json" --argjson claude "$claude_json" '
   | ([used($cu; "primary"), used($cu; "secondary"), used($au; "primary"), used($au; "secondary")] | max) as $max_used
   | ($cu.codexResetCredits.credits // [] | map(credit_line) | join("\n")) as $credit_lines
   | {
-      text: ("CX " + pct($cu; "primary") + "/" + pct($cu; "secondary") + " CL " + pct($au; "primary") + "/" + pct($au; "secondary") + " R" + ($credits | tostring)),
+      text: ("AI C" + pct($cu; "primary") + "/" + pct($cu; "secondary") + " A" + pct($au; "primary") + "/" + pct($au; "secondary") + " R" + ($credits | tostring)),
       tooltip: (
         "Codex\n" +
         "5h: " + pct($cu; "primary") + " resets " + when($cu; "primary") + "\n" +
