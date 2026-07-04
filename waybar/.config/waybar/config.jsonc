@@ -10,8 +10,8 @@
   ],
   "modules-center": [
     "clock",
-    "custom/ai-limits",
     "custom/weather",
+    "custom/ai-limits",
     "custom/update",
     "custom/voxtype",
     "custom/screenrecording-indicator",
