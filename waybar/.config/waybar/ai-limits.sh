@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+provider="${1:-codex}"
 cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-ai-limits"
 mkdir -p "$cache_dir"
 
@@ -8,6 +9,11 @@ provider_json() {
   local provider="$1"
   local cache_file="$cache_dir/$provider.json"
   local payload
+
+  if [[ -r $cache_file ]] && (( $(date +%s) - $(stat -c %Y "$cache_file") < 240 )); then
+    jq -c . "$cache_file"
+    return
+  fi
 
   if payload="$(timeout 45 codexbar usage --provider "$provider" --format json --no-color 2>/dev/null)" && jq -e 'if type == "array" then .[0].usage.primary.usedPercent != null else .usage.primary.usedPercent != null end' >/dev/null 2>&1 <<<"$payload"; then
     jq -c . <<<"$payload" >"$cache_file"
@@ -19,10 +25,9 @@ provider_json() {
   fi
 }
 
-codex_json="$(provider_json codex)"
-claude_json="$(provider_json claude)"
+usage_json="$(provider_json "$provider")"
 
-jq -cn --argjson codex "$codex_json" --argjson claude "$claude_json" '
+jq -cn --arg provider "$provider" --argjson payload "$usage_json" '
   def first_item: if type == "array" then (.[0] // {}) else (. // {}) end;
   def pct($usage; $window):
     ($usage[$window].usedPercent // null) as $value
@@ -41,23 +46,17 @@ jq -cn --argjson codex "$codex_json" --argjson claude "$claude_json" '
   def credit_line:
     "- " + (.title // "Reset") + " expires " + (.expires_at | fromdateiso8601 | strflocaltime("%b %d %H:%M"));
 
-  ($codex | first_item | .usage // {}) as $cu
-  | ($claude | first_item | .usage // {}) as $au
-  | ($cu.codexResetCredits.availableCount // ($cu.codexResetCredits.credits // [] | length) // 0) as $credits
-  | ([used($cu; "primary"), used($cu; "secondary"), used($au; "primary"), used($au; "secondary")] | max) as $max_used
-  | ($cu.codexResetCredits.credits // []) as $reset_credits
+  ($payload | first_item | .usage // {}) as $usage
+  | ([used($usage; "primary"), used($usage; "secondary")] | max) as $max_used
+  | ($usage.codexResetCredits.availableCount // ($usage.codexResetCredits.credits // [] | length) // 0) as $credits
+  | ($usage.codexResetCredits.credits // []) as $reset_credits
   | ($reset_credits | map(credit_line) | join("\n")) as $credit_lines
   | {
-      text: (" " + limit($cu; "primary") + "/" + limit($cu; "secondary") + " R" + ($credits | tostring) + "(" + credit_expiry_days($reset_credits) + ")  " + limit($au; "primary") + "/" + limit($au; "secondary")),
-      tooltip: (
-        "Codex\n" +
-        "5h: " + pct($cu; "primary") + " resets " + when($cu; "primary") + "\n" +
-        "Weekly: " + pct($cu; "secondary") + " resets " + when($cu; "secondary") + "\n" +
-        "Reset credits: " + ($credits | tostring) +
-        (if $credit_lines == "" then "" else "\n" + $credit_lines end) +
-        "\n\nClaude\n" +
-        "5h: " + pct($au; "primary") + " resets " + when($au; "primary") + "\n" +
-        "Weekly: " + pct($au; "secondary") + " resets " + when($au; "secondary")
+      text: (limit($usage; "primary") + "/" + limit($usage; "secondary") + if $provider == "codex" then " R" + ($credits | tostring) + "(" + credit_expiry_days($reset_credits) + ")" else "" end),
+      tooltip: ((if $provider == "codex" then "Codex" else "Claude" end) + "\n" +
+        "5h: " + pct($usage; "primary") + " resets " + when($usage; "primary") + "\n" +
+        "Weekly: " + pct($usage; "secondary") + " resets " + when($usage; "secondary") +
+        (if $provider == "codex" then "\nReset credits: " + ($credits | tostring) + (if $credit_lines == "" then "" else "\n" + $credit_lines end) else "" end)
       ),
       class: (if $max_used >= 90 then "critical" elif $max_used >= 75 then "warning" else "normal" end)
     }
