@@ -1,3 +1,4 @@
+@import "/usr/lib/hyprwhspr/config/waybar/hyprwhspr-style.css";
 @import "../omarchy/current/theme/waybar.css";
 
 * {
@@ -34,7 +35,7 @@
 #battery,
 #pulseaudio,
 #custom-omarchy,
-#custom-screenrecording-indicator,
+
 #custom-update {
   min-width: 12px;
   margin: 0 7.5px;
@@ -64,6 +65,22 @@ tooltip {
   font-size: 10px;
 }
 
+#custom-ai-limits {
+  margin-right: 12px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  background-color: alpha(@foreground, 0.08);
+}
+
+#custom-ai-limits.warning {
+  color: #d7af5f;
+}
+
+#custom-ai-limits.critical {
+  color: #a55555;
+}
+
 #clock {
   margin-left: 8.75px;
 }
@@ -72,9 +89,13 @@ tooltip {
   opacity: 0;
 }
 
-#custom-screenrecording-indicator {
+
+#custom-screenrecording-indicator,
+#custom-idle-indicator,
+#custom-notification-silencing-indicator {
   min-width: 12px;
   margin-left: 5px;
+  margin-right: 0;
   font-size: 10px;
   padding-bottom: 1px;
 }
@@ -90,4 +111,20 @@ tooltip {
 
 #custom-voxtype.recording {
   color: #a55555;
+}
+
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
+}
+
+#custom-weather {
+  margin-left: 7.5px;
+  margin-right: 7.5px;
+}
+
+#custom-weather.unavailable {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
 }
