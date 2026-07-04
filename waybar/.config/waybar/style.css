@@ -65,21 +65,36 @@ tooltip {
   font-size: 10px;
 }
 
-#custom-ai-limits {
-  margin-right: 12px;
-  padding: 0 8px;
+#custom-codex-limits,
+#custom-claude-limits {
+  margin-right: 6px;
+  padding: 0 8px 0 24px;
   border-radius: 999px;
   border: 1px solid alpha(@foreground, 0.35);
   font-size: 11px;
   font-weight: 700;
   background-color: alpha(@foreground, 0.12);
+  background-repeat: no-repeat;
+  background-position: 8px center;
+  background-size: 12px 12px;
 }
 
-#custom-ai-limits.warning {
+#custom-codex-limits {
+  background-image: url("/home/mokronos/.config/waybar/icons/codex.svg");
+}
+
+#custom-claude-limits {
+  margin-right: 12px;
+  background-image: url("/home/mokronos/.config/waybar/icons/claude.svg");
+}
+
+#custom-codex-limits.warning,
+#custom-claude-limits.warning {
   color: #d7af5f;
 }
 
-#custom-ai-limits.critical {
+#custom-codex-limits.critical,
+#custom-claude-limits.critical {
   color: #a55555;
 }
 
