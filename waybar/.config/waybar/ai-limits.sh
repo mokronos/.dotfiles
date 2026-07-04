@@ -48,7 +48,7 @@ jq -cn --argjson codex "$codex_json" --argjson claude "$claude_json" '
   | ($cu.codexResetCredits.credits // []) as $reset_credits
   | ($reset_credits | map(credit_line) | join("\n")) as $credit_lines
   | {
-      text: ("C5 " + limit($cu; "primary") + " Cw " + limit($cu; "secondary") + " R" + ($credits | tostring) + "(" + credit_expiry_days($reset_credits) + ") A5 " + limit($au; "primary") + " Aw " + limit($au; "secondary")),
+      text: (" " + limit($cu; "primary") + "/" + limit($cu; "secondary") + " R" + ($credits | tostring) + "(" + credit_expiry_days($reset_credits) + ")  " + limit($au; "primary") + "/" + limit($au; "secondary")),
       tooltip: (
         "Codex\n" +
         "5h: " + pct($cu; "primary") + " resets " + when($cu; "primary") + "\n" +
