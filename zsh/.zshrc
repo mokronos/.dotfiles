@@ -103,6 +103,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # opencode
 export PATH=/home/mokronos/.opencode/bin:$PATH
+export OPENCODE_DISABLE_CLAUDE_CODE=1
 export PATH="$PATH:/home/mokronos/google-home-cli"
 
 # Disable Bun AI agent rule file generation
