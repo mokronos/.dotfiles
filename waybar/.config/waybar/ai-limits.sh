@@ -47,9 +47,9 @@ jq -cn --arg provider "$provider" --argjson payload "$usage_json" '
     else "?" end;
   def window_tooltip($usage; $label; $window):
     if has_window($usage; $window) then "\n" + $label + ": " + pct($usage; $window) + " resets " + when($usage; $window) else "" end;
-  def credit_expiry_days($credits):
+  def credit_expiry_hours($credits):
     ($credits | map(.expires_at // empty | fromdateiso8601) | min) as $expiry
-    | if $expiry == null then "?" else (((($expiry - now) / 86400) | if . < 0 then 0 else . end) | ceil | tostring) + "d" end;
+    | if $expiry == null then "?" else (((($expiry - now) / 3600) | if . < 0 then 0 else . end) * 10 | round / 10 | tostring) + "h" end;
   def used($usage; $window): $usage[$window].usedPercent // 0;
   def credit_line:
     "- " + (.title // "Reset") + " expires " + (.expires_at | fromdateiso8601 | strflocaltime("%b %d %H:%M"));
@@ -60,7 +60,7 @@ jq -cn --arg provider "$provider" --argjson payload "$usage_json" '
   | ($usage.codexResetCredits.credits // []) as $reset_credits
   | ($reset_credits | map(credit_line) | join("\n")) as $credit_lines
   | {
-      text: (limits_text($usage) + if $provider == "codex" then " R" + ($credits | tostring) + "(" + credit_expiry_days($reset_credits) + ")" else "" end),
+      text: (limits_text($usage) + if $provider == "codex" then " R" + ($credits | tostring) + "(" + credit_expiry_hours($reset_credits) + ")" else "" end),
       tooltip: ((if $provider == "codex" then "Codex" else "Claude" end) +
         window_tooltip($usage; "5h"; "primary") +
         window_tooltip($usage; "Weekly"; "secondary") +
