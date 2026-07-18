@@ -12,7 +12,7 @@ npx --yes t3@nightly serve --host "::" --port 3773 &
 hyprctl dispatch moveworkspacetomonitor 5 DP-1
 
 launch_with_rule 1 "xdg-terminal-exec"
-launch_with_rule 1 "google-chrome-stable --new-window"
+launch_with_rule 1 "google-chrome-stable --restore-last-session"
 launch_with_rule 2 "google-chrome-stable --new-window"
 launch_with_rule 3 "steam"
 launch_with_rule 4 "discord"
