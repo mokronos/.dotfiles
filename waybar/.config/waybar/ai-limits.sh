@@ -56,15 +56,16 @@ jq -cn --arg provider "$provider" --argjson payload "$usage_json" '
 
   ($payload | first_item | .usage // {}) as $usage
   | ([used($usage; "primary"), used($usage; "secondary")] | max) as $max_used
-  | ($usage.codexResetCredits.availableCount // ($usage.codexResetCredits.credits // [] | length) // 0) as $credits
-  | ($usage.codexResetCredits.credits // []) as $reset_credits
+  | ($usage.codexResetCredits // null) as $reset_credit_data
+  | (if $reset_credit_data == null then null else ($reset_credit_data.availableCount // ($reset_credit_data.credits // [] | length)) end) as $credits
+  | ($reset_credit_data.credits // []) as $reset_credits
   | ($reset_credits | map(credit_line) | join("\n")) as $credit_lines
   | {
-      text: (limits_text($usage) + if $provider == "codex" then " R" + ($credits | tostring) + "(" + credit_expiry_hours($reset_credits) + ")" else "" end),
+      text: (limits_text($usage) + if $provider == "codex" and $credits != null then " R" + ($credits | tostring) + "(" + credit_expiry_hours($reset_credits) + ")" else "" end),
       tooltip: ((if $provider == "codex" then "Codex" else "Claude" end) +
         window_tooltip($usage; "5h"; "primary") +
         window_tooltip($usage; "Weekly"; "secondary") +
-        (if $provider == "codex" then "\nReset credits: " + ($credits | tostring) + (if $credit_lines == "" then "" else "\n" + $credit_lines end) else "" end)
+        (if $provider == "codex" and $credits != null then "\nReset credits: " + ($credits | tostring) + (if $credit_lines == "" then "" else "\n" + $credit_lines end) else "" end)
       ),
       class: (if $max_used >= 90 then "critical" elif $max_used >= 75 then "warning" else "normal" end)
     }
