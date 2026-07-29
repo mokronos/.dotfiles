@@ -43,8 +43,12 @@ alias ls="ls -A --color=auto"
 # shortcuts 
 alias actv="source .venv/bin/activate"
 
-
 alias o="cd /mnt/c/vault"
+
+if [[ -n "${WSL_DISTRO_NAME:-}" ]]; then
+    alias explorer="/mnt/c/Windows/explorer.exe ."
+    export PATH="/usr/lib/wsl/lib:/mnt/c/Windows/System32:/mnt/c/Windows:$PATH"
+fi
 
 # nvm install
 export NVM_DIR="$HOME/.nvm"
@@ -68,7 +72,7 @@ export PATH="$HOME/.dotfiles/scripts:$PATH"
 # eval "$(github-copilot-cli alias -- "$0")"
 
 # modular (mojo)
-export MODULAR_HOME="$HOME/mokronos/.modular"
+export MODULAR_HOME="$HOME/.modular"
 export PATH="$HOME/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 # make ctrl-p act like up arrow (take typed text into account)
@@ -82,10 +86,9 @@ bindkey "^N" down-line-or-beginning-search # Down
 # cuda paths
 export PATH="/usr/local/cuda-12.4/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH"
-export PATH="/usr/lib/wsl/lib/:$PATH"
 
 # pnpm
-export PNPM_HOME="/home/mokronos/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -95,19 +98,21 @@ esac
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # bun completions
-[ -s "/home/mokronos/.bun/_bun" ] && source "/home/mokronos/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # opencode
-export PATH=/home/mokronos/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"
 export OPENCODE_DISABLE_CLAUDE_CODE=1
-export PATH="$PATH:/home/mokronos/google-home-cli"
+export PATH="$PATH:$HOME/google-home-cli"
 
 # Disable Bun AI agent rule file generation
 export BUN_AGENT_RULE_DISABLED=1
 export CLAUDE_CODE_AGENT_RULE_DISABLED=1
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
