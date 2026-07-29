@@ -6,7 +6,7 @@ projects_root="${1:-$HOME/projects}"
 herdr_bin="${HERDR_BIN_PATH:-herdr}"
 
 selected="$({
-  find "$projects_root" -mindepth 1 -maxdepth 2 -type d -exec test -d "{}/.git" \; -print
+  find "$projects_root" -mindepth 1 -maxdepth 2 -type d -exec test -e "{}/.git" \; -print
 } | sort | fzf --prompt="Project> ")" || exit 0
 
 [[ -n "$selected" ]] || exit 0

@@ -25,6 +25,25 @@ STOW_FOLDERS=(
 )
 
 CRITICAL_FOLDERS=(hypr waybar walker)
+
+if [[ -n "${WSL_DISTRO_NAME:-}" ]]; then
+  STOW_FOLDERS=(
+    bin
+    btop
+    cursor
+    git
+    herdr
+    lazygit
+    nvim
+    opencode
+    scripts
+    starship
+    tmux
+    zsh
+  )
+  CRITICAL_FOLDERS=()
+fi
+
 MODE="${1:-install}"
 
 is_critical_folder() {
