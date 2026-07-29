@@ -42,3 +42,6 @@ height = "80%"
 [ui]
 accent = "#5eacd3"
 prompt_new_tab_name = false
+
+[ui.sound]
+enabled = false
