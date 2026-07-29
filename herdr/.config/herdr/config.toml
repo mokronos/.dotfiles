@@ -1,0 +1,35 @@
+[theme]
+name = "terminal"
+
+[terminal]
+default_shell = "/usr/bin/zsh"
+new_cwd = "follow"
+
+[keys]
+prefix = "ctrl+space"
+
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+split_horizontal = "prefix+\""
+split_vertical = "prefix+%"
+new_tab = "prefix+w"
+last_pane = "prefix+space"
+
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+new_workspace = "prefix+shift+s"
+workspace_picker = "prefix+shift+l"
+previous_workspace = "prefix+s"
+goto = "prefix+f"
+settings = "prefix+comma"
+
+close_tab = "prefix+q"
+detach = "prefix+shift+q"
+close_pane = "prefix+shift+x"
+
+[ui]
+accent = "#5eacd3"
