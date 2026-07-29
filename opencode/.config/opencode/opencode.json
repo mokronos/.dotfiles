@@ -3,6 +3,7 @@
         "*": "allow"
     },
     "$schema": "https://opencode.ai/config.json",
+    "plugin": ["@plannotator/opencode@latest"],
     "mcp": {
         "context7": {
             "type": "remote",
