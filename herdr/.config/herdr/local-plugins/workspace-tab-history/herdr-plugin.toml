@@ -1,8 +1,8 @@
 id = "workspace-tab-history"
 name = "Workspace Tab History"
-version = "0.1.0"
+version = "0.2.0"
 min_herdr_version = "0.7.0"
-description = "Toggle the two most recently focused tabs in each workspace"
+description = "Toggle recently focused workspaces and tabs"
 platforms = ["linux", "macos"]
 
 [[actions]]
@@ -14,3 +14,13 @@ command = ["bash", "toggle.sh"]
 [[events]]
 on = "tab.focused"
 command = ["bash", "track.sh"]
+
+[[actions]]
+id = "toggle-workspace"
+title = "Toggle recent workspaces"
+contexts = ["global"]
+command = ["bash", "toggle-workspace.sh"]
+
+[[events]]
+on = "workspace.focused"
+command = ["bash", "track-workspace.sh"]
