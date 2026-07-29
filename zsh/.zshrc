@@ -17,7 +17,7 @@ ZSH_THEME="robbyrussell"
 
 plugins=(git tmux zsh-autosuggestions)
 
-ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART=false
 
 # extended pattern matching
 setopt extendedglob
