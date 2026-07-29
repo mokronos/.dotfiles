@@ -41,16 +41,21 @@ is_critical_folder() {
 run_stow() {
   local folder="$1"
   local dry_run="${2:-false}"
+  local stow_args=(--restow)
 
   if [[ ! -d "$folder" ]]; then
     echo "error: stow folder not found: $folder" >&2
     exit 1
   fi
 
+  if [[ "$folder" == "herdr" ]]; then
+    stow_args+=(--no-folding)
+  fi
+
   if [[ "$dry_run" == "true" ]]; then
-    stow -nv --restow "$folder"
+    stow -nv "${stow_args[@]}" "$folder"
   else
-    stow --restow "$folder"
+    stow "${stow_args[@]}" "$folder"
   fi
 }
 
