@@ -80,6 +80,9 @@ apply_all() {
       if ! herdr plugin list --json | jq -e '.result.plugins[] | select(.plugin_id == "herdr-automatic-rename" and .source.resolved_commit == "29db272b3d53a92a0773ce0798b3b3498c3ae42d")' >/dev/null; then
         herdr plugin install qu8n/herdr-automatic-rename --ref 29db272b3d53a92a0773ce0798b3b3498c3ae42d --yes
       fi
+      if ! herdr plugin list --json | jq -e '.result.plugins[] | select(.plugin_id == "workspace-tab-history")' >/dev/null; then
+        herdr plugin link "$HOME/.config/herdr/local-plugins/workspace-tab-history" --enabled
+      fi
     else
       echo "herdr not found; skipping Herdr plugin installation"
     fi
