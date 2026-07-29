@@ -116,3 +116,9 @@ export CLAUDE_CODE_AGENT_RULE_DISABLED=1
 if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
+
+# Keep Herdr tab names in sync with the foreground process.
+for _f in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.zsh(N); do
+  source $_f
+  break
+done
