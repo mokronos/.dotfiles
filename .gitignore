@@ -10,4 +10,5 @@ api_key.json
 opencode/.config/opencode/node_modules/
 bin/.local/bin/*
 !bin/.local/bin/bluetooth-audio-switcher
+!bin/.local/bin/herdr-sessionizer
 nvim/.config/
