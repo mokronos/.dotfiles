@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+projects_root="${1:-$HOME/projects}"
+herdr_bin="${HERDR_BIN_PATH:-herdr}"
+
+selected="$({
+  find "$projects_root" -mindepth 1 -maxdepth 2 -type d -exec test -d "{}/.git" \; -print
+} | sort | fzf --prompt="Project> ")" || exit 0
+
+[[ -n "$selected" ]] || exit 0
+
+label="$(basename "$selected")"
+workspace_id="$($herdr_bin workspace list | jq -r --arg label "$label" \
+  '.result.workspaces | map(select(.label == $label)) | first | .workspace_id // empty')"
+
+if [[ -n "$workspace_id" ]]; then
+  "$herdr_bin" workspace focus "$workspace_id" >/dev/null
+else
+  "$herdr_bin" workspace create --cwd "$selected" --label "$label" --focus >/dev/null
+fi
