@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+direction="${1:?usage: herdr-tab-move <left|right>}"
+socket_path="${HERDR_SOCKET_PATH:?HERDR_SOCKET_PATH is not set}"
+
+snapshot="$(herdr api snapshot)"
+request="$(jq -nc --arg direction "$direction" --argjson snapshot "$snapshot" '
+  $snapshot.result.snapshot as $state
+  | $state.focused_workspace_id as $workspace_id
+  | $state.focused_tab_id as $tab_id
+  | [$state.tabs[] | select(.workspace_id == $workspace_id)] as $tabs
+  | ($tabs | map(.tab_id) | index($tab_id)) as $current
+  | (if $direction == "left" then ($current - 1 | if . < 0 then 0 else . end)
+    elif $direction == "right" then ($current + 1 | if . >= ($tabs | length) then ($tabs | length - 1) else . end)
+    else error("direction must be left or right")
+    end) as $insert_index
+  | {id: "tab-move", method: "tab.move", params: {tab_id: $tab_id, insert_index: $insert_index}}
+')"
+
+response="$(printf '%s\n' "$request" | nc -U "$socket_path")"
+jq -e '.error | not' <<<"$response" >/dev/null
