@@ -39,13 +39,13 @@ close_pane = "prefix+shift+x"
 [[keys.command]]
 key = "prefix+shift+comma"
 type = "shell"
-command = "herdr-tab-move left"
+command = "$HOME/.local/bin/herdr-tab-move left"
 description = "move tab left"
 
 [[keys.command]]
 key = "prefix+shift+period"
 type = "shell"
-command = "herdr-tab-move right"
+command = "$HOME/.local/bin/herdr-tab-move right"
 description = "move tab right"
 
 [[keys.command]]
