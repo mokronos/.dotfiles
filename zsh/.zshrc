@@ -50,10 +50,17 @@ if [[ -n "${WSL_DISTRO_NAME:-}" ]]; then
     export PATH="/usr/lib/wsl/lib:/mnt/c/Windows/System32:/mnt/c/Windows:$PATH"
 fi
 
-# nvm install
+# Load NVM only when its commands are first used; sourcing it delays new panes.
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+_load_nvm() {
+    unset -f nvm node npm npx
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+}
+
+for _nvm_command in nvm node npm npx; do
+    eval "${_nvm_command}() { _load_nvm; ${_nvm_command} \"\$@\"; }"
+done
+unset _nvm_command
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"

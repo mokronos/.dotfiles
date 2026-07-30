@@ -2,7 +2,7 @@
 config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
 
 # Shell
-command = /home/mokronos/.local/bin/herdr
+command = /home/snhirt/.local/bin/herdr
 
 # Font
 font-family = "JetBrainsMono Nerd Font"

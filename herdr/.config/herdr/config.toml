@@ -1,6 +1,11 @@
 [theme]
 name = "terminal"
 
+[theme.custom]
+surface0 = "#3b5f7a"
+surface_dim = "#263746"
+text = "#ffffff"
+
 [terminal]
 default_shell = "/usr/bin/zsh"
 new_cwd = "follow"
