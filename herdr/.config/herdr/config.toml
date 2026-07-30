@@ -37,6 +37,18 @@ detach = "prefix+shift+q"
 close_pane = "prefix+shift+x"
 
 [[keys.command]]
+key = "prefix+shift+comma"
+type = "shell"
+command = "herdr-tab-move left"
+description = "move tab left"
+
+[[keys.command]]
+key = "prefix+shift+period"
+type = "shell"
+command = "herdr-tab-move right"
+description = "move tab right"
+
+[[keys.command]]
 key = "prefix+s"
 type = "plugin_action"
 command = "workspace-tab-history.toggle-workspace"

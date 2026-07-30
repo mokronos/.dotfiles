@@ -11,4 +11,5 @@ opencode/.config/opencode/node_modules/
 bin/.local/bin/*
 !bin/.local/bin/bluetooth-audio-switcher
 !bin/.local/bin/herdr-sessionizer
+!bin/.local/bin/herdr-tab-move
 nvim/.config/
