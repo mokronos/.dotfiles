@@ -6,13 +6,13 @@ projects_root="${1:-$HOME/projects}"
 herdr_bin="${HERDR_BIN_PATH:-herdr}"
 
 selected="$({
-  find "$projects_root" -mindepth 1 -maxdepth 2 -type d -exec test -e "{}/.git" \; -print
+  find "$projects_root" -mindepth 2 -maxdepth 3 -name .git -printf '%h\n'
 } | sort | fzf --prompt="Project> ")" || exit 0
 
 [[ -n "$selected" ]] || exit 0
 
 label="$(basename "$selected")"
-workspace_id="$($herdr_bin api snapshot | jq -r --arg cwd "$selected" --arg label "$label" '
+workspace_id="$($herdr_bin api snapshot | jq -r --arg cwd "$selected" --arg workspace_label "$label" '
   .result.snapshot as $snapshot
   | ($snapshot.workspaces
     | map(select(. as $workspace | any($snapshot.panes[];
@@ -21,7 +21,7 @@ workspace_id="$($herdr_bin api snapshot | jq -r --arg cwd "$selected" --arg labe
     | first
     | .workspace_id)
     // ($snapshot.workspaces
-      | map(select((.label | sub("^\\[[0-9]+\\][[:space:]]+"; "")) == $label))
+      | map(select((.label | sub("^\\[[0-9]+\\][[:space:]]+"; "")) == $workspace_label))
       | first
       | .workspace_id)
     // empty
