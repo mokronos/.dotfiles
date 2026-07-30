@@ -13,7 +13,7 @@ request="$(jq -nc --arg direction "$direction" --argjson snapshot "$snapshot" '
   | [$state.tabs[] | select(.workspace_id == $workspace_id)] as $tabs
   | ($tabs | map(.tab_id) | index($tab_id)) as $current
   | (if $direction == "left" then ($current - 1 | if . < 0 then 0 else . end)
-    elif $direction == "right" then ($current + 1 | if . >= ($tabs | length) then ($tabs | length - 1) else . end)
+    elif $direction == "right" then ($current + 2 | if . > ($tabs | length) then ($tabs | length) else . end)
     else error("direction must be left or right")
     end) as $insert_index
   | {id: "tab-move", method: "tab.move", params: {tab_id: $tab_id, insert_index: $insert_index}}
