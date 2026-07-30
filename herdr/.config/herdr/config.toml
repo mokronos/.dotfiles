@@ -37,13 +37,13 @@ detach = "prefix+shift+q"
 close_pane = "prefix+shift+x"
 
 [[keys.command]]
-key = "prefix+shift+comma"
+key = "prefix+<"
 type = "shell"
 command = "$HOME/.local/bin/herdr-tab-move left"
 description = "move tab left"
 
 [[keys.command]]
-key = "prefix+shift+period"
+key = "prefix+>"
 type = "shell"
 command = "$HOME/.local/bin/herdr-tab-move right"
 description = "move tab right"
