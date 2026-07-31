@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+herdr="${HERDR_BIN_PATH:-herdr}"
+socket_path="${HERDR_SOCKET_PATH:?HERDR_SOCKET_PATH is not set}"
+workspace_id="${HERDR_ACTIVE_WORKSPACE_ID:?HERDR_ACTIVE_WORKSPACE_ID is not set}"
+current_tab_id="${HERDR_ACTIVE_TAB_ID:?HERDR_ACTIVE_TAB_ID is not set}"
+
+snapshot="$("$herdr" api snapshot)"
+read -r current_index tab_count < <(jq -er \
+  --arg workspace_id "$workspace_id" \
+  --arg tab_id "$current_tab_id" '
+    [.result.snapshot.tabs[] | select(.workspace_id == $workspace_id)] as $tabs
+    | [($tabs | map(.tab_id) | index($tab_id)), ($tabs | length)]
+    | @tsv
+  ' <<<"$snapshot")
+
+create_args=(tab create --workspace "$workspace_id" --focus)
+if [[ -n "${HERDR_ACTIVE_PANE_CWD:-}" ]]; then
+  create_args+=(--cwd "$HERDR_ACTIVE_PANE_CWD")
+fi
+
+created="$("$herdr" "${create_args[@]}")"
+new_tab_id="$(jq -er '.result.tab.tab_id' <<<"$created")"
+insert_index=$((current_index + 1))
+
+# A tab created after the rightmost tab is already in the desired position.
+(( insert_index < tab_count )) || exit 0
+
+request="$(jq -nc \
+  --arg tab_id "$new_tab_id" \
+  --argjson insert_index "$insert_index" '
+    {id: "tab-create-next", method: "tab.move", params: {
+      tab_id: $tab_id,
+      insert_index: $insert_index
+    }}
+  ')"
+response="$(printf '%s\n' "$request" | nc -U "$socket_path")"
+jq -e '.error | not' <<<"$response" >/dev/null
