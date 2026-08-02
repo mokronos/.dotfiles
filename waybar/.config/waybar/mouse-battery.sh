@@ -6,40 +6,46 @@ disconnected() {
     '{text: $text, class: "disconnected", tooltip: "Mouse disconnected"}'
 }
 
+is_wired_mouse_connected() {
+  for device in /sys/bus/usb/devices/*; do
+    [[ -r $device/idVendor && -r $device/idProduct ]] || continue
+    [[ $(<"$device/idVendor") == "046d" ]] || continue
+    [[ $(<"$device/idProduct") == "c098" ]] && return 0
+  done
+
+  return 1
+}
+
 for battery in /sys/class/power_supply/hidpp_battery_*; do
   [[ -d $battery && -r $battery/capacity ]] || continue
 
   capacity="$(<"$battery/capacity")"
   [[ $capacity =~ ^[0-9]+$ ]] || continue
 
-  status="$(<"$battery/status")"
-  [[ $status != "Unknown" ]] || continue
+  status="unknown"
+  if [[ -r $battery/status ]]; then
+    status="$(<"$battery/status")"
+  fi
 
-  if (( capacity >= 95 )); then
-    icon=$'\U000f0079'
-  elif (( capacity >= 85 )); then
-    icon=$'\U000f0082'
-  elif (( capacity >= 75 )); then
-    icon=$'\U000f0081'
-  elif (( capacity >= 65 )); then
-    icon=$'\U000f0080'
-  elif (( capacity >= 55 )); then
-    icon=$'\U000f007f'
-  elif (( capacity >= 45 )); then
-    icon=$'\U000f007e'
-  elif (( capacity >= 35 )); then
-    icon=$'\U000f007d'
-  elif (( capacity >= 25 )); then
-    icon=$'\U000f007c'
-  elif (( capacity >= 15 )); then
-    icon=$'\U000f007b'
-  else
-    icon=$'\U000f007a'
+  charging=false
+  if is_wired_mouse_connected; then
+    charging=true
+  elif [[ $status == "Unknown" ]]; then
+    continue
+  elif [[ $status == "Charging" ]]; then
+    charging=true
   fi
 
   model="$(<"$battery/model_name")"
-  jq -cn --arg text "$icon" --arg model "$model" --arg capacity "$capacity" \
-    '{text: $text, class: "connected", tooltip: ($model + " battery: " + $capacity + "%")}'
+  text=$'\U000f037d'
+  text+=" $capacity%"
+  if [[ $charging == true ]]; then
+    jq -cn --arg text "$text" --arg model "$model" --arg capacity "$capacity" \
+      '{text: $text, class: "charging", tooltip: ($model + " battery: " + $capacity + "% (charging)")}'
+  else
+    jq -cn --arg text "$text" --arg model "$model" --arg capacity "$capacity" \
+      '{text: $text, class: "connected", tooltip: ($model + " battery: " + $capacity + "%")}'
+  fi
   exit
 done
 
