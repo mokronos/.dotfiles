@@ -51,11 +51,16 @@
 }
 
 #custom-mouse-battery {
-  margin-right: 7.5px;
+  min-width: 0;
+  margin: 0 17px 0 0;
 }
 
 #custom-mouse-battery.disconnected {
   opacity: 0.5;
+}
+
+#custom-mouse-battery.charging {
+  color: #a6da95;
 }
 
 #network {
