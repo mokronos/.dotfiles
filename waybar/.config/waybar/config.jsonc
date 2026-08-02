@@ -21,6 +21,7 @@
     "custom/codex-limits",
     "custom/claude-limits",
     "tray",
+    "custom/mouse-battery",
     "bluetooth",
     "network",
     "pulseaudio",
@@ -168,6 +169,13 @@
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
     "on-click": "omarchy-launch-bluetooth"
+  },
+  "custom/mouse-battery": {
+    "format": "{text}",
+    "exec": "/home/mokronos/.config/waybar/mouse-battery.sh",
+    "return-type": "json",
+    "interval": 5,
+    "tooltip": true
   },
   "pulseaudio": {
     "format": "{icon}",

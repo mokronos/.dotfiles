@@ -33,6 +33,7 @@
 
 #cpu,
 #battery,
+#custom-mouse-battery,
 #pulseaudio,
 #custom-omarchy,
 
@@ -47,6 +48,14 @@
 
 #bluetooth {
   margin-right: 17px;
+}
+
+#custom-mouse-battery {
+  margin-right: 7.5px;
+}
+
+#custom-mouse-battery.disconnected {
+  opacity: 0.5;
 }
 
 #network {
