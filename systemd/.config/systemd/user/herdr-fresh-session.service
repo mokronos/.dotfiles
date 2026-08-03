@@ -1,0 +1,12 @@
+[Unit]
+Description=Clear Herdr saved workspaces so it starts from scratch each boot
+ConditionPathExists=%h/.config/herdr/session.json
+
+[Service]
+Type=oneshot
+# Skip if a server is already up — its in-memory state would just rewrite the file.
+ExecCondition=/bin/sh -c '! pgrep -u %U -f "herdr server" >/dev/null'
+ExecStart=/bin/rm -f %h/.config/herdr/session.json
+
+[Install]
+WantedBy=default.target
