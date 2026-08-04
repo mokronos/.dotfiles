@@ -1,10 +1,3 @@
-# only check zcompdump once a day to improve startup time
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-    compinit
-done
-compinit -C
-
 # Initialize colors for prompt
 autoload -U colors && colors
 
@@ -18,6 +11,9 @@ ZSH_THEME="robbyrussell"
 plugins=(git tmux zsh-autosuggestions)
 
 ZSH_TMUX_AUTOSTART=false
+
+# User-managed completions, including Docker Desktop's generated completion.
+fpath=("$HOME/.zsh/completions" $fpath)
 
 # extended pattern matching
 setopt extendedglob
@@ -48,8 +44,17 @@ alias o="cd /mnt/c/vault"
 
 # nvm install
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_SYMLINK_CURRENT=true
+export PATH="$NVM_DIR/current/bin:$PATH"
+_load_nvm() {
+    unset -f nvm node npm npx
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+}
+
+for _nvm_command in nvm node npm npx; do
+    eval "${_nvm_command}() { _load_nvm; ${_nvm_command} \"\$@\"; }"
+done
+unset _nvm_command
 
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
@@ -117,3 +122,37 @@ for _f in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/ho
   source $_f
   break
 done
+
+# After a reboot, keep resumable agent tabs and at most one stale shell tab per workspace.
+_herdr_prune_restored_shells() {
+  local session="$HOME/.config/herdr/session.json" tmp
+  [[ -f "$session" ]] || return
+  command herdr status server >/dev/null 2>&1 && return
+
+  tmp=$(mktemp "${session}.XXXXXX") || return
+  if jq '
+    .workspaces |= map(
+      .active_tab as $active |
+      .tabs as $tabs |
+      ([range(0; $tabs | length) as $i |
+        select($tabs[$i].panes | any(.[]; has("agent_session"))) | $i]) as $agents |
+      ([range(0; $tabs | length) as $i |
+        select(($tabs[$i].panes | any(.[]; has("agent_session"))) | not) | $i]) as $shells |
+      ($shells | if length == 0 then [] elif index($active) != null then [$active] else [.[0]] end) as $kept_shell |
+      ($agents + $kept_shell | sort) as $kept |
+      .tabs = [$kept[] as $i | $tabs[$i]] |
+      .public_tab_numbers = [$kept[] as $i | .public_tab_numbers[$i]] |
+      .active_tab = (($kept | index($active)) // 0)
+    )
+  ' "$session" > "$tmp"; then
+    chmod --reference="$session" "$tmp"
+    mv "$tmp" "$session"
+  else
+    rm -f "$tmp"
+  fi
+}
+
+herdr() {
+  (( $# == 0 )) && _herdr_prune_restored_shells
+  command herdr "$@"
+}
