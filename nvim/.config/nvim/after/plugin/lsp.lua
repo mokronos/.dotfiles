@@ -44,6 +44,58 @@ nmap('<Leader>vw', builtin.lsp_dynamic_workspace_symbols, '[V]iew [W]orkspace sy
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-    ensure_installed = { 'lua_ls', 'rust_analyzer' },
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'ts_ls' },
 })
 require('neodev').setup()
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+vim.lsp.config('ts_ls', {
+    capabilities = capabilities,
+    init_options = {
+        preferences = {
+            includeCompletionsForModuleExports = true,
+            includeCompletionsForImportStatements = true,
+            includeCompletionsWithInsertText = true,
+            importModuleSpecifierPreference = 'non-relative',
+        },
+    },
+    settings = {
+        typescript = {
+            preferences = {
+                includeCompletionsForModuleExports = true,
+                includeCompletionsForImportStatements = true,
+                importModuleSpecifierPreference = 'non-relative',
+            },
+        },
+        javascript = {
+            preferences = {
+                includeCompletionsForModuleExports = true,
+                includeCompletionsForImportStatements = true,
+                importModuleSpecifierPreference = 'non-relative',
+            },
+        },
+    },
+})
+vim.lsp.enable('ts_ls')
+
+vim.api.nvim_create_user_command('LspStart', function()
+    vim.lsp.enable('ts_ls')
+    vim.cmd('edit')
+end, { force = true })
+
+vim.api.nvim_create_user_command('LspStop', function()
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        client:stop()
+    end
+end, { force = true })
+
+vim.api.nvim_create_user_command('LspRestart', function()
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        client:stop()
+    end
+    vim.defer_fn(function()
+        vim.lsp.enable('ts_ls')
+        vim.cmd('edit')
+    end, 100)
+end, { force = true })
