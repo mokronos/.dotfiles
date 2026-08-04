@@ -1,3 +1,4 @@
+onboarding = false
 [theme]
 name = "terminal"
 
@@ -69,7 +70,7 @@ description = "toggle recent workspace tabs"
 [[keys.command]]
 key = "prefix+f"
 type = "popup"
-command = "herdr-sessionizer"
+command = "$HOME/.local/bin/herdr-sessionizer"
 description = "open project workspace"
 width = "80%"
 height = "80%"
