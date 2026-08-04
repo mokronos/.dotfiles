@@ -1,4 +1,14 @@
-vim.o.guicursor='n-c-v:block-nCursor'
+vim.o.guicursor='n-c-v:ver25-Cursor'
+
+-- Keep diagnostics visible through signs and underlines without dimming code.
+vim.diagnostic.config({
+    signs = true,
+    underline = false,
+    virtual_text = false,
+    virtual_lines = false,
+})
+vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', { link = 'Normal' })
+vim.api.nvim_set_hl(0, 'DiagnosticDeprecated', { link = 'Normal' })
 
 vim.wo.number = true
 vim.wo.relativenumber = true
