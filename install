@@ -6,6 +6,7 @@ DOTFILES="${HOME}/.dotfiles"
 STOW_FOLDERS=(
   bin
   btop
+  ckb-next
   cursor
   fastfetch
   ghostty
