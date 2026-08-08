@@ -1,4 +1,4 @@
-vim.o.guicursor='n-c-v:ver25-Cursor'
+vim.o.guicursor='n-c-v:block-nCursor'
 
 -- Keep diagnostics visible through signs and underlines without dimming code.
 vim.diagnostic.config({
