@@ -1,0 +1,20 @@
+[Unit]
+Description=T3 Code server
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+WorkingDirectory=%h
+Environment=T3CODE_HOME=/home/mokronos/.t3
+Environment=T3_BOOT_SERVICE_UNIT=t3code.service
+ExecStartPre=/home/mokronos/.local/share/mise/installs/node/25.2.1/bin/node %h/.config/systemd/user/t3code-update.mjs
+ExecStart=/home/mokronos/.local/share/mise/installs/node/25.2.1/bin/node /home/mokronos/.t3/runtime/service-launcher.mjs
+KillMode=mixed
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/mokronos/.t3/userdata/logs/boot-service.log
+StandardError=append:/home/mokronos/.t3/userdata/logs/boot-service.log
+
+[Install]
+WantedBy=default.target
