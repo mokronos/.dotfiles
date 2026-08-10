@@ -36,6 +36,7 @@ settings = "prefix+comma"
 close_tab = "prefix+q"
 detach = "prefix+shift+q"
 close_pane = "prefix+shift+x"
+close_workspace = "ctrl+x"
 
 [[keys.command]]
 key = "prefix+w"
@@ -77,6 +78,7 @@ height = "80%"
 
 [ui]
 accent = "#5eacd3"
+confirm_close = true
 prompt_new_tab_name = false
 
 [ui.sound]
