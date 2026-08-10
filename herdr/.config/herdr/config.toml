@@ -36,7 +36,14 @@ settings = "prefix+comma"
 close_tab = "prefix+q"
 detach = "prefix+shift+q"
 close_pane = "prefix+shift+x"
-close_workspace = "ctrl+x"
+
+[[keys.command]]
+key = "prefix+x"
+type = "popup"
+command = "$HOME/.local/bin/herdr-workspace-close"
+description = "close workspace"
+width = 50
+height = 7
 
 [[keys.command]]
 key = "prefix+w"
