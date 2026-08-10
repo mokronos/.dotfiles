@@ -8,7 +8,6 @@ launch_with_rule() {
   sleep 0.6
 }
 
-npx --yes t3@nightly serve --host "::" --port 3773 &
 hyprctl dispatch moveworkspacetomonitor 5 DP-1
 
 launch_with_rule 1 "xdg-terminal-exec"
