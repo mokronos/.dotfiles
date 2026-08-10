@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+workspace_id="${HERDR_ACTIVE_WORKSPACE_ID:?no active Herdr workspace}"
+herdr_bin="${HERDR_BIN_PATH:-$HOME/.local/bin/herdr}"
+label="$($herdr_bin workspace get "$workspace_id" | jq -r '.result.workspace.label')"
+
+printf 'Close workspace %s? [y/N] ' "$label"
+IFS= read -r -n 1 answer
+printf '\n'
+
+if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+  "$herdr_bin" workspace close "$workspace_id" >/dev/null
+fi
