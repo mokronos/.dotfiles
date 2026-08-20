@@ -1,8 +1,8 @@
 # Dynamic theme colors
-config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
+config-file = ?"~/.local/state/omarchy/current/theme/ghostty.conf"
 
 # Shell
-command = /home/mokronos/.local/bin/herdr --no-session
+command = /usr/bin/herdr --no-session
 
 # Font
 font-family = "JetBrainsMono Nerd Font"
