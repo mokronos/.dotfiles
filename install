@@ -20,12 +20,10 @@ STOW_FOLDERS=(
   starship
   systemd
   tmux
-  walker
-  waybar
   zsh
 )
 
-CRITICAL_FOLDERS=(hypr waybar walker)
+CRITICAL_FOLDERS=(hypr)
 MODE="${1:-install}"
 
 is_critical_folder() {
@@ -76,6 +74,11 @@ apply_all() {
     run_stow "$folder" "$dry_run"
   done
 
+  # Quattro loads user plugins from real files and rejects symlinked plugin
+  # directories, so keep this tracked config synchronized by copying it.
+  mkdir -p "$HOME/.config/omarchy"
+  cp -a "$DOTFILES/omarchy/.config/omarchy/." "$HOME/.config/omarchy/"
+
   if [[ "$dry_run" != "true" ]]; then
     if command -v herdr >/dev/null 2>&1; then
       if ! herdr plugin list --json | jq -e '.result.plugins[] | select(.plugin_id == "herdr-automatic-rename" and .source.resolved_commit == "29db272b3d53a92a0773ce0798b3b3498c3ae42d")' >/dev/null; then
@@ -91,13 +94,15 @@ apply_all() {
     if command -v hyprctl >/dev/null 2>&1; then
       hyprctl reload || true
     fi
-    if command -v omarchy-restart-waybar >/dev/null 2>&1; then
-      omarchy-restart-waybar || true
-    fi
-    if command -v omarchy-restart-walker >/dev/null 2>&1; then
-      omarchy-restart-walker || true
+    if command -v omarchy >/dev/null 2>&1; then
+      omarchy restart shell || true
     fi
   fi
+}
+
+sync_omarchy() {
+  mkdir -p "$HOME/.config/omarchy"
+  cp -a "$DOTFILES/omarchy/.config/omarchy/." "$HOME/.config/omarchy/"
 }
 
 preflight_conflicts() {
@@ -152,6 +157,9 @@ case "$MODE" in
       stow -D "$folder"
     done
     ;;
+  sync-omarchy)
+    sync_omarchy
+    ;;
   adopt)
     if [[ $# -lt 2 ]]; then
       echo "usage: ./install adopt <folder> [folder ...]" >&2
@@ -163,7 +171,7 @@ case "$MODE" in
     done
     ;;
   *)
-    echo "usage: ./install [install|dry-run|clean|adopt <folder> ...]" >&2
+    echo "usage: ./install [install|dry-run|clean|sync-omarchy|adopt <folder> ...]" >&2
     exit 1
     ;;
 esac

@@ -1,0 +1,2 @@
+-- Startup layout restoration intentionally remains disabled until the native
+-- Quattro session behavior has been evaluated after a reboot.
