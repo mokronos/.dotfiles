@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# Recycle Chromium's GPU process when NVIDIA BAR1 usage nears exhaustion.
+#
+# Mitigation for NVIDIA bug 5762513 (open-gpu-kernel-modules#1134): the
+# driver's mapping-reuse allocator fragments the small BAR1 aperture under
+# Wayland until buffer mappings fail ("Failed to map NvKmsKapiMemory"), which
+# wedges the GPU and takes down the compositor (Xid 32 storms). Chromium holds
+# the leaked BAR1 mappings inside its gpu-process; killing it makes Chrome
+# respawn it within a second, releasing the leaked space.
+#
+# Runs as a systemd user timer (bar1-watchdog.timer) every 2 minutes.
+
+set -euo pipefail
+
+THRESHOLD_PERCENT="${BAR1_THRESHOLD_PERCENT:-90}"
+COOLDOWN_SECONDS="${BAR1_COOLDOWN_SECONDS:-600}"
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/bar1-watchdog"
+
+# Cooldown: normal browsing can legitimately sit above modest thresholds, so
+# never recycle twice within COOLDOWN_SECONDS even if still over threshold.
+if [[ -f "$STATE_DIR/last-recycle" ]]; then
+  last="$(cat "$STATE_DIR/last-recycle" 2>/dev/null || echo 0)"
+  now="$(date +%s)"
+  (( now - last >= COOLDOWN_SECONDS )) || { echo "cooldown active ($((now - last))s since last recycle)"; exit 0; }
+fi
+
+reading="$(nvidia-smi -q -d MEMORY 2>/dev/null | awk '
+  /BAR1 Memory Usage/ {in_bar1 = 1}
+  in_bar1 && /Total/ {total = $3}
+  in_bar1 && /Used/  {used = $3; exit}
+  END {if (total != "" && used != "") print total, used}
+')" || true
+
+[[ -n "${reading:-}" ]] || { echo "BAR1 stats unavailable (no nvidia-smi?)"; exit 0; }
+
+total="${reading%% *}"
+used="${reading##* }"
+
+pct=$((used * 100 / total))
+echo "BAR1 ${used}/${total} MiB (${pct}%)"
+
+(( pct >= THRESHOLD_PERCENT )) || exit 0
+
+gpu_pids="$(pgrep -f 'chrome.*--type=gpu-process' || true)"
+if [[ -z "$gpu_pids" ]]; then
+  echo "threshold reached but no chrome gpu-process running"
+  exit 0
+fi
+
+echo "threshold reached — recycling chrome gpu-process(es): $gpu_pids"
+kill $gpu_pids
+
+mkdir -p "$STATE_DIR"
+date +%s > "$STATE_DIR/last-recycle"

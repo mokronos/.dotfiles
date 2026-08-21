@@ -1,0 +1,9 @@
+[Unit]
+Description=Run NVIDIA BAR1 watchdog every 2 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=2min
+
+[Install]
+WantedBy=default.target

@@ -13,4 +13,5 @@ bin/.local/bin/*
 !bin/.local/bin/herdr-sessionizer
 !bin/.local/bin/herdr-tab-create-next
 !bin/.local/bin/herdr-tab-move
+!bin/.local/bin/bar1-watchdog
 nvim/.config/

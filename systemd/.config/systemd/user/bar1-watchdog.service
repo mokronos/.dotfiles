@@ -1,0 +1,7 @@
+[Unit]
+Description=NVIDIA BAR1 Watchdog (recycle Chromium GPU process)
+Documentation=https://github.com/NVIDIA/open-gpu-kernel-modules/issues/1134
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/bar1-watchdog
