@@ -10,6 +10,7 @@ BarWidget {
 
   property string label: ""
   property string details: ""
+  property bool connected: true
 
   function refresh() {
     if (!statusProcess.running) statusProcess.running = true
@@ -26,6 +27,7 @@ BarWidget {
         var status = Util.parseModuleJson(text)
         root.label = String(status.text || "")
         root.details = String(status.tooltip || "")
+        root.connected = status.connected !== false
       }
     }
   }
@@ -37,7 +39,6 @@ BarWidget {
     onTriggered: root.refresh()
   }
 
-  visible: label !== ""
   implicitWidth: button.implicitWidth
   implicitHeight: button.implicitHeight
 
@@ -48,5 +49,6 @@ BarWidget {
     text: root.label
     tooltipText: root.details
     slotSize: Style.bar.statusSlot
+    opacity: root.connected ? 1.0 : 0.5
   }
 }
