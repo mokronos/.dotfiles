@@ -32,10 +32,11 @@ fi
 hyprctl dispatch moveworkspacetomonitor 5 DP-1 >>"$LOG" 2>&1
 
 launch_with_rule 1 "xdg-terminal-exec"
-launch_with_rule 1 "google-chrome-stable --restore-last-session"
-launch_with_rule 2 "google-chrome-stable --new-window"
+# Zen restores its previous session itself; no restore flag exists
+launch_with_rule 1 "zen-browser"
+launch_with_rule 2 "zen-browser --new-window"
 launch_with_rule 3 "steam"
 launch_with_rule 4 "discord"
-launch_with_rule 5 "google-chrome-stable --new-window http://localhost:3773"
+launch_with_rule 5 "zen-browser --new-window http://localhost:3773"
 
 log "=== script finished ==="
