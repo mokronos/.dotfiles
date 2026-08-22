@@ -11,6 +11,8 @@ BarWidget {
   property string label: ""
   property string details: ""
   property bool connected: true
+  // Qt.resolvedUrl() yields a file:// URL, which bash cannot execute as-is.
+  readonly property string scriptPath: decodeURIComponent(Qt.resolvedUrl("mouse-battery.sh").toString().replace(/^file:\/\//, ""))
 
   function refresh() {
     if (!statusProcess.running) statusProcess.running = true
@@ -20,7 +22,7 @@ BarWidget {
 
   Process {
     id: statusProcess
-    command: ["bash", Qt.resolvedUrl("mouse-battery.sh")]
+    command: ["bash", root.scriptPath]
     stdout: StdioCollector {
       waitForEnd: true
       onStreamFinished: {
