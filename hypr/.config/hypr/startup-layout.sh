@@ -34,6 +34,7 @@ hyprctl dispatch moveworkspacetomonitor 5 DP-1 >>"$LOG" 2>&1
 launch_with_rule 1 "xdg-terminal-exec"
 # Zen restores its previous session itself; no restore flag exists
 launch_with_rule 1 "zen-browser"
+sleep 0.3 # small gap so the first window maps before single-instance handoff
 launch_with_rule 2 "zen-browser --new-window"
 launch_with_rule 3 "steam"
 launch_with_rule 4 "discord"
