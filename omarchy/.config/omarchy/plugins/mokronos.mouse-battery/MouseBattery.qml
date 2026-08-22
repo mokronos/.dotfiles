@@ -44,13 +44,16 @@ BarWidget {
   implicitWidth: button.implicitWidth
   implicitHeight: button.implicitHeight
 
-  BarIconButton {
+  // Text-sized label needs a naturally sized button; BarIconButton would cram
+  // it into a single fixed icon slot.
+  WidgetButton {
     id: button
     anchors.fill: parent
     bar: root.bar
     text: root.label
+    fontSize: Style.font.caption
+    horizontalMargin: 6
     tooltipText: root.details
-    slotSize: Style.bar.statusSlot
-    opacity: root.connected ? 1.0 : 0.5
+    dimmed: !root.connected
   }
 }
