@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+disconnected() {
+  jq -cn --arg text $'\U000f037e' \
+    '{text: $text, tooltip: "Mouse disconnected", connected: false}'
+}
+
 is_wired_mouse_connected() {
   for device in /sys/bus/usb/devices/*; do
     [[ -r $device/idVendor && -r $device/idProduct ]] || continue
@@ -26,11 +31,11 @@ for battery in /sys/class/power_supply/hidpp_battery_*; do
   text=$'\U000f037d'
   text+=" $capacity%"
   if [[ $charging == true ]]; then
-    jq -cn --arg text "$text" --arg model "$model" --arg capacity "$capacity" '{text: $text, tooltip: ($model + " battery: " + $capacity + "% (charging)")}'
+    jq -cn --arg text "$text" --arg model "$model" --arg capacity "$capacity" '{text: $text, tooltip: ($model + " battery: " + $capacity + "% (charging)"), connected: true}'
   else
-    jq -cn --arg text "$text" --arg model "$model" --arg capacity "$capacity" '{text: $text, tooltip: ($model + " battery: " + $capacity + "%")}'
+    jq -cn --arg text "$text" --arg model "$model" --arg capacity "$capacity" '{text: $text, tooltip: ($model + " battery: " + $capacity + "%"), connected: true}'
   fi
   exit
 done
 
-printf '{}'
+disconnected
