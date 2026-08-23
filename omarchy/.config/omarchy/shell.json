@@ -71,8 +71,18 @@
   },
   "idle": {
     "lock": 2147483,
-    "screensaver": 1800
+    "screensaver": 300
   },
-  "plugins": [],
-  "version": 1
+  "plugins": [
+    {
+      "id": "mokronos.idle"
+    }
+  ],
+  "version": 1,
+  "disabledPlugins": [
+    "omarchy.idle"
+  ],
+  "cloneSourceRestores": [
+    "mokronos.idle"
+  ]
 }
