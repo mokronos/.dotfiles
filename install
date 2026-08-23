@@ -20,6 +20,7 @@ STOW_FOLDERS=(
   starship
   systemd
   tmux
+  xdg
   zsh
 )
 
