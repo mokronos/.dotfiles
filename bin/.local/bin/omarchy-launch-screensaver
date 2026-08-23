@@ -9,11 +9,6 @@
 # Waking is handled by Hyprland's key_press_enables_dpms/mouse_move_enables_dpms
 # plus the idle service's omarchy-system-wake call on activity.
 
-# Allow screensaver to be turned off but also force started
-if omarchy-toggle-enabled screensaver-off && [[ $1 != "force" ]]; then
-  exit 1
-fi
-
 # No isLocked guard here (unlike the stock launcher): blanking a locked screen
 # is desirable power saving, and input still wakes the display.
 omarchy-brightness-display off
