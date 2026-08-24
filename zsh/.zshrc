@@ -118,6 +118,9 @@ export CLAUDE_CODE_AGENT_RULE_DISABLED=1
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
+# Pi
+export PATH="/home/mokronos/.local/share/mise/installs/node/25.2.1/bin:$PATH"
+
 # Keep Herdr tab names in sync with the foreground process.
 for _f in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.zsh(N); do
   source $_f
