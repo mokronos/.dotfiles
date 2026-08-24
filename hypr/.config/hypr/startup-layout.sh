@@ -33,7 +33,9 @@ fi
 
 hyprctl eval 'hl.dispatch(hl.dsp.workspace.move({ workspace = "5", monitor = "DP-1" }))' >>"$LOG" 2>&1
 
-launch_with_rule 1 "xdg-terminal-exec"
+# Ghostty's config starts Herdr as the terminal command. Do not use
+# xdg-terminal-exec here because Omarchy's default currently resolves to Foot.
+launch_with_rule 1 "ghostty"
 # Zen restores its previous session itself; no restore flag exists
 launch_with_rule 1 "zen-browser"
 sleep 0.3 # small gap so the first window maps before single-instance handoff
