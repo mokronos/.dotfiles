@@ -3,5 +3,9 @@
         "*": "allow"
     },
     "$schema": "https://opencode.ai/config.json",
-    "plugin": ["@plannotator/opencode@latest"]
+    "lsp": false,
+    "plugin": ["@plannotator/opencode@latest"],
+    "experimental": {
+        "continue_loop_on_deny": true
+    }
 }
