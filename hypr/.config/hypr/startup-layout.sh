@@ -11,7 +11,9 @@ launch_with_rule() {
   local command="$2"
 
   log "launching ws=$workspace: $command"
-  if ! hyprctl dispatch exec "[workspace $workspace silent] $command" >>"$LOG" 2>&1; then
+  # Hyprland 0.56 exposes dispatchers through its Lua interface. The old
+  # `hyprctl dispatch exec ...` form is now parsed as invalid Lua.
+  if ! hyprctl eval "hl.dispatch(hl.dsp.exec_cmd([[[workspace $workspace silent] $command]]))" >>"$LOG" 2>&1; then
     log "ERROR: hyprctl failed for ws=$workspace cmd=$command"
   fi
   sleep 0.6
@@ -29,7 +31,7 @@ else
   log "WARNING: could not query monitors"
 fi
 
-hyprctl dispatch moveworkspacetomonitor 5 DP-1 >>"$LOG" 2>&1
+hyprctl eval 'hl.dispatch(hl.dsp.workspace.move({ workspace = "5", monitor = "DP-1" }))' >>"$LOG" 2>&1
 
 launch_with_rule 1 "xdg-terminal-exec"
 # Zen restores its previous session itself; no restore flag exists
