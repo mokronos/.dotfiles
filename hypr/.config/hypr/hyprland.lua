@@ -9,6 +9,7 @@ require("hypr.autostart")
 require("default.hypr.toggles")
 
 o.window(".*", { opacity = "1.0 1.0" })
+o.window(".*", { idle_inhibit = "fullscreen" })
 o.window("steam", { workspace = "3 silent" })
 o.window("discord", { workspace = "4 silent" })
 o.window("t3code", { workspace = "5 silent" })
