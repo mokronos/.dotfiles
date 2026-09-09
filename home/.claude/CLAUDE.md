@@ -1,3 +1,3 @@
 # CLAUDE.md
 
-@~/AGENTS.md
+@~/.codex/AGENTS.md
