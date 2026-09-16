@@ -107,8 +107,7 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # opencode
-export PATH=/home/mokronos/.opencode/bin:$PATH
-alias opencode='opencode2'
+export PATH="$HOME/.opencode/bin:$PATH"
 export OPENCODE_DISABLE_CLAUDE_CODE=1
 export PATH="$PATH:/home/mokronos/google-home-cli"
 
