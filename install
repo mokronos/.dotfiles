@@ -9,6 +9,7 @@ STOW_FOLDERS=(
   cursor
   fastfetch
   ghostty
+  git
   home
   herdr
   hypr
