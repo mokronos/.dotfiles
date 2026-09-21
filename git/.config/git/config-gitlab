@@ -1,0 +1,3 @@
+# Work identity. Selected by remote URL from the includeIf blocks in `config`.
+[user]
+	email = sebastian.hirt@ancud.de
