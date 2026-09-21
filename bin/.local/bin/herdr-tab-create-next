@@ -36,5 +36,22 @@ request="$(jq -nc \
       insert_index: $insert_index
     }}
   ')"
-response="$(printf '%s\n' "$request" | nc -U "$socket_path")"
+response="$(python3 - "$socket_path" "$request" <<'PY'
+import socket, sys
+sock_path, req = sys.argv[1], sys.argv[2]
+s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+s.connect(sock_path)
+s.sendall((req + "\n").encode())
+s.shutdown(socket.SHUT_WR)
+chunks = []
+while True:
+    chunk = s.recv(65536)
+    if not chunk:
+        break
+    chunks.append(chunk)
+    if b"\n" in chunk:
+        break
+sys.stdout.write(b"".join(chunks).decode())
+PY
+)"
 jq -e '.error | not' <<<"$response" >/dev/null
