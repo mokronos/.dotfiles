@@ -7,6 +7,7 @@ herdr_bin="${HERDR_BIN_PATH:-$HOME/.local/bin/herdr}"
 fzf_bin="${FZF_BIN_PATH:-/usr/bin/fzf}"
 
 selected="$({
+  printf '%s\n' "$HOME/.dotfiles"
   find "$projects_root" -mindepth 1 -maxdepth 2 -type d -exec test -d "{}/.git" \; -print
 } | sort | "$fzf_bin" --prompt="Project> ")" || exit 0
 
