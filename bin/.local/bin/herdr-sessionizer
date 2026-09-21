@@ -4,7 +4,7 @@ set -euo pipefail
 
 projects_root="${1:-$HOME/projects}"
 herdr_bin="${HERDR_BIN_PATH:-$HOME/.local/bin/herdr}"
-fzf_bin="${FZF_BIN_PATH:-$HOME/.fzf/bin/fzf}"
+fzf_bin="${FZF_BIN_PATH:-/usr/bin/fzf}"
 
 selected="$({
   find "$projects_root" -mindepth 1 -maxdepth 2 -type d -exec test -d "{}/.git" \; -print
