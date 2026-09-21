@@ -28,14 +28,18 @@
 	autoupdate = true        # Apply stored conflict resolutions automatically
 [user]
 	name = Sebastian Hirt
-	email = sebastian@hirts.de
+	# Work is the default: every company GitLab we touch is work, and private
+	# work only ever lives on GitHub. Anything that is not github.com therefore
+	# gets the work address, including hosts not yet seen and hosts whose name
+	# says nothing about who runs them.
+	email = sebastian.hirt@ancud.de
 
-# Pick the commit identity from the remote a repository actually points at, so
-# work never lands under the personal address or the other way round. Each
-# includeIf takes one URL form; git has no way to OR them into one condition.
-# The scp-style forms need both `:**` and `:*/**`: `**` only crosses `/` when it
-# is a whole path component, so `:**` alone stops at the first slash.
-# A repository with no matching remote keeps the [user] email above.
+# github.com is the one personal remote, so it is the only exception. Each
+# includeIf takes a single URL form; git has no way to OR them into one
+# condition. The scp-style form needs both `:**` and `:*/**`, because `**` only
+# crosses `/` when it is a whole path component, so `:**` alone would stop at
+# the first slash and miss any owner/repo path.
+# A repository with no remote at all keeps the work address above.
 [includeIf "hasconfig:remote.*.url:git@github.com:**"]
 	path = ~/.config/git/config-github
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
@@ -44,13 +48,3 @@
 	path = ~/.config/git/config-github
 [includeIf "hasconfig:remote.*.url:https://github.com/**"]
 	path = ~/.config/git/config-github
-[includeIf "hasconfig:remote.*.url:git@gitlab.ancud.de:**"]
-	path = ~/.config/git/config-gitlab
-[includeIf "hasconfig:remote.*.url:git@gitlab.ancud.de:*/**"]
-	path = ~/.config/git/config-gitlab
-[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.ancud.de:*/**"]
-	path = ~/.config/git/config-gitlab
-[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.ancud.de/**"]
-	path = ~/.config/git/config-gitlab
-[includeIf "hasconfig:remote.*.url:https://gitlab.ancud.de/**"]
-	path = ~/.config/git/config-gitlab
