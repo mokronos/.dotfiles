@@ -70,7 +70,7 @@
     "transparent": false
   },
   "idle": {
-    "lock": 2147483,
+    "lock": 1800,
     "screensaver": 1800
   },
   "plugins": [
