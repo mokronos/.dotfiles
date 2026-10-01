@@ -1,0 +1,25 @@
+{
+  "theme": "dark",
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "permissions": {
+    "deny": [
+      "Read(~/.kube/**)",
+      "Edit(~/.kube/**)",
+      "Bash(kubectx)",
+      "Bash(kubectx *)",
+      "Bash(kubens)",
+      "Bash(kubens *)",
+      "Bash(kubectl config *)",
+      "Bash(* --kubeconfig*)",
+      "Bash(KUBECONFIG=*)",
+      "Bash(export KUBECONFIG*)",
+      "Bash(*~/.kube*)",
+      "Bash(*/.kube/*)",
+      "Bash(*$HOME/.kube*)"
+    ]
+  }
+}
