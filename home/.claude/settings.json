@@ -1,0 +1,38 @@
+{
+  "theme": "dark",
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "permissions": {
+    "deny": [
+      "Read(~/.kube/**)",
+      "Edit(~/.kube/**)",
+      "Bash(kubectx)",
+      "Bash(kubectx *)",
+      "Bash(kubens)",
+      "Bash(kubens *)",
+      "Bash(kubectl config *)",
+      "Bash(* --kubeconfig*)",
+      "Bash(KUBECONFIG=*)",
+      "Bash(export KUBECONFIG*)",
+      "Bash(*~/.kube*)",
+      "Bash(*/.kube/*)",
+      "Bash(*$HOME/.kube*)",
+      "Bash(kubectl *secret*)"
+    ],
+    "allow": [
+      "Bash(kubectl get *)",
+      "Bash(kubectl describe *)",
+      "Bash(kubectl logs *)",
+      "Bash(kubectl top *)",
+      "Bash(kubectl events *)",
+      "Bash(kubectl explain *)",
+      "Bash(kubectl api-resources*)",
+      "Bash(kubectl api-versions*)",
+      "Bash(kubectl version*)",
+      "Bash(kubectl auth can-i *)"
+    ]
+  }
+}

@@ -29,6 +29,13 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[yellow]%})"
 
 export GIT_PAGER=
 
+_kubeconfigs=("$HOME/.kube/config"(N.) "$HOME"/.kube/*(N.))
+typeset -U _kubeconfigs
+if (( ${#_kubeconfigs} )); then
+    export KUBECONFIG="${(j.:.)_kubeconfigs}"
+fi
+unset _kubeconfigs
+
 # change python version as needed
 # easier than fiddeling with default system version and breaking stuff
 alias python="python3"
