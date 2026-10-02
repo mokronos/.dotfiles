@@ -31,8 +31,6 @@ else
   log "WARNING: could not query monitors"
 fi
 
-hyprctl eval 'hl.dispatch(hl.dsp.workspace.move({ workspace = "5", monitor = "DP-1" }))' >>"$LOG" 2>&1
-
 # Ghostty's config starts Herdr as the terminal command. Do not use
 # xdg-terminal-exec here because Omarchy's default currently resolves to Foot.
 launch_with_rule 1 "ghostty"
@@ -40,8 +38,9 @@ launch_with_rule 1 "ghostty"
 launch_with_rule 1 "zen-browser"
 sleep 0.3 # small gap so the first window maps before single-instance handoff
 launch_with_rule 2 "zen-browser --new-window"
-launch_with_rule 3 "steam"
-launch_with_rule 4 "discord"
-launch_with_rule 5 "zen-browser --new-window http://localhost:3773"
+launch_with_rule 3 "obsidian"
+launch_with_rule 4 "zen-browser --new-window https://outlook.office.com/mail/"
+launch_with_rule 4 "/opt/teams-for-linux/teams-for-linux --ozone-platform=x11"
+launch_with_rule 5 "t3code-nightly"
 
 log "=== script finished ==="
