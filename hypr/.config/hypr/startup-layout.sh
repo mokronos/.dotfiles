@@ -36,10 +36,8 @@ fi
 launch_with_rule 1 "ghostty"
 # Zen restores its previous session itself; no restore flag exists
 launch_with_rule 1 "zen-browser"
-sleep 0.3 # small gap so the first window maps before single-instance handoff
-launch_with_rule 2 "zen-browser --new-window"
+python "$HOME/.dotfiles/hypr/.config/hypr/startup-zen.py" >>"$LOG" 2>&1 &
 launch_with_rule 3 "obsidian"
-launch_with_rule 4 "zen-browser --new-window https://outlook.office.com/mail/"
 launch_with_rule 4 "/opt/teams-for-linux/teams-for-linux --ozone-platform=x11"
 launch_with_rule 5 "t3code-nightly"
 
