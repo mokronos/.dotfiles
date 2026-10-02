@@ -20,13 +20,15 @@ local function arrange_workspaces()
   end
   rules = {
     hl.workspace_rule({ workspace = "1", monitor = primary.name, default = true }),
-    hl.workspace_rule({ workspace = "r[3-2147483647]", monitor = primary.name }),
+    hl.workspace_rule({ workspace = "3", monitor = primary.name }),
+    hl.workspace_rule({ workspace = "r[5-2147483647]", monitor = primary.name }),
     hl.workspace_rule({ workspace = "2", monitor = laptop.name, default = laptop.name ~= primary.name }),
+    hl.workspace_rule({ workspace = "4", monitor = laptop.name }),
   }
 
   for _, workspace in ipairs(hl.get_workspaces()) do
     if not workspace.special then
-      local target = workspace.id == 2 and laptop or primary
+      local target = (workspace.id == 2 or workspace.id == 4) and laptop or primary
       if not workspace.monitor or workspace.monitor.name ~= target.name then
         hl.dispatch(hl.dsp.workspace.move({ workspace = workspace, monitor = target.name }))
       end
