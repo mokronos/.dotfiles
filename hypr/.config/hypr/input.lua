@@ -2,7 +2,7 @@ hl.config({
   input = {
     -- Use multiple keyboard layouts and switch between them with Left Alt + Right Alt
     kb_layout = "us,de",
-    kb_options = "caps:swapescape,shift:both_capslock_cancel,grp:alts_toggle",
+    kb_options = "shift:both_capslock_cancel,grp:alts_toggle",
     repeat_rate = 40,
     repeat_delay = 600,
     numlock_by_default = true,
