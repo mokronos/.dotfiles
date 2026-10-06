@@ -16,6 +16,20 @@ chmod +x install
 ./install
 ```
 
+## Install agent skills
+
+From the dotfiles repository root, install the `config-dotfiles` skill globally for Claude Code, OpenCode, and Codex:
+
+```sh
+npx skills add ./home/.claude/skills/config-dotfiles \
+  --global \
+  --agent claude-code \
+  --agent opencode \
+  --agent codex
+```
+
+Use the **Symlink** install method when prompted (do not pass `--copy`). The CLI keeps a canonical copy under `~/.agents/skills` and links each agent's global skills directory to it, so the skill is available across projects.
+
 # install neovim
 
 Either from source or just (swap version):
