@@ -18,10 +18,10 @@ chmod +x install
 
 ## Install agent skills
 
-From the dotfiles repository root, install the `config-dotfiles` skill globally for Claude Code, OpenCode, and Codex:
+Skills are backed up in `skills/`. From the dotfiles repository root, install the `config-dotfiles` skill globally for Claude Code, OpenCode, and Codex:
 
 ```sh
-npx skills add ./home/.claude/skills/config-dotfiles \
+npx skills add ./skills/config-dotfiles \
   --global \
   --agent claude-code \
   --agent opencode \
