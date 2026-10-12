@@ -1,0 +1,10 @@
+[Unit]
+Description=Kodus GitLab webhook tunnel through kiguss
+
+[Service]
+ExecStart=/usr/bin/ssh -NT -o BatchMode=yes -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -R 127.0.0.1:13332:127.0.0.1:3332 kiguss
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
