@@ -1,0 +1,10 @@
+[Unit]
+Description=Mira GitLab webhook tunnel through kiguss
+
+[Service]
+ExecStart=/usr/bin/ssh -NT -o BatchMode=yes -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -R 127.0.0.1:18000:127.0.0.1:8000 kiguss
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
