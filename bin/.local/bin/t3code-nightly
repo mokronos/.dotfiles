@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+
+import fcntl
+import hashlib
+import json
+import os
+from pathlib import Path
+import platform
+import sys
+import tempfile
+import urllib.request
+
+
+directory = Path.home() / ".local/share/t3code"
+appimage = directory / "T3-Code-Nightly.AppImage"
+update_only = sys.argv[1:] == ["--update-only"]
+
+
+def update():
+    architecture = {"x86_64": "x86_64", "aarch64": "arm64"}[platform.machine()]
+    request = urllib.request.Request(
+        "https://api.github.com/repos/pingdotgg/t3code/releases?per_page=10",
+        headers={"Accept": "application/vnd.github+json", "User-Agent": "t3code-nightly-launcher"},
+    )
+    with urllib.request.urlopen(request, timeout=30) as response:
+        releases = json.load(response)
+    release = next(r for r in releases if "-nightly." in r["tag_name"] and not r["draft"])
+    asset = next(a for a in release["assets"] if a["name"].endswith(f"-{architecture}.AppImage"))
+    algorithm, expected = asset["digest"].split(":", 1)
+    if algorithm != "sha256":
+        raise ValueError("GitHub did not provide a SHA-256 digest")
+    if appimage.exists():
+        with appimage.open("rb") as current:
+            if hashlib.file_digest(current, "sha256").hexdigest() == expected:
+                print(f"T3 Code is current: {release['tag_name']}", flush=True)
+                return
+
+    print(f"Updating T3 Code to {release['tag_name']}…", flush=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=directory, delete=False) as destination:
+            temporary = Path(destination.name)
+            digest = hashlib.sha256()
+            with urllib.request.urlopen(asset["browser_download_url"], timeout=60) as response:
+                while chunk := response.read(1024 * 1024):
+                    destination.write(chunk)
+                    digest.update(chunk)
+        if digest.hexdigest() != expected:
+            raise ValueError("AppImage SHA-256 verification failed")
+        temporary.chmod(0o755)
+        temporary.replace(appimage)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
+directory.mkdir(parents=True, exist_ok=True)
+try:
+    with (directory / "update.lock").open("w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        update()
+except Exception as error:
+    print(f"T3 Code update failed: {error}", file=sys.stderr)
+    if update_only or not appimage.exists():
+        sys.exit(1)
+
+if not update_only:
+    os.execv(appimage, [str(appimage), *sys.argv[1:]])
