@@ -42,6 +42,6 @@ sleep 0.3 # small gap so the first window maps before single-instance handoff
 launch_with_rule 2 "zen-browser --new-window"
 launch_with_rule 3 "steam"
 launch_with_rule 4 "discord"
-launch_with_rule 5 "$HOME/.local/bin/t3code-desktop"
+launch_with_rule 5 "$HOME/.local/bin/t3code-nightly"
 
 log "=== script finished ==="
