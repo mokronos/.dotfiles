@@ -16,6 +16,22 @@ chmod +x install
 ./install
 ```
 
+## T3 Code Nightly desktop
+
+The `bin` package includes the desktop launcher and icon. Run `t3code-nightly`
+or open **T3 Code Nightly** from the application menu. The launcher downloads
+the latest official nightly AppImage into `~/.local/share/t3code/`, verifies
+its GitHub SHA-256 digest, and updates it before opening. If the network is
+unavailable, it opens the installed copy. To install/update without opening
+the app, run `t3code-nightly --update-only`.
+
+The AppImage is user-owned, so T3's in-app update button also works. Keep the
+desktop update channel on **Nightly**. T3 checks for updates while running;
+downloading and restarting from inside the app require a click.
+
+Do not install `t3code-nightly-bin` alongside this launcher: the extracted
+Arch package disables T3's built-in Linux updater.
+
 ## Install agent skills
 
 Skills are backed up in `skills/`. From the dotfiles repository root, install the `config-dotfiles` skill globally for Claude Code, OpenCode, and Codex:
