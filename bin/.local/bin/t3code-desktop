@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+exec "$HOME/.local/share/t3code/T3-Code.AppImage" "$@"
