@@ -29,6 +29,9 @@ The AppImage is user-owned, so T3's in-app update button also works. Keep the
 desktop update channel on **Nightly**. T3 checks for updates while running;
 downloading and restarting from inside the app require a click.
 
+On the personal desktop, the Hyprland startup layout launches T3 Code on
+workspace 5. The old `t3code.service` web server is no longer used.
+
 Do not install `t3code-nightly-bin` alongside this launcher: the extracted
 Arch package disables T3's built-in Linux updater.
 

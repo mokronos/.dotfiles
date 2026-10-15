@@ -2,10 +2,11 @@
 Type=Application
 Name=T3 Code Nightly
 Comment=Desktop control surface for coding agents
-Exec=/home/mokronos/.local/bin/t3code-desktop %U
-TryExec=/home/mokronos/.local/bin/t3code-desktop
+Exec=/home/mokronos/.local/bin/t3code-nightly %U
+TryExec=/home/mokronos/.local/bin/t3code-nightly
 Icon=t3code-nightly
 Terminal=false
+NoDisplay=true
 StartupWMClass=com.t3tools.T3Code
 Categories=Development;
 MimeType=x-scheme-handler/t3code;
