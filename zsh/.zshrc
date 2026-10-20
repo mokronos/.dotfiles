@@ -49,20 +49,6 @@ alias actv="source .venv/bin/activate"
 
 alias o="cd /mnt/c/vault"
 
-# nvm install
-export NVM_DIR="$HOME/.nvm"
-export NVM_SYMLINK_CURRENT=true
-export PATH="$NVM_DIR/current/bin:$PATH"
-_load_nvm() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-}
-
-for _nvm_command in nvm node npm npx; do
-    eval "${_nvm_command}() { _load_nvm; ${_nvm_command} \"\$@\"; }"
-done
-unset _nvm_command
-
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
