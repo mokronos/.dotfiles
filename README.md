@@ -37,17 +37,7 @@ Arch package disables T3's built-in Linux updater.
 
 ## Install agent skills
 
-Skills are backed up in `skills/`. From the dotfiles repository root, install the `config-dotfiles` skill globally for Claude Code, OpenCode, and Codex:
-
-```sh
-npx skills add ./skills/config-dotfiles \
-  --global \
-  --agent claude-code \
-  --agent opencode \
-  --agent codex
-```
-
-Use the **Symlink** install method when prompted (do not pass `--copy`). The CLI keeps a canonical copy under `~/.agents/skills` and links each agent's global skills directory to it, so the skill is available across projects.
+Skills live in `skills/`. `./install` symlinks each one to `~/.agents/skills/<name>`, where Codex and OpenCode load it, and links `~/.claude/skills/<name>` to that for Claude Code. Edits in the repo apply immediately.
 
 # install neovim
 
