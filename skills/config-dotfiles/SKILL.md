@@ -1,6 +1,6 @@
 ---
 name: config-dotfiles
-description: Use this skill for any configuration, maintenance, or diagnostics task on the user's computers or personal development environment: changing, inspecting, installing, updating, or documenting configuration, and diagnosing unexpected system behavior such as sleep, idle, display, audio, or input issues. Covers operating systems, shells, terminals, desktop environments, editors, and dotfiles. Do not use it when changing a software project's own configuration, such as its formatter, build, CI, runtime, deployment, or app settings, even if the project is in a repository.
+description: "Use this skill for any configuration, maintenance, or diagnostics task on the user's computers or personal development environment: changing, inspecting, installing, updating, or documenting configuration, and diagnosing unexpected system behavior such as sleep, idle, display, audio, or input issues. Covers operating systems, shells, terminals, desktop environments, editors, and dotfiles. Do not use it when changing a software project's own configuration, such as its formatter, build, CI, runtime, deployment, or app settings, even if the project is in a repository."
 ---
 
 # Computer and environment configuration
