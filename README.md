@@ -16,6 +16,25 @@ chmod +x install
 ./install
 ```
 
+## User commands
+
+`~/.local/bin` is a real directory for user-installed commands. The `bin`
+package uses Stow's `--no-folding` option to link maintained scripts individually;
+downloaded binaries and installer-managed links stay outside the repository.
+
+`./install` migrates the old directory-wide symlink automatically. To migrate
+and relink only the `bin` package, run:
+
+```shell
+./install sync-bin
+```
+
+The migration moves untracked entries (including ignored files) from
+`bin/.local/bin` into the real `~/.local/bin`, preserving their permissions and
+symlink targets. Tracked scripts remain in the repository. Conflicting destination
+files are reported before any files are moved. Run this once on each machine
+after updating its dotfiles branch.
+
 ## T3 Code Nightly desktop
 
 The `bin` package includes the desktop launcher and icon. Run `t3code-nightly`

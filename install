@@ -49,7 +49,7 @@ run_stow() {
     exit 1
   fi
 
-  if [[ "$folder" == "herdr" ]]; then
+  if [[ "$folder" == "bin" || "$folder" == "herdr" ]]; then
     stow_args+=(--no-folding)
   fi
 
@@ -131,10 +131,10 @@ preflight_conflicts() {
   local has_conflicts="false"
 
   for folder in "${STOW_FOLDERS[@]}"; do
-    if ! stow -n --restow "$folder" >/dev/null 2>&1; then
+    if ! run_stow "$folder" true >/dev/null 2>&1; then
       has_conflicts="true"
       echo "conflict detected for $folder"
-      stow -nv --restow "$folder" || true
+      run_stow "$folder" true || true
     fi
   done
 
@@ -166,6 +166,7 @@ pushd "$DOTFILES" >/dev/null
 
 case "$MODE" in
   install)
+    bash "$DOTFILES/migrate-local-bin"
     preflight_conflicts
     apply_all false
     ;;
@@ -181,6 +182,10 @@ case "$MODE" in
   sync-omarchy)
     sync_omarchy
     ;;
+  sync-bin)
+    bash "$DOTFILES/migrate-local-bin"
+    run_stow bin
+    ;;
   adopt)
     if [[ $# -lt 2 ]]; then
       echo "usage: ./install adopt <folder> [folder ...]" >&2
@@ -192,7 +197,7 @@ case "$MODE" in
     done
     ;;
   *)
-    echo "usage: ./install [install|dry-run|clean|sync-omarchy|adopt <folder> ...]" >&2
+    echo "usage: ./install [install|dry-run|clean|sync-omarchy|sync-bin|adopt <folder> ...]" >&2
     exit 1
     ;;
 esac
