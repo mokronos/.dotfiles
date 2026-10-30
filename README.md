@@ -54,6 +54,19 @@ workspace 5. The old `t3code.service` web server is no longer used.
 Do not install `t3code-nightly-bin` alongside this launcher: the extracted
 Arch package disables T3's built-in Linux updater.
 
+## Desktop power actions
+
+The personal desktop's Omarchy menu uses `desktop-power reboot`,
+`desktop-power shutdown`, and `desktop-power logout`. These quit Zen using its
+native application shortcut and wait for its process to exit before running
+Omarchy's current power command, preserving all browser windows in the session.
+The desktop Zen profile's `user.js` disables the shortcut confirmation at the
+next browser launch. A browser that does not exit within 60 seconds cancels the
+power action.
+
+Use these commands from a terminal too. Calling `omarchy system reboot`,
+`omarchy system shutdown`, or `systemctl` directly bypasses this preparation.
+
 ## Install agent skills
 
 Skills live in `skills/`. `./install` symlinks each one to `~/.agents/skills/<name>`, where Codex and OpenCode load it, and links `~/.claude/skills/<name>` to that for Claude Code. Edits in the repo apply immediately.
