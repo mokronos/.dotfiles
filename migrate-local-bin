@@ -48,3 +48,10 @@ for source in "${installed[@]}"; do
   echo "moving installed tool to $target"
   mv -T -- "$source" "$target"
 done
+
+while IFS= read -r -d '' relative; do
+  target="$HOME/${relative#bin/}"
+  if [[ -L "$target" && "$(readlink -- "$target")" == "$DOTFILES/$relative" ]]; then
+    ln -sfnr -- "$DOTFILES/$relative" "$target"
+  fi
+done < <(git -C "$DOTFILES" ls-files -z -- bin)
