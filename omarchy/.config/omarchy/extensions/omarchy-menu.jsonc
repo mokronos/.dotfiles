@@ -29,5 +29,8 @@
   // "about": {"icon":"","label":"About","action":"omarchy-launch-or-focus-tui \"zsh -c 'fastfetch; read -k 1'\""},
   // Replace the screensaver action with explicit display power-off (DPMS).
   // Idle does the same through the cloned mokronos.idle service.
-  "system.screensaver": {"icon":"󰍹","label":"Turn Displays Off","action":"omarchy-brightness-display off"}
+  "system.screensaver": {"icon":"󰍹","label":"Turn Displays Off","action":"omarchy-brightness-display off"},
+  "system.logout": {"action":"$HOME/.local/bin/desktop-power logout"},
+  "system.reboot": {"action":"$HOME/.local/bin/desktop-power reboot"},
+  "system.shutdown": {"action":"$HOME/.local/bin/desktop-power shutdown"}
 }
