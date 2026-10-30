@@ -8,11 +8,4 @@ packer_compiled.lua
 __pycache__/
 api_key.json
 opencode/.config/opencode/node_modules/
-bin/.local/bin/*
-!bin/.local/bin/bluetooth-audio-switcher
-!bin/.local/bin/herdr-sessionizer
-!bin/.local/bin/herdr-tab-create-next
-!bin/.local/bin/herdr-tab-move
-!bin/.local/bin/bar1-watchdog
-!bin/.local/bin/t3code-nightly
 nvim/.config/
