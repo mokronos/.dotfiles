@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DOTFILES="$HOME/.dotfiles"
+SOURCE="$DOTFILES/bin/.local/bin"
+TARGET="$HOME/.local/bin"
+
+if [[ -L "$TARGET" ]]; then
+  if [[ "$(readlink -f -- "$TARGET")" != "$(readlink -f -- "$SOURCE")" ]]; then
+    echo "error: $TARGET points outside the dotfiles bin package" >&2
+    exit 1
+  fi
+elif [[ -e "$TARGET" && ! -d "$TARGET" ]]; then
+  echo "error: $TARGET is not a directory" >&2
+  exit 1
+fi
+
+shopt -s nullglob dotglob
+installed=()
+for source in "$SOURCE"/*; do
+  relative="${source#"$DOTFILES/"}"
+  tracked="$(git -C "$DOTFILES" ls-files -- "$relative")"
+  if [[ -n "$tracked" ]]; then
+    continue
+  fi
+
+  target="$TARGET/${source##*/}"
+  if [[ ! -L "$TARGET" && ( -e "$target" || -L "$target" ) ]]; then
+    if [[ ! -L "$target" || "$(readlink -m -- "$target")" != "$(readlink -m -- "$source")" ]]; then
+      echo "error: refusing to replace $target while moving $source" >&2
+      exit 1
+    fi
+  fi
+  installed+=("$source")
+done
+
+if [[ -L "$TARGET" ]]; then
+  unlink -- "$TARGET"
+fi
+mkdir -p -- "$TARGET"
+
+for source in "${installed[@]}"; do
+  target="$TARGET/${source##*/}"
+  if [[ -L "$target" ]]; then
+    unlink -- "$target"
+  fi
+  echo "moving installed tool to $target"
+  mv -T -- "$source" "$target"
+done
