@@ -49,7 +49,7 @@ run_stow() {
     exit 1
   fi
 
-  if [[ "$folder" == "bin" || "$folder" == "herdr" ]]; then
+  if [[ "$folder" == "bin" || "$folder" == "herdr" || "$folder" == "systemd" ]]; then
     stow_args+=(--no-folding)
   fi
 

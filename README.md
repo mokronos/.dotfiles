@@ -48,7 +48,7 @@ To apply this override to an existing installation without restowing everything:
 
 ```shell
 cd ~/.dotfiles
-stow --restow systemd
+stow --restow --no-folding systemd
 systemctl --user daemon-reload
 systemctl --user restart hex.service
 ```
