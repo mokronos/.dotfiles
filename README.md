@@ -35,6 +35,24 @@ symlink targets. Tracked scripts remain in the repository. Conflicting destinati
 files are reported before any files are moved. Run this once on each machine
 after updating its dotfiles branch.
 
+## Hex dictation
+
+Alt+Space activates Hex through Hyprland's global-shortcut portal. Install Hex
+separately; its installer provides the background service and login autostart.
+
+The `systemd` package includes `hex.service.d/cpu.conf`, which sets
+`GGML_VK_VISIBLE_DEVICES` to an empty value. Speech models run on the CPU instead
+of reserving GPU memory. Hex's window can still use the GPU for rendering.
+
+To apply this override to an existing installation without restowing everything:
+
+```shell
+cd ~/.dotfiles
+stow --restow systemd
+systemctl --user daemon-reload
+systemctl --user restart hex.service
+```
+
 ## T3 Code Nightly desktop
 
 The `bin` package includes the desktop launcher and icon. Run `t3code-nightly`
