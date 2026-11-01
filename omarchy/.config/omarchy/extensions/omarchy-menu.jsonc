@@ -30,7 +30,7 @@
   // Replace the screensaver action with explicit display power-off (DPMS).
   // Idle does the same through the cloned mokronos.idle service.
   "system.screensaver": {"icon":"󰍹","label":"Turn Displays Off","action":"omarchy-brightness-display off"},
-  "system.logout": {"action":"$HOME/.local/bin/desktop-power logout"},
-  "system.reboot": {"action":"$HOME/.local/bin/desktop-power reboot"},
-  "system.shutdown": {"action":"$HOME/.local/bin/desktop-power shutdown"}
+  "system.logout": {"icon":"󰍃","label":"Logout","action":"$HOME/.local/bin/desktop-power logout"},
+  "system.reboot": {"icon":"󰜉","label":"Reboot","action":"$HOME/.local/bin/desktop-power reboot"},
+  "system.shutdown": {"icon":"󰐥","label":"Shutdown","action":"$HOME/.local/bin/desktop-power shutdown"}
 }
