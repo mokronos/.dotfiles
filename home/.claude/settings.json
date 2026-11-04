@@ -34,5 +34,6 @@
       "Bash(kubectl version*)",
       "Bash(kubectl auth can-i *)"
     ]
-  }
+  },
+  "cleanupPeriodDays": 36500
 }
