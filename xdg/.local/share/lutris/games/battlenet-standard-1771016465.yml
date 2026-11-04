@@ -78,7 +78,6 @@ system:
   env:
     DXVK_HUD: compiler
     DXVK_STATE_CACHE_PATH: /home/mokronos/games/battlenet
-    PROTON_USE_XALIA: '0'
     STAGING_SHARED_MEMORY: '1'
     __GL_SHADER_DISK_CACHE: '1'
     __GL_SHADER_DISK_CACHE_PATH: /home/mokronos/games/battlenet
@@ -89,6 +88,7 @@ wine:
   battleye: false
   eac: false
   fsr: false
+  version: GE-Proton10-34
   overrides:
     locationapi: d
 year: 1996

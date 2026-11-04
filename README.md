@@ -74,11 +74,10 @@ Arch package disables T3's built-in Linux updater.
 
 ## Battle.net
 
-The personal desktop uses Lutris with GE-Proton for Battle.net. Its game
-configuration disables Xalia (`PROTON_USE_XALIA=0`), which otherwise causes
-Battle.net's login window to crash with a stack overflow under GE-Proton 11.
-Open **Battle.net** from the application menu; Battle.net manages its own and
-World of Warcraft's updates.
+The personal desktop uses Lutris with GE-Proton10-34 for Battle.net, rather than
+automatically selecting the newest GE-Proton. GE-Proton11-12 crashes during
+Battle.net's login security check on this machine. Open **Battle.net** from the
+application menu; Battle.net manages its own and World of Warcraft's updates.
 
 ## Desktop power actions
 
