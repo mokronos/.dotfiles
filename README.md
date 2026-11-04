@@ -72,6 +72,14 @@ workspace 5. The old `t3code.service` web server is no longer used.
 Do not install `t3code-nightly-bin` alongside this launcher: the extracted
 Arch package disables T3's built-in Linux updater.
 
+## Battle.net
+
+The personal desktop uses Lutris with GE-Proton for Battle.net. Its game
+configuration disables Xalia (`PROTON_USE_XALIA=0`), which otherwise causes
+Battle.net's login window to crash with a stack overflow under GE-Proton 11.
+Open **Battle.net** from the application menu; Battle.net manages its own and
+World of Warcraft's updates.
+
 ## Desktop power actions
 
 The personal desktop's Omarchy menu uses `desktop-power reboot`,
