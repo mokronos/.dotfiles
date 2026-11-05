@@ -72,6 +72,17 @@ workspace 5. The old `t3code.service` web server is no longer used.
 Do not install `t3code-nightly-bin` alongside this launcher: the extracted
 Arch package disables T3's built-in Linux updater.
 
+## WowUp-CF
+
+The personal desktop uses the official [WowUp-CF Linux AppImage](https://github.com/WowUp/WowUp.CF/releases/latest)
+at `~/.local/share/wowup/WowUp-CF.AppImage`. The `bin` package provides the
+`wowup-cf` command and application-menu entry. Use WowUp's built-in updater
+for subsequent releases.
+
+Add the Forever installation at
+`~/games/battlenet/drive_c/Program Files (x86)/World of Warcraft/_forever_/Wow.exe`.
+Select the **Forever** client, not Classic Era, when importing addon collections.
+
 ## Battle.net
 
 The personal desktop uses Lutris with GE-Proton10-34 for Battle.net, rather than

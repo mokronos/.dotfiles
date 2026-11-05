@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=WowUp-CF
+Comment=Manage World of Warcraft addons from CurseForge and other providers
+Exec=wowup-cf %U
+TryExec=wowup-cf
+Terminal=false
+Type=Application
+Icon=wowup-cf
+StartupWMClass=WowUp-CF
+Categories=Game;Utility;
