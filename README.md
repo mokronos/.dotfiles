@@ -77,7 +77,7 @@ Arch package disables T3's built-in Linux updater.
 The personal desktop uses the official [WowUp-CF Linux AppImage](https://github.com/WowUp/WowUp.CF/releases/latest)
 at `~/.local/share/wowup/WowUp-CF.AppImage`. The `bin` package provides the
 `wowup-cf` command and application-menu entry. Use WowUp's built-in updater
-for subsequent releases.
+for subsequent releases. The AppImage requires `fuse2` (`omarchy pkg add fuse2`).
 
 Add the Forever installation at
 `~/games/battlenet/drive_c/Program Files (x86)/World of Warcraft/_forever_/Wow.exe`.
