@@ -16,7 +16,6 @@ STOW_FOLDERS=(
   hypr
   lazygit
   nvim
-  opencode
   scripts
   starship
   systemd

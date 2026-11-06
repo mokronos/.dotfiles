@@ -7,6 +7,8 @@ description: "Use this skill for any configuration, maintenance, or diagnostics 
 
 Use `~/.dotfiles` as the source of truth for durable computer and environment configuration. Keep changes machine-aware and avoid editing live symlinked configuration directly.
 
+This repository is public, including every branch and commit message. Never commit project-specific or company information, private hosts, identities, infrastructure, or credentials. Keep these in local untracked configuration or the appropriate private project; commit only generic configuration and local-file includes here.
+
 ## Choose the right scope
 
 - Determine which computer or context the request targets. If unclear, check `/sys/class/dmi/id/chassis_type`: laptops use the `work` branch; desktops use `main` for personal configuration.
