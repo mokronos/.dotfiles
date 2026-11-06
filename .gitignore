@@ -7,5 +7,8 @@ package.json
 packer_compiled.lua
 __pycache__/
 api_key.json
-opencode/.config/opencode/node_modules/
+*.local
+.env
+.env.*
+!.env.example
 nvim/.config/

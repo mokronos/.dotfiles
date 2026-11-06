@@ -16,6 +16,29 @@ chmod +x install
 ./install
 ```
 
+## Private machine configuration
+
+All branches of this repository are public. Keep company identities, private
+hosts, project infrastructure, and credentials out of files and commit messages.
+
+The shared Git config uses the personal identity by default and includes
+`~/.config/git/config.local` before its GitHub-specific personal identity rules.
+On a work machine, create that local file with `[user]` settings for the work
+identity; GitHub repositories continue to use the personal identity. Keep any
+private host or directory matching rules in that local file too. Run
+`stow --restow git` from `~/.dotfiles` to link the shared configuration, then
+check `git config --show-origin --get user.email` inside representative work
+and personal repositories before committing.
+
+`*.local` and `.env` files are ignored as an additional safeguard. Store private
+configuration outside this repository whenever possible; ignore rules do not
+protect already tracked files or commit messages.
+
+OpenCode's application configuration is no longer managed by this repository.
+When updating an existing installation, remove only links whose targets are
+inside `~/.dotfiles/opencode/`; keep independently managed settings, plugins,
+credentials, and session data.
+
 ## User commands
 
 `~/.local/bin` is a real directory for user-installed commands. The `bin`
