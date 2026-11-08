@@ -126,6 +126,46 @@ power action.
 Use these commands from a terminal too. Calling `omarchy system reboot`,
 `omarchy system shutdown`, or `systemctl` directly bypasses this preparation.
 
+## Anker USB-C hub recovery (personal desktop)
+
+The Anker hub connects through an ASMedia ASM2142/ASM3142 PCIe USB-C card
+(`1b21:2142`, PCI address `0000:02:00.0`). If the keyboard and mouse stop working
+through the hub and replugging does nothing, check for a locked USB controller:
+
+```sh
+lspci -nnk -s 02:00.0
+lsusb -t
+journalctl -k -b --no-pager -g '0000:02:00.0|HC died|host controller not responding'
+```
+
+On November 7, 2026 at 21:38, repeated USB descriptor timeouts ended with
+`xHCI host controller not responding, assume dead` and `HC died; cleaning up`.
+The entire card's USB device tree disappeared. Restarting its driver recovered
+the hub and Logitech mouse receiver on November 8 without rebooting.
+
+First confirm the PCI address still identifies the ASMedia card. All devices on
+that card will disconnect briefly: move the keyboard/mouse to motherboard USB
+ports if needed, and unmount any storage connected through the card before resetting.
+
+Run this in the graphical desktop session to request a system password dialog.
+Agents can invoke it too; never ask the user to send their password in chat.
+
+```sh
+pkexec --disable-internal-agent /usr/bin/sh -e -c '
+echo 0000:02:00.0 > /sys/bus/pci/drivers/xhci_hcd/unbind
+echo 0000:02:00.0 > /sys/bus/pci/drivers/xhci_hcd/bind
+'
+```
+
+If graphical authorization is unavailable, run the same two writes using
+`sudo sh -e -c '…'` in a terminal. Verify recovery with `lsusb -t` and recent
+kernel logs. This resets only the affected card, not every USB controller.
+
+This is a temporary recovery, not a confirmed root-cause fix. The logs establish
+a controller hang, but not whether the hub/cable, card/power, or driver/firmware
+caused it. Test the hub on another computer or a motherboard USB port through
+a suitable USB-C-to-A data adapter to isolate the expansion card.
+
 ## Install agent skills
 
 Skills live in `skills/`. `./install` symlinks each one to `~/.agents/skills/<name>`, where Codex and OpenCode load it, and links `~/.claude/skills/<name>` to that for Claude Code. Edits in the repo apply immediately.
