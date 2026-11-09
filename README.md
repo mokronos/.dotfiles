@@ -115,16 +115,9 @@ application menu; Battle.net manages its own and World of Warcraft's updates.
 
 ## Desktop power actions
 
-The personal desktop's Omarchy menu uses `desktop-power reboot`,
-`desktop-power shutdown`, and `desktop-power logout`. These quit Zen using its
-native application shortcut and wait for its process to exit before running
-Omarchy's current power command, preserving all browser windows in the session.
-The desktop Zen profile's `user.js` disables the shortcut confirmation at the
-next browser launch. A browser that does not exit within 60 seconds cancels the
-power action.
-
-Use these commands from a terminal too. Calling `omarchy system reboot`,
-`omarchy system shutdown`, or `systemctl` directly bypasses this preparation.
+The Omarchy menu uses the stock Shutdown, Reboot, and Logout actions without
+custom browser preparation. From a terminal, use `omarchy system shutdown`,
+`omarchy system reboot`, or `omarchy system logout`.
 
 ## Anker USB-C hub recovery (personal desktop)
 
