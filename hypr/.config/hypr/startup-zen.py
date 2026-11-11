@@ -2,6 +2,7 @@
 
 import json
 import subprocess
+import sys
 import time
 
 
@@ -37,6 +38,7 @@ def outlook(client):
 
 
 def main():
+    browser_workspace, side_workspace, mail_workspace = sys.argv[1:4]
     wait_for(bool)
     previous = None
     stable_since = time.monotonic()
@@ -58,7 +60,7 @@ def main():
         browsing = [client for client in clients if not outlook(client)]
 
     for index, client in enumerate(browsing):
-        move(client, 2 if index == 1 else 1)
+        move(client, side_workspace if index == 1 else browser_workspace)
 
     mail = [client for client in clients if outlook(client)]
     if not mail:
@@ -67,7 +69,7 @@ def main():
         clients = wait_for(lambda clients: any(client["address"] not in known for client in clients))
         mail = [client for client in clients if client["address"] not in known]
     for client in mail:
-        move(client, 4)
+        move(client, mail_workspace)
 
 
 if __name__ == "__main__":

@@ -9,6 +9,3 @@ require("hypr.autostart")
 require("default.hypr.toggles")
 
 o.window(".*", { opacity = "1.0 1.0" })
-o.window("md\\.obsidian\\.Obsidian", { workspace = "3 silent" })
-o.window("teams-for-linux", { workspace = "4 silent" })
-o.window("com\\.t3tools\\.T3Code", { workspace = "5 silent" })
