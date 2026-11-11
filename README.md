@@ -78,16 +78,13 @@ systemctl --user restart hex.service
 
 ## T3 Code Nightly desktop
 
-The `bin` package includes the desktop launcher and icon. Run `t3code-nightly`
-or open **T3 Code Nightly** from the application menu. The launcher downloads
-the latest official nightly AppImage into `~/.local/share/t3code/`, verifies
-its GitHub SHA-256 digest, and updates it before opening. If the network is
-unavailable, it opens the installed copy. To install/update without opening
-the app, run `t3code-nightly --update-only`.
+The `bin` package provides the `t3code-nightly` command, desktop launcher, and
+icon for the official nightly AppImage at
+`~/.local/share/t3code/T3-Code-Nightly.AppImage`. Install the initial AppImage
+from [T3 Code's releases](https://github.com/pingdotgg/t3code/releases).
 
-The AppImage is user-owned, so T3's in-app update button also works. Keep the
-desktop update channel on **Nightly**. T3 checks for updates while running;
-downloading and restarting from inside the app require a click.
+T3's built-in updater handles subsequent releases. Keep the desktop update
+channel on **Nightly** and the AppImage user-owned and writable.
 
 On the personal desktop, the Hyprland startup layout launches T3 Code on
 workspace 5. The old `t3code.service` web server is no longer used.
