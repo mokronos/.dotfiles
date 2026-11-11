@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=T3 Code Nightly
-Comment=Nightly coding agent desktop app, updated on launch
+Comment=Nightly coding agent desktop app
 Exec=t3code-nightly %U
 TryExec=t3code-nightly
 Terminal=false
