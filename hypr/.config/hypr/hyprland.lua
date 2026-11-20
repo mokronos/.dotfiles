@@ -6,6 +6,7 @@ require("hypr.input")
 require("hypr.bindings")
 require("hypr.looknfeel")
 require("hypr.autostart")
+require("hypr.launch-workspace")
 require("default.hypr.toggles")
 
 o.window(".*", { opacity = "1.0 1.0" })
