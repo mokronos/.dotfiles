@@ -2,6 +2,7 @@
 -- launched, not wherever focus happens to be once its window finally maps.
 
 local MAX_LAUNCH_AGE = 180
+local TAG = "launched-elsewhere"
 local HISTORY_SPAN = 600
 local CLOCK_TICKS = 100
 
@@ -94,6 +95,21 @@ hl.on("window.open", function(window)
   end
   local origin = workspace_at(launched)
   if origin and origin ~= window.workspace.id then
-    hl.dispatch(hl.dsp.window.move({ workspace = tostring(origin), follow = false, window = "address:" .. window.address }))
+    local target = "address:" .. window.address
+    hl.dispatch(hl.dsp.window.tag({ tag = "+" .. TAG, window = target }))
+    hl.dispatch(hl.dsp.window.move({ workspace = tostring(origin), follow = false, window = target }))
+  end
+end)
+
+-- Until you visit its workspace, a window sent back does not pull you over
+-- there when the app asks to be activated once it has finished starting.
+o.window({ tag = TAG }, { focus_on_activate = false })
+
+hl.on("workspace.active", function()
+  local active = hl.get_active_workspace()
+  for _, window in ipairs(hl.get_windows({ tag = TAG })) do
+    if active and window.workspace and window.workspace.id == active.id then
+      hl.dispatch(hl.dsp.window.tag({ tag = "-" .. TAG, window = "address:" .. window.address }))
+    end
   end
 end)
